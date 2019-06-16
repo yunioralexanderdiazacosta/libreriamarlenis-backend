@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Libreria Marleni</title>
+    
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700,900" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">    
+</head>
+<body class="amber lighten-5">
+    <!-- Estilos generales --->
+    <style>
+        body { font-family: Roboto !important; }
+        #menu > li > a > i { margin-right: 10px !important; }
+        .sidenav { width: 220px; }
+    </style>
+
+
+    <!-- Componente Sidevar --->
+    <ul id="menu" class="sidenav">
+        <div class="row">
+            <div class="col s4">
+                <span>Menú</span>
+            </div>
+        </div>
+        
+        <li>
+            <a class="waves-effect" href="#!">
+                <i class="material-icons">people</i>Clientes
+            </a>
+        </li>
+        <li>
+            <a class="waves-effect" href="#!">
+                <i class="material-icons">shopping_basket</i>Ventas
+            </a>
+        </li>
+        <li>
+            <a class="waves-effect" href="#!">
+                <i class="material-icons">local_printshop</i>Fotocopias
+            </a>
+        </li>
+        <li>
+            <a class="waves-effect" href="#!">
+                <i class="material-icons">local_shipping</i>Inventario
+            </a>
+        </li>
+        <li>
+            <a class="waves-effect" href="#!">
+                <i class="material-icons">content_copy</i>Transcripciones
+            </a>
+        </li>
+        <li>
+            <a class="waves-effect" href="#!">
+                <i class="material-icons">show_chart</i>Reportes
+            </a>
+        </li>
+        <li>
+            <a class="waves-effect" href="#!">
+                <i class="material-icons">settings</i>Ajustes
+            </a>
+        </li>
+      </ul>
+    
+    <!-- Componente Raiz --->
+    <div>
+        <!-- Componente Navbar --->
+        <div class="row">
+            <div class="col">
+                <a href="#" data-target="menu" class="black-text sidenav-trigger"><i class="medium material-icons">menu</i></a>
+            </div>
+            <div class="col">
+                <h5 class="black-text">Gestión de clientes</h5>
+            </div>
+        </div>
+
+        <!-- Componente Route --->
+        <div class="row" style="margin-top: 12%;">
+            <div class="col s4 push-s4">
+                <h1>Logo</h1>
+            </div>            
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+    <!-- Script de utilidad --->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() 
+        {
+            let elems = document.querySelectorAll('.sidenav');
+            let instances = M.Sidenav.init(elems);
+        });
+    </script>
+</body>
+</html>
