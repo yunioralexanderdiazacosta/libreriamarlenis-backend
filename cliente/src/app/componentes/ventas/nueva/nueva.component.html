@@ -1,0 +1,317 @@
+<div class="row">
+	<div class="col-lg-12">
+		<span class="text-secondary h4"><i class="fas fa-shopping-cart"></i> Nueva Venta</span>
+		<ol class="breadcrumb" style="float: right;">
+			<li class="breadcrumb-item">
+				<a href="#">
+					<i class="fas fa-home"></i>
+				</a>
+			</li>
+			
+			<li class="breadcrumb-item">
+				<a href="#">
+					Ventas
+				</a>
+			</li>
+
+			<li class="breadcrumb-item active">Nueva</li>
+		</ol>
+		<hr id="linea">
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-lg-12 mb-3">
+		<button class="btn btn-primary float-left" data-toggle="modal" data-target="#nuevoCliente">
+				<i class="fas fa-plus"></i>
+		</button>
+		<h5 class="bg-light text-center p-2"><i class="fas fa-user"></i> Cliente</h5>
+	</div>
+
+	<div class="col-4">
+		<div class="form-group">
+			<label class="ml-2 text-secondary">Cédula de Identidad</label>
+			<select class="form-control" name="cliente">
+				<option value="">Seleccione...</option>
+				<option value="">V-23895594</option>
+			</select>
+		</div>
+	</div>
+
+	<div class="col-4">
+		<div class="form-group">
+			<label class="text-secondary">Nombre</label>
+			<input type="text" class="form-control" readonly>
+		</div>
+	</div>
+
+	<div class="col-4">
+		<div class="form-group">
+			<label class="text-secondary">Apellido</label>
+			<input type="text" class="form-control" readonly>
+		</div>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-lg-12">
+		<h5 class="bg-light text-center p-2"><i class="fas fa-check-square"></i> Seleccionar Item(s)</h5>
+		<div class="form-check form-check-inline">
+			<input class="form-check-input" type="checkbox" id="productos" (change)="formProductos =!formProductos">
+			<label class="form-check-label" for="productos">Productos</label>
+		</div>
+
+		<div class="form-check form-check-inline">
+			<input class="form-check-input" type="checkbox" id="copias" (change)="formCopias = !formCopias">
+			<label class="form-check-label" for="copias">Copias</label>
+		</div>
+
+		<div class="form-check form-check-inline">
+			<input class="form-check-input" type="checkbox" id="transcripciones" (change)="formTranscripciones = !formTranscripciones">
+			<label class="form-check-label" for="transcripciones">Transcripciónes</label>
+		</div>
+	</div>
+</div>
+
+<div class="row my-3">
+	<div class="col-lg-12">
+		<div class="accordion" id="accordionExample">
+			<div class="card" *ngIf="formProductos">
+				<div class="card-header" id="headingOne">
+			  		<h2 class="mb-0 text-center">
+						<button class="btn btn-link text-success" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+				  			<span class="h5"><i class="fas fa-shopping-basket"></i> Productos</span>
+						</button>
+			  		</h2>
+				</div>
+				<div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+				  	<div class="card-body">
+
+					<div class="row mb-3">
+						<div class="col-lg-4">
+							<div class="input-group">
+								<div class="input-group-prepend">
+									<span class="input-group-text"><i class="fas fa-search"></i></span>
+								</div>
+								<input type="text" class="form-control" placeholder="Buscar producto...">
+							</div>
+						</div>
+
+						<div class="col-lg-8 float-right">
+							<button class="btn btn-primary float-right" data-toggle="modal" data-target="#agregarProducto">
+								<i class="fas fa-plus"></i>
+							</button>
+						</div>
+					</div>
+
+					<table class="table table-hover">
+						<thead class="bg-secondary text-white text-center">
+							<tr>
+								<th>#</th>
+								<th>Descripción</th>
+								<th width="10%">Cantidad</th>
+								<th>Precio U.</th>
+								<th>Subtotal</th>
+								<th></th>
+							</tr>
+						</thead>
+						<tbody class="text-center">
+							<tr>
+								<td>1</td>
+								<td>Portaminas Paper Mate</td>
+								<td><input type="number" min="1" class="form-control" value="10"></td>
+								<td>Bs. 5.000</td>
+								<td>Bs. 50.000</td>
+								<td>
+									<button class="btn btn-danger btn-sm">
+										<i class="fas fa-trash"></i>
+									</button>
+								</td>
+							</tr>
+
+							<tr>
+								<td>2</td>
+								<td>Cuaderno College Caligrafía Horizontal Artel</td>
+								<td><input type="number" class="form-control" value="3"></td>
+								<td>Bs. 25.000</td>
+								<td>Bs. 75.000</td>
+								<td>
+									<button class="btn btn-danger btn-sm">
+										<i class="fas fa-trash"></i>
+									</button>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+
+				  	</div>
+				</div>
+  			</div>
+
+		    <div class="card" *ngIf="formCopias">
+				<div class="card-header" id="headingTwo">
+					<h2 class="mb-0 text-center">
+						<button class="btn btn-link collapsed text-success" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+							<span class="h5"><i class="fas fa-copy"></i> Copias</span>
+						</button>
+				  	</h2>
+				</div>
+				<div id="collapseTwo" class="collapse show" aria-labelledby="headingTwo" data-parent="#accordionExample">
+	  				<div class="card-body">
+
+	  				<button class="btn btn-primary float-right mb-3" data-toggle="modal" data-target="#nuevaFotocopia">
+						<i class="fas fa-plus"></i>
+					</button>
+					
+					<table class="table table-hover">
+						<thead class="bg-secondary text-white text-center">
+							<tr>
+								<th>#</th>
+								<th>Tipo</th>
+								<th width="15%">Cantidad</th>
+								<th width="15%">Dañadas</th>
+								<th width="15%">Precio</th>
+								<th width="15%">Subtotal</th>
+								<th></th>
+							</tr>
+						</thead>
+						<tbody class="text-center">
+							<tr>
+								<td>1</td>
+								<td>Carta</td>
+								<td>
+									<div class="row justify-content-center">
+										<div class="col-8">
+											<input type="number" class="form-control" value="1" min="1">
+										</div>
+									</div>
+								</td>
+
+								<td>
+									<div class="row justify-content-center">
+										<div class="col-8">
+											<input type="number" class="form-control" value="0">
+										</div>
+									</div>
+								</td>
+
+								<td>Bs. 4.000</td>
+								<td>Bs. 8.000</td>
+								<td>
+									<button class="btn btn-danger btn-sm">
+										<i class="fas fa-trash"></i>
+									</button>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				  	
+	  				</div>
+				</div>
+  			</div>
+
+		  	<div class="card" *ngIf="formTranscripciones">
+				<div class="card-header" id="headingThree">
+					<h2 class="mb-0 text-center">
+						<button class="btn btn-link collapsed text-success" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+				  			<span class="h5"><i class="fas fa-file-alt"></i> Transcripciones</span>
+						</button>
+			  		</h2>
+				</div>
+				<div id="collapseThree" class="collapse show" aria-labelledby="headingThree" data-parent="#accordionExample">
+	  				<div class="card-body">
+
+	  				<button class="btn btn-primary float-right mb-3" data-toggle="modal" data-target="#nuevaTranscripcion">
+						<i class="fas fa-plus"></i>
+					</button>
+
+					<table class="table table-hover">
+						<thead class="text-center bg-secondary text-white">
+							<tr>
+								<th>#</th>
+								<th>Fecha de Entrega</th>
+								<th>Titulo</th>
+								<th>Encargado</th>
+								<th>Subtotal</th>
+								<th></th>
+							</tr>
+						</thead>
+						<tbody class="text-center">
+							<tr>
+								<td>1</td>
+								<td>10-05-2019</td>
+								<td>Conceptos de telefonia movil</td>
+								<td>Empleado1</td>
+								<td>Bs. 30.000</td>
+								<td>
+									<button class="btn btn-danger btn-sm">
+										<i class="fas fa-trash"></i>
+									</button>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+	  				</div>
+				</div>
+ 			</div>
+		</div>
+	</div>
+</div>
+
+<div class="row" *ngIf="!formProductos && !formCopias && !formTranscripciones">
+	<div class="col-lg-12">
+		<div class="alert alert-dark text-center">
+			<span class="h4"><i class="fas fa-info-circle"></i> No se han agregado items</span>
+		</div>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-lg-12">
+		<div class="row justify-content-end">
+			<div class="col-lg-4">
+				<div class="card">
+					<div class="card-body bg-light text-secondary">
+						<div class="row">
+							<div class="col-5">
+								<span class="h6">Subtotal:</span>
+							</div>
+							<div class="col-7">
+								<span class="h6">Bs. 248.000</span>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-5">
+								<span class="h6">IVA(19%):</span>
+							</div>
+							<div class="col-7">
+								<span class="h6">Bs. 47.120</span>
+							</div>
+						</div>
+						<hr>
+						<div class="row">
+							<div class="col-5">
+								<span class="h5">Total</span>
+							</div>
+							<div class="col-7">
+								<span class="h5">Bs. 295.120</span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="row mt-5">
+	<div class="col-lg-12 text-right">
+		<button class="btn btn-secondary btn-lg mr-2">Cancelar</button>
+		<button class="btn btn-primary btn-lg">Confirmar</button>
+	</div>
+</div>
+<app-producto></app-producto>
+<app-nuevo-cliente></app-nuevo-cliente>
+<app-nueva-transcripcion></app-nueva-transcripcion>
+<app-nueva-fotocopia></app-nueva-fotocopia>

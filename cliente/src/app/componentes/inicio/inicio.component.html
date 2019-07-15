@@ -1,0 +1,155 @@
+<div class="row">
+	<div class="col-lg-12">
+		<span class="text-secondary h4"><i class="fas fa-home"></i> Inicio</span>
+		<hr id="linea">
+	</div>
+</div>
+
+<!--
+<div class="row mt-3">
+    <div class="col-xl-3 col-sm-6 mb-3">
+        <div class="card text-secondary bg-light o-hidden h-100">
+            <div class="card-body">
+                <div class="card-body-icon text-success">
+                	<i class="fas fa-fw fa-users"></i>
+                </div>
+                <div class="mr-5">
+                	<span class="h5 text-success">Clientes<br>
+                		<span class="h4 text-danger">10</span>
+                	</span>
+                </div>
+            </div>
+        	<a class="card-footer text-secondary clearfix small z-1" routerLink="#!">
+            	<span class="float-left h6">Nuevo</span>
+            	<span class="float-right h6">
+              		<i class="fas fa-angle-right"></i>
+            	</span>
+            </a>
+        </div>
+    </div>
+
+    <div class="col-xl-3 col-sm-6 mb-3">
+        <div class="card text-secondary bg-light o-hidden h-100">
+            <div class="card-body">
+            	<div class="card-body-icon text-success">
+                	<i class="fas fa-fw fa-book"></i>
+                </div>
+                <div class="mr-5">
+                	<span class="h5 text-success">Productos<br>
+                		<span class="h4 text-danger">20</span>
+                	</span>
+                </div>
+            </div>
+            <a class="card-footer text-secondary clearfix small z-1" routerLink="#!">
+            	<span class="float-left h6">Nuevo</span>
+                <span class="float-right h6">
+                	<i class="fas fa-angle-right"></i>
+                </span>
+            </a>
+        </div>
+    </div>
+
+    <div class="col-xl-3 col-sm-6 mb-3">
+	    <div class="card text-secondary bg-light o-hidden h-100">
+	    	<div class="card-body">
+	        	<div class="card-body-icon text-success">
+	          		<i class="fas fa-fw fa-store"></i>
+	        	</div>
+	        	<div class="mr-4">
+	        		<span class="h5 text-success">Proveedores<br>
+	        			<span class="h4 text-danger">3</span>
+	        		</span>
+	        	</div>
+	        </div>
+	      	<a class="card-footer text-secondary clearfix small z-1" routerLink="#!">
+	       		<span class="float-left h6">Nuevo</span>
+	        	<span class="float-right h6">
+	          		<i class="fas fa-angle-right"></i>
+	        	</span>
+	      	</a>
+	    </div>
+    </div>
+
+    <div class="col-xl-3 col-sm-6 mb-3">
+        <div class="card text-secondary bg-light o-hidden h-100">
+            <div class="card-body">
+            	<div class="card-body-icon text-success">
+                	<i class="fas fa-fw fa-shopping-cart"></i>
+                </div>
+                <div class="mr-4">
+                	<span class="h5 text-success">Ventas</span><br>
+                	<span class="h4 text-danger">Bs. 255.000</span>
+                </div>
+            </div>
+            <a class="card-footer text-secondary clearfix small z-1" routerLink="#!">
+                <span class="float-left h6">Nueva</span>
+                <span class="float-right h6">
+                	<i class="fas fa-angle-right"></i>
+                </span>
+            </a>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-3">
+	<div class="col-6">
+		<app-ventas-semana></app-ventas-semana> 
+	</div>
+	<div class="col-6">
+		<app-fotocopias-semana></app-fotocopias-semana>
+	</div>
+</div>
+-->
+
+<div class="row mt-3">
+	<div class="col-lg-12">
+		<div class="card">
+			<div class="card-header">
+				<h5 class="text-center">Mis transcripciones pendientes</h5>
+			</div>
+			<div class="card-body">
+				<div class="row">
+					<div class="col-lg-4">
+						<div class="input-group mb-3">
+							<div class="input-group-prepend">
+								<span class="input-group-text"><i class="fas fa-search"></i></span>
+							</div>
+							<input type="text" class="form-control" placeholder="Buscar...">
+						</div>
+					</div>
+				</div>
+
+				<table class="table table table-hover">
+					<thead class="text-center bg-secondary text-white">
+						<tr>
+							<th>Fecha de Entrega</th>
+							<th>Restante</th>
+							<th>Cliente</th>
+							<th>Categoría</th>
+							<th>Titulo</th>
+							<th>Estatus Tarea</th>
+						</tr>
+					</thead>
+					<tbody class="text-center">
+						<tr id="pointer" routerLink="/transcripciones/finalizar" data-toggle="tooltip" title="actualizar">
+							<td class="align-middle">20-07-2019 04:00pm</td>
+							<td class="align-middle"> 
+								<label class="h5">
+									<span class="badge badge-pill badge-danger"> 6 días</span>
+								</label>
+							</td>
+							<td class="align-middle">V-15781328 - Luisa Arismendi</td>
+							<td class="align-middle"> Informe </td>
+							<td class="align-middle">
+								Microservicios en la Educación a Distancia
+							</td>
+							<td class="align-middle">
+								<i class="fas fa-times text-danger" data-toggle="tooltip" title="No realizada"></i>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>

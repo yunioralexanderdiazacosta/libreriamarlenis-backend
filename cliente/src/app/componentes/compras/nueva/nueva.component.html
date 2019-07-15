@@ -1,0 +1,244 @@
+<div class="row">
+	<div class="col-lg-12">
+		<span class="text-secondary h4"><i class="fas fa-people-carry"></i> Nuevo Ingreso</span>
+		<ol class="breadcrumb" style="float:right;">
+			<li class="breadcrumb-item">
+				<a routerLink="/inicio">
+					<i class="fas fa-home"></i>
+				</a>
+			</li>
+			
+			<li class="breadcrumb-item">
+				<a routerLink="/ingresos">
+					Ingresos
+				</a>
+			</li>
+
+			<li class="breadcrumb-item active">Nuevo</li>
+		</ol>
+		<hr id="linea">
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-lg-12 mb-3">
+		<button class="btn btn-primary float-left" data-toggle="modal" data-target="#nuevoProveedor">
+				<i class="fas fa-plus"></i>
+		</button>
+		<h5 class="bg-light text-center p-2"><i class="fas fa-store"></i> Proveedor</h5>
+	</div>
+
+	<div class="col-4">
+		<div class="form-group">
+			<label class="ml-2 text-secondary">Razon Social</label>
+			<select class="form-control" name="cliente">
+				<option value="">Seleccione...</option>
+				<option value="1">Supermercado Caripito C.A</option>
+				<option value="2">Producto Total S.A.</option>
+				<option value="3" selected>Productos Lopetegui</option>
+			</select>
+		</div>
+	</div>
+
+	<div class="col-4">
+		<div class="form-group">
+			<label class="text-secondary">Contacto</label>
+			<input type="text" class="form-control" value="Juan Millan" readonly>
+		</div>
+	</div>
+
+	<div class="col-4">
+		<div class="form-group">
+			<label class="text-secondary">Teléfono</label>
+			<input type="text" class="form-control" value="0416-0987133" readonly>
+		</div>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-lg-12">
+		<h5 class="bg-light text-center p-2">
+			<i class="fas fa-shopping-basket"></i> Productos Adquiridos
+		</h5>
+		<div class="row mb-3">
+			<div class="col-lg-4">
+				<div class="input-group">
+					<div class="input-group-prepend">
+						<span class="input-group-text"><i class="fas fa-search"></i></span>
+					</div>
+					<input type="text" class="form-control" placeholder="Buscar producto...">
+				</div>
+			</div>
+
+			<div class="col-lg-8 float-right">
+				<button class="btn btn-primary float-right" data-toggle="collapse" data-target="#agregarSolicitud" role="button" aria-expanded="false" aria-controls="agregarSolicitud" (click)="nuevaSolicitud = !nuevaSolicitud" *ngIf="!nuevaSolicitud">
+					<i class="fas fa-plus"></i>
+				</button>
+
+				<button class="btn btn-danger float-right" data-toggle="collapse" data-target="#agregarSolicitud" role="button" aria-expanded="false" aria-controls="agregarSolicitud" (click)="nuevaSolicitud = !nuevaSolicitud" *ngIf="nuevaSolicitud">
+					<i class="fas fa-times"></i>
+				</button>
+			</div>
+		</div>
+
+		<div class="collapse" id="agregarSolicitud">
+			<div class="card card-body">
+		    	 <div class="row">
+                    <div class="col-6">
+                        <div class="form-group">
+                            <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#agregarProducto">
+                            	<i class="fas fa-plus"></i>
+                            </button>
+                            <label class="ml-1">Producto</label>
+                            <select class="form-control" name="producto">
+                                <option value="">Seleccione...</option>
+                                <option value="1">Boligrafo Kilometrico Azul Rojo Caja 12</option>
+                                <option value="2">Colores De Madera Kores Hexagonal</option>
+                                <option value="3">Marcador Acrílico (Para Pizarra)</option>
+                            </select>
+                        </div>
+                    </div>
+            
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label>Cantidad</label>
+                            <input type="number" class="form-control" min="1" value="1">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-4">
+                        <div class="form-group">
+                            <label>Precio de Compra</label>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon1">Bs.</span>
+                                </div>
+                                <input type="text" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-4">
+                        <div class="form-group">
+                            <label>Precio de Venta</label>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon1">Bs.</span>
+                                </div>
+                                <input type="text" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-4">
+                        <div class="form-group">
+                            <label>Subtotal</label>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon1">Bs.</span>
+                                </div>
+                                <input type="text" class="form-control" readonly>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+				<hr>
+				<div class="row">
+					<div class="col-lg-12">
+	                    <button class="btn btn-primary btn-lg float-right">
+	                    	Guardar
+	                    </button>
+                    </div>
+                </div>
+            </div>
+		</div>
+
+		<table class="table table-hover">
+			<thead class="bg-secondary text-white text-center">
+				<tr>
+					<th>#</th>
+					<th>Descripción</th>
+					<th width="10%">Cantidad</th>
+					<th>Precio C.</th>
+					<th>Subtotal</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody class="text-center">
+				<tr>
+					<td>1</td>
+					<td>Portaminas Paper Mate</td>
+					<td><input type="number" min="1" class="form-control" value="500"></td>
+					<td>Bs. 5.000</td>
+					<td>Bs. 2.500.000</td>
+					<td>
+						<button class="btn btn-danger btn-sm">
+							<i class="fas fa-trash"></i>
+						</button>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>
+
+
+<div class="row" *ngIf="nomostrar">
+	<div class="col-lg-12">
+		<div class="alert alert-dark text-center">
+			<span class="h4"><i class="fas fa-info-circle"></i> No se han agregado registros</span>
+		</div>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-lg-12">
+		<div class="row justify-content-end">
+			<div class="col-lg-4">
+				<div class="card">
+					<div class="card-body bg-light text-secondary">
+						<div class="row">
+							<div class="col-5">
+								<span class="h6">Subtotal:</span>
+							</div>
+							<div class="col-7">
+								<span class="h6">Bs. 2.500.000</span>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-5">
+								<span class="h6">IVA(19%):</span>
+							</div>
+							<div class="col-7">
+								<span class="h6">Bs. 475.000</span>
+							</div>
+						</div>
+						<hr>
+						<div class="row">
+							<div class="col-5">
+								<span class="h5">Total</span>
+							</div>
+							<div class="col-7">
+								<span class="h5">Bs. 2.975.000</span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="row mt-5">
+	<div class="col-lg-12 text-right">
+		<button class="btn btn-secondary btn-lg mr-2">Cancelar</button>
+		<button class="btn btn-primary btn-lg">Confirmar</button>
+	</div>
+</div>
+
+<app-producto-compra></app-producto-compra>
+<app-nuevo-proveedor></app-nuevo-proveedor>

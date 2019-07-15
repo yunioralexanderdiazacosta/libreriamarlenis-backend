@@ -1,0 +1,61 @@
+<div class="row">
+	<div class="col-lg-12">
+		<span class="text-secondary h4"><i class="fas fa-file-pdf"></i> Reportes</span>
+		<ol class="breadcrumb" style="float: right;">
+	  		<li class="breadcrumb-item">
+	    		<a routerLink="/inicio">
+	    			<i class="fas fa-home"></i>
+	    		</a>
+	  		</li>
+	  		<li class="breadcrumb-item active">
+	  			Reportes
+	  		</li>
+		</ol>
+		<hr id="linea">
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-lg-8 offset-lg-2">
+		<div class="form-group">
+			<label class="text-secondary">Seleccione consulta a realizar</label>
+			<select class="form-control">
+				<option value="1">Ventas</option>
+				<option value="2">compras</option>
+			</select>
+		</div>
+
+		<div class="row">
+			<div class="col-lg-6">
+				<label class="text-secondary">Desde:</label>
+				<div class="input-group">
+					<div class="input-group-prepend">
+						<span class="input-group-text">
+							<i class="fas fa-calendar"></i>
+						</span>
+					</div>
+					<input type="date" class="form-control">
+				</div>
+			</div>
+
+			<div class="col-lg-6">
+				<label class="text-secondary">Hasta:</label>
+				<div class="input-group">
+					<div class="input-group-prepend">
+						<span class="input-group-text">
+							<i class="fas fa-calendar"></i>
+						</span>
+					</div>
+					<input type="date" class="form-control">
+				</div>
+			</div>
+		</div>
+	    <hr> 
+
+		<div class="form-group text-right">
+			<button class="btn btn-primary btn-lg">
+				Ver 
+			</button>
+		</div>
+	</div>
+</div>

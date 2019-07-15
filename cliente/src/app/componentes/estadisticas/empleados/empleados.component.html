@@ -1,0 +1,85 @@
+<div class="row">
+	<div class="col-lg-12">
+		<span class="text-secondary h4">
+			<i class="fas fa-chart-line"></i> Estadistícas Empleado 
+			<span class="text-danger">(Julio 2019)</span>
+		</span>
+		<ol class="breadcrumb" style="float: right;">
+	  		<li class="breadcrumb-item">
+	    		<a routerLink="/inicio">
+	    			<i class="fas fa-home"></i>
+	    		</a>
+	  		</li>
+	  		<li class="breadcrumb-item active">Estadisticas </li>
+		</ol>
+		<hr id="linea">
+	</div>
+</div>
+
+<div class="row my-3">
+	<div class="col-lg-12">
+		<table class="table table-bordered">
+			<tr class="text-center">
+				<th class="bg-dark text-white"><h5>Usuario</h5></th> 
+				<td><h5 class="text-secondary">Empleado 1</h5></td>
+				<th class="bg-dark text-white"><h5>Datos</h5></th>
+				<td><h5 class="text-secondary">V-23781011 - Juan Perez</h5></td>
+			</tr>
+		</table>
+	</div>
+</div>
+
+<div class="row my-3">
+	<div class="col-lg-3">
+		<div class="card" id="b-none">
+			<div class="card-body text-center bg-light" id="br-40">
+				<h5 class="text-success">Transcripciones asignadas: <br>
+					<span class="text-dark">10</span>
+				</h5>
+			</div>
+		</div>
+	</div>
+
+	<div class="col-lg-3">
+		<div class="card" id="b-none">
+			<div class="card-body text-center bg-light" id="br-40">
+				<h5 class="text-success">
+					Ventas realizadas: <br>
+					<span class="text-dark">54</span>
+				</h5>
+			</div>
+		</div>
+	</div>
+
+	<div class="col-lg-3">
+		<div class="card" id="b-none">
+			<div class="card-body text-center bg-light" id="br-40">
+				<h5 class="text-success">
+					Indice de Ventas (IV)<br>
+					<span class="text-dark">33%</span>
+				</h5>
+			</div>
+		</div>
+	</div>
+
+	<div class="col-lg-3">
+		<div class="card" id="b-none">
+			<div class="card-body text-center bg-light" id="br-40">
+				<h5 class="text-success">
+					Indice de Transcripciones (IT)<br>
+					<span class="text-dark">56%</span>
+				</h5>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-lg-6">
+		<app-transcripciones-medicion></app-transcripciones-medicion>
+	</div>
+
+	<div class="col-lg-6">
+		<app-transcripciones-eficiencia></app-transcripciones-eficiencia>
+	</div>
+</div>

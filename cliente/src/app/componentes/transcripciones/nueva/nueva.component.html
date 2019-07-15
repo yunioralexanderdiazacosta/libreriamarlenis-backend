@@ -1,0 +1,94 @@
+<div class="modal" tabindex="-1" role="dialog" id="nuevaTranscripcion">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-secondary text-white">
+                <h5 class="modal-title">Nueva Transcripción</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+				<div class="row">
+					<div class="col-lg-6">
+						<div class="form-group">
+							<label class="text-secondary">Fecha de Entrega</label>
+							<input type="date" class="form-control">
+						</div>
+					</div>
+
+					<div class="col-lg-6">
+						<div class="form-group">
+							<label class="text-secondary">Subtotal</label>
+							<div class="input-group">
+								<div class="input-group-prepend">
+									<span class="input-group-text">Bs.</span>
+								</div>
+								<input type="number" class="form-control" placeholder="Ingresa el monto">
+							</div>
+						</div>
+					</div>
+
+					<div class="col-lg-6">
+						<div class="form-group">
+							<label class="text-secondary">Encargado</label>
+							<select class="form-control">
+								<option value="">Seleccione...</option>
+								<option value="1">Admin (Yo)</option>
+								<option value="2">Empleado 1</option>
+								<option value="3" selected>Empleado 2</option>
+							</select>
+						</div>
+					</div>
+
+					<div class="col-lg-6">
+						<label class="text-secondary">Categoría</label>
+						<select class="form-control">
+							<option value="">Seleccione</option>
+							<option value="1" selected>Informe</option>
+						</select>
+					</div>
+
+					<div class="col-lg-12">
+						<div class="form-group">
+							<label class="text-secondary">Titulo</label>
+							<textarea class="form-control" rows="2" placeholder="Ingresa el titulo"></textarea>
+						</div>
+					</div>
+
+					<div class="col-lg-12">
+						<div class="form-group">
+							<label class="h5">¿Desea adjuntar archivo?</label><br>
+							<div class="form-check form-check-inline">
+								<input class="form-check-input" type="radio" id="inlineCheckbox1" (change)="adjuntar=true" name="adjuntar">
+								<label class="form-check-label" for="inlineCheckbox1">Si</label>
+							</div>
+
+							<div class="form-check form-check-inline">
+								<input class="form-check-input" type="radio" id="inlineCheckbox2" (change)="adjuntar=false" name="adjuntar">
+								<label class="form-check-label" for="inlineCheckbox2">No</label>
+							</div>
+						</div>
+					</div>
+
+					<div class="col-lg-12" *ngIf="adjuntar == false">
+						<div class="form-group">
+							<label class="text-secondary">Contenido a investigar</label>
+							<textarea class="form-control" rows="4" placeholder="Ingresa el contenido a investigar..."></textarea>
+						</div>
+					</div>
+
+					<div class="col-lg-12" *ngIf="adjuntar == true">
+						<div class="form-group">
+							<label class="text-secondary">Archivo</label><br>
+							<input type="file">
+						</div>
+					</div>
+				</div>  
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-primary">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,14 @@
+#posicion{
+	height:100%; 
+	margin-top: 69px;
+	overflow-y: auto;
+}
+
+#bg-none{
+	background: none;
+	border: none;
+}
+
+#active:active{
+  color: #fff !important;
+}

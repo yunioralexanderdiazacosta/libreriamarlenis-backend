@@ -1,0 +1,188 @@
+<div class="row">
+	<div class="col-lg-12">
+		<span class="text-secondary h4"><i class="fas fa-file-alt"></i> Gestión de las Transcripciones</span>
+		<ol class="breadcrumb" style="float: right;">
+	  		<li class="breadcrumb-item">
+	    		<a href="#">
+	    			<i class="fas fa-home"></i>
+	    		</a>
+	  		</li>
+	  		<li class="breadcrumb-item active">Transcripciones</li>
+		</ol>
+		<hr id="linea">
+	</div>
+</div>
+
+<div class="row mt-3">
+	<div class="col-lg-12">
+	    <div class="row mb-3">
+			<div class="col-lg-4">
+				<div class="input-group">
+					<div class="input-group-prepend">
+						<span class="input-group-text"><i class="fas fa-search"></i></span>
+					</div>
+					<input type="text" class="form-control" placeholder="Buscar...">
+				</div>
+			</div>
+
+			<div class="col-lg-8 text-right">
+				<a routerLink="/ventas/nueva" class="btn btn-primary" data-toggle="tooltip" title="Agregar">
+					<i class="fas fa-plus"></i>
+				</a>
+			</div>
+		</div>
+
+		<table class="table table-hover">
+			<thead class="text-center bg-secondary text-white">
+				<tr>
+					<th>#</th>
+					<th>Fecha de la Solicitud</th>
+					<th>Encargado</th>
+					<th>Categoría</th>
+					<th>Titulo</th>
+					<th>Estatus Tarea</th>
+					<th>Estatus Entrega</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody class="text-center">
+				<tr>
+					<td class="align-middle">1</td>
+					<td class="align-middle">20-07-2019 1:30pm</td>
+					<td class="align-middle"> Empleado2 </td>
+					<td class="align-middle"> Investigación </td>
+					<td class="align-middle">
+						Informática y Telecominicaciones
+					</td>
+					<td class="aling-middle">
+						<i class="fas fa-times text-danger"></i>
+					</td>
+					<td class="align-middle">
+						<span class="badge badge-pill badge-danger">No Entregado</span>
+					</td>
+					<td>
+						<div class="btn-group">
+							<button class="btn btn-secondary" routerLink="#!">
+								<i class="fas fa-eye"></i>
+							</button>
+
+							<button class="btn btn-secondary">
+								<i class="fas fa-edit"></i>
+							</button>
+						</div>
+					</td>
+				</tr>
+
+
+				<tr>
+					<td class="align-middle">2</td>
+					<td class="align-middle">20-07-2019 04:00pm</td>
+					<td class="align-middle"> Empleado1 </td>
+					<td class="align-middle">Informe </td>
+					<td class="align-middle">
+						Microservicios en la Educación a Distancia
+					</td>
+					<td class="aling-middle">
+						<i class="fas fa-times text-danger"></i>
+					</td>
+					<td class="align-middle">
+						<span class="badge badge-pill badge-danger">No Entregado</span>
+					</td>
+					<td>
+						<div class="btn-group">
+							<button class="btn btn-secondary" routerLink="#!">
+								<i class="fas fa-eye"></i>
+							</button>
+
+							<button class="btn btn-secondary">
+								<i class="fas fa-edit"></i>
+							</button>
+						</div>
+					</td>
+				</tr>
+
+				<tr>
+					<td class="align-middle">3</td>
+					<td class="align-middle">19-07-2019 10:00am</td>
+					<td class="align-middle"> Admin </td>
+					<td class="align-middle"> Ensayo </td>
+					<td class="align-middle">
+						Toma de Decisiones
+					</td>
+					<td class="aling-middle">
+						<i class="fas fa-times text-danger"></i>
+					</td>
+					<td class="align-middle">
+						<span class="badge badge-pill badge-danger">No Entregado</span>
+					</td>
+					<td>
+						<div class="btn-group">
+							<button class="btn btn-secondary" routerLink="#!">
+								<i class="fas fa-eye"></i>
+							</button>
+
+							<button class="btn btn-secondary">
+								<i class="fas fa-edit"></i>
+							</button>
+						</div>
+					</td>
+				</tr>
+
+
+				<tr>
+					<td class="align-middle">4</td>
+					<td class="align-middle">10-07-2019 03:00pm</td>
+					<td class="align-middle"> Empleado1 </td>
+					<td class="align-middle">Investigación</td>
+					<td class="align-middle">
+						Biotecnología
+					</td>
+					<td class="aling-middle">
+						<i class="fas fa-check text-success"></i>
+					</td>
+					<td class="align-middle">
+						<span class="badge badge-pill badge-success">Entregado</span>
+					</td>
+					<td>
+						<div class="btn-group">
+							<button class="btn btn-secondary" routerLink="#!">
+								<i class="fas fa-eye"></i>
+							</button>
+
+							<button class="btn btn-secondary">
+								<i class="fas fa-edit"></i>
+							</button>
+						</div>
+					</td>
+				</tr>
+
+				<tr>
+					<td class="align-middle">5</td>
+					<td class="align-middle">08-07-2019</td>
+					<td class="align-middle"> Admin </td>
+					<td class="align-middle"> Investigación</td>
+					<td class="align-middle">
+						El Embarazo Precoz
+					</td>
+					<td class="aling-middle">
+						<i class="fas fa-check text-success"></i>
+					</td>
+					<td class="align-middle">
+						<span class="badge badge-pill badge-success">Entregado</span>
+					</td>
+					<td>
+						<div class="btn-group">
+							<button class="btn btn-secondary" routerLink="#!">
+								<i class="fas fa-eye"></i>
+							</button>
+
+							<button class="btn btn-secondary">
+								<i class="fas fa-edit"></i>
+							</button>
+						</div>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>

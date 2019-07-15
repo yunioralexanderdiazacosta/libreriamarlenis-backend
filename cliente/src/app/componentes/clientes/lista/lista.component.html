@@ -1,0 +1,138 @@
+<div class="row">
+	<div class="col-lg-12">
+		<span class="text-secondary h4"><i class="fas fa-users"></i> Gestión de Clientes</span>
+		<ol class="breadcrumb" style="float: right;">
+	  		<li class="breadcrumb-item">
+	    		<a routerLink="/inicio">
+	    			<i class="fas fa-home"></i>
+	    		</a>
+	  		</li>
+	  		<li class="breadcrumb-item active">Clientes</li>
+		</ol>
+		<hr id="linea">
+	</div>
+</div>
+
+<div class="row mt-3">
+	<div class="col-lg-12">
+		<div class="row mb-3">
+			<div class="col-lg-4">
+				<div class="input-group">
+					<div class="input-group-prepend">
+						<span class="input-group-text"><i class="fas fa-search"></i></span>
+					</div>
+					<input type="text" class="form-control" placeholder="Buscar...">
+				</div>
+			</div>
+
+			<div class="col-lg-8 text-right">
+				<button class="btn btn-primary" data-toggle="modal" data-target="#nuevoCliente">
+					<i class="fas fa-plus"></i>
+				</button>
+			</div>
+		</div>
+
+		<table class="table table">
+			<thead class="text-center bg-secondary text-white">
+				<tr>
+					<th>N° Cedula</th>
+					<th>Nombre</th>
+					<th>Apellido</th>
+					<th>Teléfono</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody class="text-center">
+				<tr>
+				  	<td class="align-middle">V-23895594</td>
+				  	<td class="align-middle">Juan</td>
+				  	<td class="align-middle">Gonzalez</td>
+				  	<td class="align-middle">0414-9011220</td>
+				  	<td class="align-middle">
+				  		<div class="btn btn-group">
+				  		    <a routerLink="/clientes/historico" class="btn btn-secondary">
+				  				<i class="fas fa-eye"></i>
+				  			</a>
+
+				  			<a routerLink="#!" class="btn btn-secondary">
+				  				<i class="fas fa-edit"></i>
+				  			</a>
+
+				  			<button class="btn btn-secondary">
+				  				<i class="fas fa-trash"></i>
+				  			</button>
+				  		</div>
+				  	</td>
+				</tr>
+
+				<tr>
+				  	<td class="align-middle">V-24891011</td>
+				  	<td class="align-middle">Pedro</td>
+				  	<td class="align-middle">Martinez</td>
+				  	<td class="align-middle">0416-1011012</td>
+				  	<td>
+				  		<div class="btn btn-group">
+				  			<a routerLink="#!" class="btn btn-secondary">
+				  				<i class="fas fa-eye"></i>
+				  			</a>
+
+				  			<a routerLink="#!" class="btn btn-secondary">
+				  				<i class="fas fa-edit"></i>
+				  			</a>
+
+				  			<button class="btn btn-secondary">
+				  				<i class="fas fa-trash"></i>
+				  			</button>
+				  		</div>
+				  	</td>
+				</tr>
+
+
+				<tr>
+				  	<td class="align-middle">V-11891011</td>
+				  	<td class="align-middle">Camilo</td>
+				  	<td class="align-middle">Millan</td>
+				  	<td class="align-middle">0414-0112390</td>
+				  	<td>
+				  		<div class="btn btn-group">
+				  			<a routerLink="#!" class="btn btn-secondary">
+				  				<i class="fas fa-eye"></i>
+				  			</a>
+
+				  			<a routerLink="#!" class="btn btn-secondary">
+				  				<i class="fas fa-edit"></i>
+				  			</a>
+
+				  			<button class="btn btn-secondary">
+				  				<i class="fas fa-trash"></i>
+				  			</button>
+				  		</div>
+				  	</td>
+				</tr>
+
+				<tr>
+					<td class="align-middle">V-15781328</td>
+				  	<td class="align-middle">Luisa</td>
+				  	<td class="align-middle">Arismendi</td>
+				  	<td class="align-middle">0426-9560391</td>
+				  	<td>
+				  		<div class="btn btn-group">
+				  			<a routerLink="#!" class="btn btn-secondary">
+				  				<i class="fas fa-eye"></i>
+				  			</a>
+
+				  			<a routerLink="#!" class="btn btn-secondary">
+				  				<i class="fas fa-edit"></i>
+				  			</a>
+
+				  			<button class="btn btn-secondary">
+				  				<i class="fas fa-trash"></i>
+				  			</button>
+				  		</div>
+				  	</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>
+<app-nuevo-cliente></app-nuevo-cliente>

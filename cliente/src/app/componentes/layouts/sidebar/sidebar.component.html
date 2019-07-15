@@ -1,0 +1,78 @@
+<ul class="sidebar navbar-nav" id="posicion">
+	<li class="nav-item" routerLinkActive="active">
+		<a class="nav-link" routerLink="/inicio">
+			<i class="fas fa-home"></i> <span class="ml-2">Inicio</span>
+		</a>
+	</li>
+
+	<li class="nav-item" routerLinkActive="active">
+		<a class="nav-link" routerLink="/clientes">
+			<i class="fas fa-users"></i> <span class="ml-2">Clientes</span>
+		</a>
+	</li>
+
+	<li class="nav-item" routerLinkActive="active">
+		<a class="nav-link" routerLink="/ventas">
+			<i class="fas fa-shopping-cart"></i> <span class="ml-2">Ventas</span>
+		</a>
+	</li>
+
+	<li class="nav-item dropdown" routerLinkActive="active">
+		<a class="nav-link dropdown-toggle" href="#!" id="menu1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+			<i class="fas fa-truck-loading"></i> <span class="ml-2">Compras</span>
+		</a>
+
+		<div class="dropdown-menu" id="bg-none" aria-labelledby="menu1">
+			<a class="dropdown-item" routerLink="/compras">Ingresos</a>
+			<a class="dropdown-item" routerLink="/proveedores">Proveedores</a>
+		</div>
+	</li>
+
+ 
+	<li class="nav-item dropdown" routerLinkActive="active">
+		<a class="nav-link dropdown-toggle" href="#!" id="menu2" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+			<i class="fas fa-box"></i> <span class="ml-2">Inventario</span>
+		</a>
+
+		<div class="dropdown-menu" id="bg-none" aria-labelledby="menu2">
+			<a class="dropdown-item" routerLink="/inventario">Productos</a>
+			<a class="dropdown-item" routerLink="/inventario/categorias-productos">Categorias</a>
+		</div>
+	</li>
+
+	<li class="nav-item dropdown" routerLinkActive="active">
+		<a class="nav-link dropdown-toggle" href="#!" id="menu3" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+			<i class="fas fa-file-alt"></i> <span class="ml-2">Transcripciones</span>
+		</a>
+
+		<div class="dropdown-menu" id="bg-none" aria-labelledby="menu3">
+			<a class="dropdown-item" routerLink="/transcripciones">Lista</a>
+			<a class="dropdown-item" routerLink="/transcripciones/almacenamiento">Almacenamiento</a>
+			<a class="dropdown-item" routerLink="#!">Categorias</a>
+		</div>
+	</li>
+
+	<li class="nav-item" routerLinkActive="active">
+		<a class="nav-link" routerLink="/reportes">
+			<i class="fas fa-file-pdf"></i> <span class="ml-2">Reportes</span>
+		</a>
+	</li>
+
+	<li class="nav-item" routerLinkActive="active">
+		<a class="nav-link" routerLink="/estadisticas">
+			<i class="fas fa-chart-line"></i> <span class="ml-2">Estadistícas</span>
+		</a>
+	</li>
+
+	 <li class="nav-item dropdown" routerLinkActive="active">
+		<a class="nav-link dropdown-toggle" href="#!" id="menu4" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+			<i class="fas fa-cog"></i> <span class="ml-2">Configuración</span>
+		</a>
+
+		<div class="dropdown-menu" id="bg-none" aria-labelledby="menu4">
+			<a class="dropdown-item" routerLink="/empleados">Empleados</a>
+			<a class="dropdown-item" routerLink="/cambiar-contrasena">Cambiar contraseña</a>
+			<a class="dropdown-item" routerLink="/respaldos">Respaldos</a>
+		</div>
+	</li>
+</ul>

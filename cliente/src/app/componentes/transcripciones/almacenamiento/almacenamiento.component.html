@@ -1,0 +1,105 @@
+<div class="row">
+	<div class="col-lg-12">
+		<span class="text-secondary h4"><i class="fas fa-file-alt"></i> Transcripciones Almacenadas</span>
+		<ol class="breadcrumb" style="float: right;">
+	  		<li class="breadcrumb-item">
+	    		<a routerLink="/inicio">
+	    			<i class="fas fa-home"></i>
+	    		</a>
+	  		</li>
+	  		<li class="breadcrumb-item">
+	  			<a routerLink="/transcripciones">
+	  				Transcripciones
+	  			</a>
+	  		</li>
+	  		<li class="breadcrumb-item active">
+	  			Almacenamiento
+	  		</li>
+		</ol>
+		<hr id="linea">
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-lg-12">
+		<div class="row">
+			<div class="col-lg-4">
+				<div class="form-group">
+					<label>Categoría:</label>
+					<select class="form-control">
+						<option value="">Todas</option>
+						<option value="">Trabajos</option>
+						<option value="">Investigaciones</option>
+						<option value="">Informes</option>
+					</select>
+				</div>
+			</div>
+
+			<div class="col-lg-8">
+				<div class="form-group">
+					<label>Buscar:</label>
+					<div class="input-group">
+						<div class="input-group-prepend">
+							<span class="input-group-text"><i class="fas fa-search"></i></span>
+						</div>
+						<input type="text" class="form-control" placeholder="Buscar palabra clave, título...">
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="row mt-3">
+			<div class="col-lg-6">
+				<div class="card">
+					<div class="card-header bg-dark text-white">
+						<h5 class="text-center">Linguistica y Comunicación</h5>
+					</div>
+					<div class="card-body">
+						<ol>
+							<li>Que es la lingüistica </li>
+							<li>Importancia de la lingüistica </li>
+							<li>Que es la comunicación... </li> 
+						</ol>
+					</div>
+					<div class="card-footer text-right">
+						<div class="btn-group">
+							<button class="btn btn-secondary btn-lg" data-toggle="modal" data-target="#contenido">
+								<i class="fas fa-eye"></i>
+							</button>
+							<button class="btn btn-secondary btn-lg">
+								<i class="fas fa-file-word"></i>
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-lg-6">
+				<div class="card">
+					<div class="card-header bg-dark text-white">
+						<h5 class="text-center">Comunicación Verbal</h5>
+					</div>
+					<div class="card-body">
+						<ol>
+							<li>Definición</li>
+							<li>Caracterisicas</li>
+							<li>Importancia...</li>
+						</ol>
+					</div>
+					<div class="card-footer text-right">
+						<div class="btn-group">
+							<button class="btn btn-secondary btn-lg">
+								<i class="fas fa-eye"></i>
+							</button>
+							<button class="btn btn-secondary btn-lg">
+								<i class="fas fa-file-word"></i>
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<app-contenido></app-contenido>

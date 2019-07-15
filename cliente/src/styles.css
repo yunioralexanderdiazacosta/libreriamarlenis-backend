@@ -1,0 +1,35 @@
+/* You can add global styles to this file, and also import other style files */
+#linea {
+	border: 1px inset #ccc;
+}
+
+#pointer{
+	cursor: pointer;
+}
+
+@media print{
+	@page { size: auto;  margin: 0mm; }
+   
+	#boton{
+		display: none;
+	}
+
+	#posicion{
+		visibility: hidden;
+	}
+
+	#wrapper #content-wrapper{
+		margin-left:20px;
+		margin-right:20px;
+		margin-top: 10px;
+		margin-bottom: 10px;
+	}
+}
+
+ #pink {
+ 	color: #fa5858;
+ }
+
+ #teal{
+ 	color: #00BF9A;
+ }
