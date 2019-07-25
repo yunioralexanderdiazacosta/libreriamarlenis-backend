@@ -8,30 +8,44 @@
 		    	 </h1>    
 			</div>
 			<div class="card-body">
-				<div class="form-group">
-					<div class="input-group">
-						<div class="input-group-prepend">
-							<span class="input-group-text text-white bg-dark" id="border-none"><i class="fas fa-user"></i></span>
+				<form [formGroup]="login" (ngSubmit)="onSubmit()" novalidate>
+					<div class="form-group">
+						<div class="input-group">
+							<div class="input-group-prepend">
+								<span class="input-group-text text-white bg-dark" id="border-none"><i class="fas fa-user"></i></span>
+							</div>
+							<input type="text" formControlName="usuario" class="form-control" placeholder="Usuario"  [ngClass]="{ 'is-invalid': f.usuario.errors && (f.usuario.dirty || f.usuario.touched) }">
+						
+							<div class="invalid-feedback" *ngIf="f.usuario.errors && (f.usuario.dirty || f.usuario.touched)">
+								<div *ngIf="f.usuario.errors.required">{{ input_required }}</div>
+							</div>
 						</div>
-						<input type="text" class="form-control" placeholder="Usuario">
 					</div>
-				</div>
-				<div class="form-group">
-					<div class="input-group">
-						<div class="input-group-prepend">
-							<span class="input-group-text text-white bg-dark" id="border-none"><i class="fas fa-key"></i></span>
+
+					<div class="form-group">
+						<div class="input-group">
+							<div class="input-group-prepend">
+								<span class="input-group-text text-white bg-dark" id="border-none"><i class="fas fa-key"></i></span>
+							</div>
+							<input type="password" formControlName="clave" class="form-control" placeholder="Contraseña" [ngClass]="{ 'is-invalid': f.clave.errors && (f.clave.dirty || f.clave.touched) }">
+							
+							<div class="invalid-feedback" *ngIf="f.clave.errors && (f.clave.dirty || f.clave.touched)">
+								<div *ngIf="f.clave.errors.required">{{ input_required }}</div>
+							</div>
 						</div>
-						<input type="password" class="form-control" placeholder="Contraseña">
 					</div>
-				</div>
-				<hr> 
-				<a class="btn btn-primary btn-block mb-3" (click)="logueado=true" routerLink="/inicio">
-					Ingresar <i class="fas fa-sign-in-alt"></i> 
-				</a>
-				
-				<div class="text-center">
-					<a class="btn btn-link text-danger">¿Olvido su contraseña?</a>
-				</div>
+					<hr> 
+
+					<div *ngIf="error" class="text-danger my-2">{{ error }}</div>
+
+					<button [disabled]="login.invalid" class="btn btn-primary btn-block mb-3">
+						Ingresar <i class="fas fa-sign-in-alt"></i> 
+					</button>
+					
+					<div class="text-center">
+						<a class="btn btn-link text-danger">¿Olvido su contraseña?</a>
+					</div>
+				</form>
 			</div>
 		</div>
 	</div>

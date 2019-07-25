@@ -46,129 +46,19 @@
 				</tr>
 			</thead>
 			<tbody class="text-center">
-				<tr>
-					<td class="align-middle">1</td>
-					<td class="align-middle">20-07-2019 1:30pm</td>
-					<td class="align-middle"> Empleado2 </td>
-					<td class="align-middle"> Investigación </td>
-					<td class="align-middle">
-						Informática y Telecominicaciones
-					</td>
+				<tr *ngFor="let transcripcion of transcripciones; index as i">
+					<td class="align-middle">{{ i+1 }}</td>
+					<td class="align-middle">{{ transcripcion.created_at | date: 'dd-MM-yyyy hh:mm a' }}</td>
+					<td class="align-middle">{{ transcripcion.usuario.usuario }}</td>
+					<td class="align-middle">{{ transcripcion.tipos_transcripcione.descripcion  }}</td>
+					<td class="align-middle">{{ transcripcion.titulo }}</td>
 					<td class="aling-middle">
-						<i class="fas fa-times text-danger"></i>
+						<i [ngClass]="transcripcion.estatus_tarea == 0 ? 'fas fa-times text-danger' : 'fas fa-check text-success'"></i>
 					</td>
 					<td class="align-middle">
-						<span class="badge badge-pill badge-danger">No Entregado</span>
-					</td>
-					<td>
-						<div class="btn-group">
-							<button class="btn btn-secondary" routerLink="#!">
-								<i class="fas fa-eye"></i>
-							</button>
-
-							<button class="btn btn-secondary">
-								<i class="fas fa-edit"></i>
-							</button>
-						</div>
-					</td>
-				</tr>
-
-
-				<tr>
-					<td class="align-middle">2</td>
-					<td class="align-middle">20-07-2019 04:00pm</td>
-					<td class="align-middle"> Empleado1 </td>
-					<td class="align-middle">Informe </td>
-					<td class="align-middle">
-						Microservicios en la Educación a Distancia
-					</td>
-					<td class="aling-middle">
-						<i class="fas fa-times text-danger"></i>
-					</td>
-					<td class="align-middle">
-						<span class="badge badge-pill badge-danger">No Entregado</span>
-					</td>
-					<td>
-						<div class="btn-group">
-							<button class="btn btn-secondary" routerLink="#!">
-								<i class="fas fa-eye"></i>
-							</button>
-
-							<button class="btn btn-secondary">
-								<i class="fas fa-edit"></i>
-							</button>
-						</div>
-					</td>
-				</tr>
-
-				<tr>
-					<td class="align-middle">3</td>
-					<td class="align-middle">19-07-2019 10:00am</td>
-					<td class="align-middle"> Admin </td>
-					<td class="align-middle"> Ensayo </td>
-					<td class="align-middle">
-						Toma de Decisiones
-					</td>
-					<td class="aling-middle">
-						<i class="fas fa-times text-danger"></i>
-					</td>
-					<td class="align-middle">
-						<span class="badge badge-pill badge-danger">No Entregado</span>
-					</td>
-					<td>
-						<div class="btn-group">
-							<button class="btn btn-secondary" routerLink="#!">
-								<i class="fas fa-eye"></i>
-							</button>
-
-							<button class="btn btn-secondary">
-								<i class="fas fa-edit"></i>
-							</button>
-						</div>
-					</td>
-				</tr>
-
-
-				<tr>
-					<td class="align-middle">4</td>
-					<td class="align-middle">10-07-2019 03:00pm</td>
-					<td class="align-middle"> Empleado1 </td>
-					<td class="align-middle">Investigación</td>
-					<td class="align-middle">
-						Biotecnología
-					</td>
-					<td class="aling-middle">
-						<i class="fas fa-check text-success"></i>
-					</td>
-					<td class="align-middle">
-						<span class="badge badge-pill badge-success">Entregado</span>
-					</td>
-					<td>
-						<div class="btn-group">
-							<button class="btn btn-secondary" routerLink="#!">
-								<i class="fas fa-eye"></i>
-							</button>
-
-							<button class="btn btn-secondary">
-								<i class="fas fa-edit"></i>
-							</button>
-						</div>
-					</td>
-				</tr>
-
-				<tr>
-					<td class="align-middle">5</td>
-					<td class="align-middle">08-07-2019</td>
-					<td class="align-middle"> Admin </td>
-					<td class="align-middle"> Investigación</td>
-					<td class="align-middle">
-						El Embarazo Precoz
-					</td>
-					<td class="aling-middle">
-						<i class="fas fa-check text-success"></i>
-					</td>
-					<td class="align-middle">
-						<span class="badge badge-pill badge-success">Entregado</span>
+						<span [ngClass]="transcripcion.estatus_entrega == 0 ? 'badge badge-pill badge-danger' : 'badge badge-pill badge-success'">
+							{{ transcripcion.estatus_entrega == 0 ? 'No Entregado' : 'Entregado' }}
+						</span>
 					</td>
 					<td>
 						<div class="btn-group">

@@ -1,81 +1,90 @@
-<div class="modal" tabindex="-1" role="dialog" id="nuevaFotocopia">
-    <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-            <div class="modal-header bg-secondary text-white">
-                <h5 class="modal-title">Venta de Copia(s)</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div class="row">
-                    <div class="col-6">
-                        <div class="form-group">
-                            <label class="text-secondary">Tipo</label>
-                            <select class="form-control" name="tipo">
-                                <option value="">Seleccione...</option>
-                                <option value="1">Carta</option>
-                                <option value="2" selected>oficio</option>
-                                <option value="3">Ampliación</option>
-                                <option value="4">Reducción</option>
-                                <option value="5">Reciclaje</option>
-                            </select>
-                        </div>
-                    </div>
-            
-                    <div class="col-6">
-                        <div class="form-group">
-                            <label class="text-secondary">Cantidad</label>
-                            <input type="number" class="form-control" [(ngModel)]="cantidad" placeholder="Ingresa la cantidad" value="3" min="1">
-                        </div>
-                    </div>
+<form [formGroup]="formCopia" (ngSubmit)="almacenarCopiaVenta()">
+    <div class="modal" tabindex="-1" role="dialog" id="nuevaFotocopia">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header bg-secondary text-white">
+                    <h5 class="modal-title">Venta de Copia(s)</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label class="text-secondary">Tipo</label>
+                                <select class="form-control" 
+                                    formControlName="tipo_id" 
+                                    (change)="obtenerDatos(f.tipo_id.value)"
+                                    [ngClass]="{ 'is-invalid' : f.tipo_id.errors && submitted }">
+                                    <option value="" disabled>Seleccione...</option>
+                                    <ng-container *ngFor="let dato of tipoCopias">
+                                        <option [value]="dato.id" *ngIf="dato.estado == 0">{{ dato.descripcion }}</option>
+                                    </ng-container>
+                                </select>
 
-                <div class="row">
-                    <div class="col-4">
-                        <div class="form-group">
-                            <label class="text-secondary">Precio</label>
-                            <div class="input-group">
-                            	<div class="input-group-prepend">
-                            		<span class="input-group-text">Bs.</span>
-                            	</div>
-                            	<input type="text" class="form-control" [(ngModel)]="precio" placeholder="Precio" readonly>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="col-4">
-                        <div class="form-group">
-                            <label class="text-secondary">Subtotal</label>
-                            <div class="input-group">
-                            	<div class="input-group-prepend">
-                            		<span class="input-group-text">Bs.</span>
-                            	</div>
-                            	<input type="text" class="form-control" placeholder="Subtotal" readonly value="{{cantidad * precio }}">
-                            </div>
-                        </div>
-                    </div>
-
-                     <div class="col-4">
-                        <div class="form-group">
-                            <label>Copias Dañadas</label>
-                            <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <div class="input-group-text">
-                                        <i class="fas fa-file-excel"></i>
-                                    </div>
+                                <div class="invalid-feedback" *ngIf="f.tipo_id.errors && submitted">
+                                    <div *ngIf="f.tipo_id.errors.required">Debes seleccionar una opción</div>
                                 </div>
-                                <input type="number" class="form-control" value="0">
+                            </div>
+                        </div>
+
+                         <div class="col-6">
+                            <div class="form-group">
+                                <label class="text-secondary">Precio</label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">Bs.</span>
+                                    </div>
+                                    <input type="text" 
+                                        class="form-control" 
+                                        formControlName="precio" 
+                                        placeholder="Precio" readonly>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label class="text-secondary">Cantidad</label>
+                                <input type="number" 
+                                    formControlName="cantidad"
+                                    class="form-control"  
+                                    placeholder="Ingresa la cantidad"
+                                    min="1"
+                                    [ngClass]="{ 'is-invalid': f.cantidad.errors && submitted }">
+
+                                <div class="invalid-feedback" *ngIf="f.cantidad.errors && submitted">
+                                    <div *ngIf="f.cantidad.errors.required">Este campo es requerido y solo acepta números</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label class="text-secondary">Subtotal</label>
+                                <div class="input-group">
+                                	<div class="input-group-prepend">
+                                		<span class="input-group-text">Bs.</span>
+                                	</div>
+                                	<input type="number" 
+                                    formControlName="subtotal"
+                                    class="form-control" 
+                                    placeholder="Subtotal" readonly 
+                                    value="{{f.cantidad.value * f.precio.value }}">
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                <button type="button" class="btn btn-primary">Guardar</button>
+                <div class="modal-footer">
+                    <a href="#!" #cerrarModal class="btn btn-secondary" data-dismiss="modal">Cerrar</a>
+                    <button type="submit" class="btn btn-primary">Guardar</button>
+                </div>
             </div>
         </div>
     </div>
-</div>
+</form>

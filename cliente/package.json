@@ -22,6 +22,7 @@
     "@ng-select/ng-select": "^2.20.5",
     "chart.js": "^2.8.0",
     "core-js": "^2.5.4",
+    "moment": "^2.24.0",
     "ngx-pagination": "^4.0.0",
     "ngx-toastr": "^10.0.4",
     "rxjs": "~6.3.3",

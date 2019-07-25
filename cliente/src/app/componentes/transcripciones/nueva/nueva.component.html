@@ -1,3 +1,4 @@
+<form [formGroup]="formTranscripcion" (ngSubmit)="almacenarTranscripcion()">
 <div class="modal" tabindex="-1" role="dialog" id="nuevaTranscripcion">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
@@ -12,7 +13,15 @@
 					<div class="col-lg-6">
 						<div class="form-group">
 							<label class="text-secondary">Fecha de Entrega</label>
-							<input type="date" class="form-control">
+							<input 
+								type="date" 
+								formControlName="fechaEntrega"
+								class="form-control"
+								[ngClass]="{ 'is-invalid': f.fechaEntrega.errors && submitted }">
+
+								<div class="invalid-feedback" *ngIf="f.fechaEntrega.errors && submitted">
+									<div *ngIf="f.fechaEntrega.errors.required">Este es campo es requerido</div>
+								</div>
 						</div>
 					</div>
 
@@ -23,7 +32,15 @@
 								<div class="input-group-prepend">
 									<span class="input-group-text">Bs.</span>
 								</div>
-								<input type="number" class="form-control" placeholder="Ingresa el monto">
+								<input type="number" 
+									formControlName="subtotal"
+									class="form-control" 
+									placeholder="Ingresa el monto"
+									[ngClass]="{ 'is-invalid': f.subtotal.errors && submitted }">
+
+								<div class="invalid-feedback" *ngIf="f.subtotal.errors && submitted">
+									<div *ngIf="f.subtotal.errors.required">Este campo es requerido y solo acepta números</div>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -31,27 +48,47 @@
 					<div class="col-lg-6">
 						<div class="form-group">
 							<label class="text-secondary">Encargado</label>
-							<select class="form-control">
+							<select class="form-control"
+								formControlName="encargado_id"
+								[ngClass]="{ 'is-invalid': f.encargado_id.errors && submitted }"
+								(change)="obtenerEncargado(f.encargado_id.value)">
 								<option value="">Seleccione...</option>
-								<option value="1">Admin (Yo)</option>
-								<option value="2">Empleado 1</option>
-								<option value="3" selected>Empleado 2</option>
+								<option *ngFor="let usuario of usuarios" [value]="usuario.id">{{ usuario.usuario }}</option>
 							</select>
+
+							<div class="invalid-feedback" *ngIf="f.encargado_id.errors && submitted">
+									<div *ngIf="f.encargado_id.errors.required">Debes asignar un encargado</div>
+							</div>
 						</div>
 					</div>
 
 					<div class="col-lg-6">
 						<label class="text-secondary">Categoría</label>
-						<select class="form-control">
+						<select class="form-control"
+							formControlName="categoria"
+							[ngClass]="{ 'is-invalid': f.categoria.errors && submitted }">
 							<option value="">Seleccione</option>
-							<option value="1" selected>Informe</option>
+							<option *ngFor="let dato of tipoTranscripciones" [value]="dato.id">{{ dato.descripcion }}</option>
 						</select>
+
+						<div class="invalid-feedback" *ngIf="f.categoria.errors && submitted">
+							<div *ngIf="f.categoria.errors.required">Debes seleccionar una categoría</div>
+						</div>
 					</div>
 
 					<div class="col-lg-12">
 						<div class="form-group">
 							<label class="text-secondary">Titulo</label>
-							<textarea class="form-control" rows="2" placeholder="Ingresa el titulo"></textarea>
+							<textarea 
+								formControlName="titulo"
+								class="form-control" 
+								rows="2" 
+								placeholder="Ingresa el titulo"
+								[ngClass]="{ 'is-invalid': f.titulo.errors && submitted }"></textarea>
+
+							<div class="invalid-feedback" *ngIf="f.titulo.errors && submitted">
+								<div *ngIf="f.titulo.errors.required">Este campo es requerido</div>
+							</div>
 						</div>
 					</div>
 
@@ -59,13 +96,25 @@
 						<div class="form-group">
 							<label class="h5">¿Desea adjuntar archivo?</label><br>
 							<div class="form-check form-check-inline">
-								<input class="form-check-input" type="radio" id="inlineCheckbox1" (change)="adjuntar=true" name="adjuntar">
+								<input class="form-check-input" 
+									type="radio" 
+									id="inlineCheckbox1"
+									name="adjuntar" 
+									(change)="activarArchivo()">
 								<label class="form-check-label" for="inlineCheckbox1">Si</label>
 							</div>
 
 							<div class="form-check form-check-inline">
-								<input class="form-check-input" type="radio" id="inlineCheckbox2" (change)="adjuntar=false" name="adjuntar">
+								<input class="form-check-input"
+									type="radio" 
+									id="inlineCheckbox2"
+									name="adjuntar" 
+									(change)="activarContenido()">
 								<label class="form-check-label" for="inlineCheckbox2">No</label>
+							</div>
+
+							<div *ngIf="f.activar.errors && submitted">
+								<small class="text-danger" *ngIf="f.activar.errors.required">Debes seleccionar una opción</small>
 							</div>
 						</div>
 					</div>
@@ -73,22 +122,35 @@
 					<div class="col-lg-12" *ngIf="adjuntar == false">
 						<div class="form-group">
 							<label class="text-secondary">Contenido a investigar</label>
-							<textarea class="form-control" rows="4" placeholder="Ingresa el contenido a investigar..."></textarea>
+							<textarea class="form-control" 
+								formControlName="contenido" 
+								rows="4" 
+								placeholder="Ingresa el contenido a investigar..."
+								[ngClass]="{ 'is-invalid': f.contenido.errors && submitted }"></textarea>
+								
+								<div class="invalid-feedback" *ngIf="f.contenido.errors && submitted">
+									<div *ngIf="f.contenido.errors.required">Este campo es requerido</div>
+								</div>
 						</div>
 					</div>
 
 					<div class="col-lg-12" *ngIf="adjuntar == true">
 						<div class="form-group">
 							<label class="text-secondary">Archivo</label><br>
-							<input type="file">
+							<input type="file" (change)="guardarArchivo($event)">
+
+							<div *ngIf="f.archivo_inv.errors && submitted">
+								<small class="text-danger" *ngIf="f.archivo_inv.errors.required">Debe adjuntar el archivo</small>
+							</div>
 						</div>
 					</div>
 				</div>  
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                <button type="button" class="btn btn-primary">Guardar</button>
+                <a href="#!" #cerrarModal class="btn btn-secondary" data-dismiss="modal">Cerrar</a>
+                <button type="submit" [disabled]="formTranscripcion.invalid" class="btn btn-primary">Guardar</button>
             </div>
         </div>
     </div>
 </div>
+</form>

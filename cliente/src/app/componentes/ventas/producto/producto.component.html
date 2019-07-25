@@ -1,3 +1,4 @@
+<form [formGroup]="formProducto" (ngSubmit)="almacenarProducto()">
 <div class="modal" tabindex="-1" role="dialog" id="agregarProducto">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
@@ -12,25 +13,45 @@
                     <div class="col-6">
                         <div class="form-group">
                             <label>Producto</label>
-                            <select class="form-control" name="producto">
-                                <option value="">Seleccione...</option>
-                                <option value="1" selected="">Marcadores surtidos al agua x70
-                                </option>
+                            <select class="form-control" 
+                                formControlName="producto_id" 
+                                [ngClass]="{ 'is-invalid': f.producto_id.errors && submitted }"
+                                (change)="obtenerProducto(f.producto_id.value)">
+                                <option value="" disabled>Seleccione...</option>
+                                <ng-container *ngFor="let producto of productos; index as i">
+                                <option  [value]="producto.id" *ngIf="producto.estado == 0">{{ producto.nombre }}</option>
+                                </ng-container>
                             </select>
+
+                            <div class="invalid-feedback" *ngIf="f.producto_id.errors && submitted">
+                                <div *ngIf="f.producto_id.errors.required">Debes seleccionar una opción</div>
+                            </div>
                         </div>
                     </div>
             
                     <div class="col-3">
                         <div class="form-group">
                             <label>Cantidad</label>
-                            <input type="number" class="form-control" min="5" value="1">
+                            <input type="number" 
+                                class="form-control"
+                                formControlName="cantidad" 
+                                [disabled]="f.producto_id.errors ? true : null"
+                                [ngClass]="{ 'is-invalid': f.cantidad.errors && submitted }">
+
+                            <div class="invalid-feedback" *ngIf="f.cantidad.errors && submitted">
+                                <div *ngIf="f.cantidad.errors.required">Este campo es requerido y solo acepta números</div>
+                                <div *ngIf="f.cantidad.errors.max">La cantidad no puede ser mayor a la disponible</div>
+                            </div>
                         </div>
                     </div>
 
                     <div class="col-3">
                         <div class="form-group">
                             <label>Disponible</label>
-                            <input type="text" class="form-control" value="300" readonly>
+                            <input type="text" 
+                                class="form-control" 
+                                formControlName="stock" 
+                                readonly>
                         </div>
                     </div>
                 </div>
@@ -43,7 +64,10 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text" id="basic-addon1">Bs.</span>
                                 </div>
-                                <input type="text" class="form-control" readonly value="8000">
+                                <input type="text" 
+                                    class="form-control" 
+                                    formControlName="precio_venta"
+                                    readonly>
                             </div>
                         </div>
                     </div>
@@ -55,7 +79,11 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text" id="basic-addon1">Bs.</span>
                                 </div>
-                                <input type="text" class="form-control" readonly value="40000">
+                                <input type="text" 
+                                    class="form-control"
+                                    formControlName="subtotal"
+                                    value="{{ f.cantidad.value * f.precio_venta.value }}" 
+                                    readonly>
                             </div>
                         </div>
                     </div>
@@ -63,9 +91,10 @@
             </div>
 
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                <button type="button" class="btn btn-primary">Guardar</button>
+                <a href="#!" id="pointer" #cerrarModal class="btn btn-secondary" data-dismiss="modal">Cerrar</a>
+                <button type="submit" [disabled]="formProducto.invalid" class="btn btn-primary">Guardar</button>
             </div>
         </div>
     </div>
 </div>
+</form>

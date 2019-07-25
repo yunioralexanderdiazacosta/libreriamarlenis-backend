@@ -1,3 +1,4 @@
+<form [formGroup]="formProveedor" (ngSubmit)="almacenarProveedor()">
 <div class="modal" tabindex="-1" role="dialog" id="nuevoProveedor">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
@@ -12,14 +13,30 @@
                     <div class="col-6">
                         <div class="form-group">
                             <label class="text-secondary">Razón Social</label>
-                            <input type="text" class="form-control" placeholder="Ingresa la razon social">
+                            <input type="text" 
+                                formControlName="razon_social"
+                                class="form-control" 
+                                placeholder="Ingresa la razon social"
+                                [ngClass]="{ 'is-invalid': f.razon_social.errors && submitted }">
+
+                            <div class="invalid-feedback" *ngIf="f.razon_social.errors && submitted">
+                                <div *ngIf="f.razon_social.errors.required">{{ input_required }}</div>
+                            </div>
                         </div>
                     </div>
             
                     <div class="col-6">
                         <div class="form-group">
                             <label class="text-secondary">Contacto</label>
-                            <input type="text" class="form-control" placeholder="Ingresa el nombre del contacto">
+                            <input type="text" 
+                                formControlName="contacto"
+                                class="form-control" 
+                                placeholder="Ingresa el nombre del contacto"
+                                [ngClass]="{ 'is-invalid': f.contacto.errors && submitted }">
+
+                            <div class="invalid-feedback" *ngIf="f.contacto.errors && submitted">
+                                <div *ngIf="f.contacto.errors.required">{{ input_required }}</div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -28,14 +45,31 @@
                     <div class="col-6">
                         <div class="form-group">
                             <label class="text-secondary">Correo Electrónico</label>
-                            <input type="text" class="form-control" placeholder="Ingresa el correo electrónico">
+                            <input type="text" 
+                                formControlName="correo"
+                                class="form-control" 
+                                placeholder="Ingresa el correo electrónico"
+                                [ngClass]="{ 'is-invalid': f.correo.errors && submitted }">
+
+                            <div class="invalid-feedback" *ngIf="f.correo.errors && submitted">
+                                <div *ngIf="f.correo.errors.required">{{ input_required }}</div>
+                                <div *ngIf="f.correo.errors.email">El correo electrónico no es válido</div>
+                            </div>
                         </div>
                     </div>
                     
                     <div class="col-6">
                         <div class="form-group">
                             <label class="text-secondary">Teléfono</label>
-                            <input type="text" class="form-control" placeholder="Ingresa el número telefónico">
+                            <input type="text" 
+                                formControlName="telefono"
+                                class="form-control" 
+                                placeholder="Ingresa el número telefónico"
+                                [ngClass]="{ 'is-invalid': f.telefono.errors && submitted }">
+
+                            <div class="invalid-feedback" *ngIf="f.telefono.errors && submitted">
+                                <div *ngIf="f.correo.errors.required">{{ input_required }}</div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -44,16 +78,24 @@
                     <div class="col-12">
                         <div class="form-group">
                             <label class="text-secondary">Dirección</label>
-                            <textarea class="form-control" placeholder="Ingresa la dirección"></textarea>
+                            <textarea class="form-control"
+                                formControlName="direccion" 
+                                placeholder="Ingresa la dirección"
+                                [ngClass]="{ 'is-invalid': f.direccion.errors && submitted }"></textarea>
+                            
+                            <div class="invalid-feedback" *ngIf="f.direccion.errors && submitted">
+                                <div *ngIf="f.direccion.errors.required">{{ input_required }}</div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
 
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                <button type="button" class="btn btn-primary">Guardar</button>
+                <a href="#!" #cerrarModal class="btn btn-secondary" data-dismiss="modal">Cerrar</a>
+                <button type="submit" [disabled]="formProveedor.invalid" class="btn btn-primary">Guardar</button>
             </div>
         </div>
     </div>
 </div>
+</form>

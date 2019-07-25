@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CatProductosService } from '../../../servicios/cat-productos/cat-productos.service';
 
 @Component({
   selector: 'app-categorias-productos',
@@ -7,9 +8,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CategoriasProductosComponent implements OnInit {
 
-  constructor() { }
+	constructor(public catProductosService: CatProductosService) { }
+	categorias: any = []
 
-  ngOnInit() {
-  }
+  	ngOnInit() {
+  		this.listarCategoriasProductos()
+  	}
 
+  	listarCategoriasProductos()
+  	{
+  		this.catProductosService.obtenerCategoriasProductos().subscribe(
+  		res => {
+  			this.categorias = res
+  		},
+  		err => {
+  			console.log(err)
+  		})
+  	}
 }

@@ -146,7 +146,7 @@ const routes: Routes = [
 	},
 
 	{
-		path: 'transcripciones/finalizar',
+		path: 'transcripciones/actualizar/:id',
 		component: EdicionTranscripcionComponent
 	},
 

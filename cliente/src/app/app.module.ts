@@ -2,14 +2,23 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { FormsModule } from '@angular/forms';
+import{ ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { ToastrModule } from 'ngx-toastr';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import { AuthInterceptorService } from './_interceptores/auth.interceptor';
+import { SeparadorPipe } from './_utilidades/separador/separador.pipe';
 
 import { AppComponent } from './app.component';
 import { SidebarComponent } from './componentes/layouts/sidebar/sidebar.component';
 import { IniciarsesionComponent } from './componentes/iniciarsesion/iniciarsesion.component';
 
+/******************************************* INICIO*******************************************************/
 import { InicioComponent } from './componentes/inicio/inicio.component';
 import { VentasSemanaComponent } from './componentes/inicio/ventas-semana/ventas-semana.component';
 import { FotocopiasSemanaComponent } from './componentes/inicio/fotocopias-semana/fotocopias-semana.component';
+import { IndicadoresComponent } from './componentes/inicio/indicadores/indicadores.component';
 
 /******************************************* CLIENTES*******************************************************/
 import { ListaClientesComponent } from './componentes/clientes/lista/lista.component';
@@ -21,12 +30,16 @@ import { HistoricoClienteComponent } from './componentes/clientes/historico/hist
 import { ListaVentasComponent } from './componentes/ventas/lista/lista.component';
 import { NuevaVentaComponent } from './componentes/ventas/nueva/nueva.component';
 import { ProductoComponent } from './componentes/ventas/producto/producto.component';
+import { VentasProductosComponent } from './componentes/ventas/nueva/productos/productos.component';
+import { VentasCopiasComponent } from './componentes/ventas/nueva/copias/copias.component';
 /***********************************************************************************************************/
 
 /*************************************** COMPRAS ********************************************************/
 import { ListaComprasComponent } from './componentes/compras/lista/lista.component';
 import { NuevaCompraComponent } from './componentes/compras/nueva/nueva.component';
 import { ProductoCompraComponent } from './componentes/compras/producto/producto.component';
+import { CompraProductosComponent } from './componentes/compras/nueva/productos/productos.component';
+import { CompraComponent } from './componentes/compras/nueva/compra/compra.component';
 
 import { ListaProveedoresComponent } from './componentes/compras/proveedores/lista/lista.component';
 import { NuevoProveedorComponent } from './componentes/compras/proveedores/nuevo/nuevo.component';
@@ -45,6 +58,7 @@ import { NuevaTranscripcionComponent } from './componentes/transcripciones/nueva
 import { EdicionTranscripcionComponent } from './componentes/transcripciones/edicion/edicion.component';
 import { AlmacenamientoComponent } from './componentes/transcripciones/almacenamiento/almacenamiento.component';
 import { ContenidoComponent } from './componentes/transcripciones/contenido/contenido.component';
+import { CartaComponent } from './componentes/transcripciones/almacenamiento/carta/carta.component';
 /**********************************************************************************************************/
 
 /************************************** FOTOCOPIAS ********************************************************/
@@ -86,104 +100,122 @@ import { NuevoEmpleadoComponent } from './componentes/ajustes/empleados/nuevo/nu
 import { NavbarComponent } from './componentes/layouts/navbar/navbar.component';
 /**********************************************************************************************************/
 import { RespaldosBdComponent } from './componentes/respaldos-bd/respaldos-bd.component';
-
+import { VentasTranscripcionesComponent } from './componentes/ventas/nueva/transcripciones/transcripciones.component';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    SidebarComponent,
-    NavbarComponent,
-    IniciarsesionComponent,
-    /******** INICIO ***********/
-    InicioComponent,
-    VentasSemanaComponent,
-    FotocopiasSemanaComponent,
-    /***************************/
+    declarations: [
+        AppComponent,
+        SidebarComponent,
+        NavbarComponent,
+        IniciarsesionComponent,
+        /******** INICIO ***********/
+        InicioComponent,
+        VentasSemanaComponent,
+        FotocopiasSemanaComponent,
+        IndicadoresComponent,
+        /***************************/
 
-    /******* CLIENTES **********/ 
-    ListaClientesComponent,
-    NuevoClienteComponent,
-    HistoricoClienteComponent,
-    /***************************/
-    
-    /********* VENTAS **********/ 
-    ListaVentasComponent,
-    ProductoComponent,
-    NuevaVentaComponent,
-    /***************************/
+        /******* CLIENTES **********/ 
+        ListaClientesComponent,
+        NuevoClienteComponent,
+        HistoricoClienteComponent,
+        /***************************/
+        
+        /********* VENTAS **********/ 
+        ListaVentasComponent,
+        ProductoComponent,
+        NuevaVentaComponent,
+        VentasProductosComponent,
+        VentasCopiasComponent,
+        VentasTranscripcionesComponent,
+        /***************************/
 
-    /********* COMPRAS **********/ 
-    ListaComprasComponent,
-    NuevaCompraComponent,
-    ProductoCompraComponent,
+        /********* COMPRAS **********/ 
+        ListaComprasComponent,
+        NuevaCompraComponent,
+        ProductoCompraComponent,
+        CompraProductosComponent,
+        CompraComponent,
 
-    ListaProveedoresComponent,
-    NuevoProveedorComponent,
-    /***************************/
+        ListaProveedoresComponent,
+        NuevoProveedorComponent,
+        /***************************/
 
-    /******* INVENTARIO ********/
-    ListaInventarioComponent,
-    ListaEntradasComponent,
-    NuevaEntradaComponent,
-    CategoriasProductosComponent,
-    /***************************/
+        /******* INVENTARIO ********/
+        ListaInventarioComponent,
+        ListaEntradasComponent,
+        NuevaEntradaComponent,
+        CategoriasProductosComponent,
+        /***************************/
 
-    /***** TRANSCRIPCIONES *****/
-    ListaTranscripcionesComponent,
-    NuevaTranscripcionComponent,
-    EdicionTranscripcionComponent,
-    AlmacenamientoComponent,
-    /***************************/
+        /***** TRANSCRIPCIONES *****/
+        ListaTranscripcionesComponent,
+        NuevaTranscripcionComponent,
+        EdicionTranscripcionComponent,
+        AlmacenamientoComponent,
+        CartaComponent,
+        /***************************/
 
-    /****** FOTOCOPIAS *********/
-    NuevaFotocopiaComponent,
-    ContenidoComponent,
-    /***************************/
+        /****** FOTOCOPIAS *********/
+        NuevaFotocopiaComponent,
+        ContenidoComponent,
+        /***************************/
 
-    /****** REPORTES ***********/
-    ReportesSeleccionComponent,
-    ReporteVentasComponent,
-    ReporteComprasComponent,
-    ReporteTransPendientesComponent,
-    ReporteInventarioComponent,
-    ReporteFotocopiasComponent,
-    /***************************/
+        /****** REPORTES ***********/
+        ReportesSeleccionComponent,
+        ReporteVentasComponent,
+        ReporteComprasComponent,
+        ReporteTransPendientesComponent,
+        ReporteInventarioComponent,
+        ReporteFotocopiasComponent,
+        /***************************/
 
-    /******* ESTADISTICAS ******/
-    EstadisticasSeleccionComponent,
-    //ventas
-    EstadisticasVentasComponent,
-    IngresosMesVentasComponent,
-    ProductosMesVentasComponent,
-    ProductosMasVendidosComponent,
-    ClientesMesVentasComponent,
-    ClientesAtendidosMesComponent,
+        /******* ESTADISTICAS ******/
+        EstadisticasSeleccionComponent,
+        //ventas
+        EstadisticasVentasComponent,
+        IngresosMesVentasComponent,
+        ProductosMesVentasComponent,
+        ProductosMasVendidosComponent,
+        ClientesMesVentasComponent,
+        ClientesAtendidosMesComponent,
 
-    //empleados
-    EstadisticasEmpleadosComponent,
-    TranscripcionesMedicionComponent,
-    TranscripcionesEficienciaComponent,
-    //fotocopias
-    EstadisticasFotocopiasComponent,
-    EstadisticaFotocopiasTipoComponent,
-    EstadisticaCompFotocopiasComponent,
-    /***************************/
+        //empleados
+        EstadisticasEmpleadosComponent,
+        TranscripcionesMedicionComponent,
+        TranscripcionesEficienciaComponent,
+        //fotocopias
+        EstadisticasFotocopiasComponent,
+        EstadisticaFotocopiasTipoComponent,
+        EstadisticaCompFotocopiasComponent,
+        /***************************/
 
-    /******** AJUSTES ************/
-    //empleado
-    ListaEmpleadosComponent,
-    NuevoEmpleadoComponent,
-    ProductosCategoriasMesComponent,
-    //respaldos
-    RespaldosBdComponent,
-    /*****************************/
+        /******** AJUSTES ************/
+        //empleado
+        ListaEmpleadosComponent,
+        NuevoEmpleadoComponent,
+        ProductosCategoriasMesComponent,
+        //respaldos
+        RespaldosBdComponent,
+        /*****************************/
+        SeparadorPipe
+    ],
+    imports: [
+        BrowserModule,
+        BrowserAnimationsModule,
+        AppRoutingModule,
+        FormsModule,
+        ReactiveFormsModule,
+        HttpClientModule,
+        ToastrModule.forRoot()
+    ],
+    providers: [
+    {
+        provide: HTTP_INTERCEPTORS,
+        useClass: AuthInterceptorService,
+        multi: true
+    }
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    FormsModule
-  ],
-  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

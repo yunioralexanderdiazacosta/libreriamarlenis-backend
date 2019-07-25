@@ -36,88 +36,21 @@
 			<thead class="text-center bg-secondary text-white">
 				<tr>
 					<th>N° Cedula</th>
-					<th>Nombre</th>
-					<th>Apellido</th>
+					<th>Nombre(s)</th>
+					<th>Apellido(s)</th>
 					<th>Teléfono</th>
 					<th></th>
 				</tr>
 			</thead>
 			<tbody class="text-center">
-				<tr>
-				  	<td class="align-middle">V-23895594</td>
-				  	<td class="align-middle">Juan</td>
-				  	<td class="align-middle">Gonzalez</td>
-				  	<td class="align-middle">0414-9011220</td>
+				<tr *ngFor="let cliente of clientes">
+				  	<td class="align-middle">{{ cliente.cedula }} </td>
+				  	<td class="align-middle">{{ cliente.nombres }}</td>
+				  	<td class="align-middle">{{ cliente.apellidos }}</td>
+				  	<td class="align-middle">{{ cliente.telefono }}</td>
 				  	<td class="align-middle">
 				  		<div class="btn btn-group">
 				  		    <a routerLink="/clientes/historico" class="btn btn-secondary">
-				  				<i class="fas fa-eye"></i>
-				  			</a>
-
-				  			<a routerLink="#!" class="btn btn-secondary">
-				  				<i class="fas fa-edit"></i>
-				  			</a>
-
-				  			<button class="btn btn-secondary">
-				  				<i class="fas fa-trash"></i>
-				  			</button>
-				  		</div>
-				  	</td>
-				</tr>
-
-				<tr>
-				  	<td class="align-middle">V-24891011</td>
-				  	<td class="align-middle">Pedro</td>
-				  	<td class="align-middle">Martinez</td>
-				  	<td class="align-middle">0416-1011012</td>
-				  	<td>
-				  		<div class="btn btn-group">
-				  			<a routerLink="#!" class="btn btn-secondary">
-				  				<i class="fas fa-eye"></i>
-				  			</a>
-
-				  			<a routerLink="#!" class="btn btn-secondary">
-				  				<i class="fas fa-edit"></i>
-				  			</a>
-
-				  			<button class="btn btn-secondary">
-				  				<i class="fas fa-trash"></i>
-				  			</button>
-				  		</div>
-				  	</td>
-				</tr>
-
-
-				<tr>
-				  	<td class="align-middle">V-11891011</td>
-				  	<td class="align-middle">Camilo</td>
-				  	<td class="align-middle">Millan</td>
-				  	<td class="align-middle">0414-0112390</td>
-				  	<td>
-				  		<div class="btn btn-group">
-				  			<a routerLink="#!" class="btn btn-secondary">
-				  				<i class="fas fa-eye"></i>
-				  			</a>
-
-				  			<a routerLink="#!" class="btn btn-secondary">
-				  				<i class="fas fa-edit"></i>
-				  			</a>
-
-				  			<button class="btn btn-secondary">
-				  				<i class="fas fa-trash"></i>
-				  			</button>
-				  		</div>
-				  	</td>
-				</tr>
-
-				<tr>
-					<td class="align-middle">V-15781328</td>
-				  	<td class="align-middle">Luisa</td>
-				  	<td class="align-middle">Arismendi</td>
-				  	<td class="align-middle">0426-9560391</td>
-				  	<td>
-				  		<div class="btn btn-group">
-				  			<a routerLink="#!" class="btn btn-secondary">
 				  				<i class="fas fa-eye"></i>
 				  			</a>
 

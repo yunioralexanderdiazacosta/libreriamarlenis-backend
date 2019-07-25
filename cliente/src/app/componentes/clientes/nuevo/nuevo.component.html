@@ -1,70 +1,118 @@
-<div class="modal" tabindex="-1" role="dialog" id="nuevoCliente">
-    <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-            <div class="modal-header bg-secondary text-white">
-                <h5 class="modal-title">Nuevo Cliente</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div class="row">
-                    <div class="col-6">
-                        <div class="form-group">
-                            <label class="text-secondary">Nacionalidad</label>
-                            <select class="form-control" name="producto">
-                                <option value="">Seleccione...</option>
-                                <option value="V" selected>Venezolano</option>
-                                <option value="E">Extranero</option>
-                            </select>
+<form [formGroup]="formCliente" (ngSubmit)="almacenarCliente()">
+    <div class="modal" tabindex="-1" role="dialog" id="nuevoCliente">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header bg-secondary text-white">
+                    <h5 class="modal-title">Nuevo Cliente</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label class="text-secondary">Nacionalidad</label>
+                                <select class="form-control" 
+                                    formControlName="nacionalidad"
+                                    [ngClass]="{ 'is-invalid': f.nacionalidad.errors && (f.nacionalidad.dirty || f.nacionalidad.touched) }">
+                                    <option value="">Seleccione...</option>
+                                    <option value="V" selected>Venezolano</option>
+                                    <option value="E">Extranero</option>
+                                </select>
+
+                                <div class="invalid-feedback" *ngIf="f.nacionalidad.errors && (f.nacionalidad.dirty || f.nacionalidad.touched)">
+                                    <div *ngIf="f.nacionalidad.errors.required">Debes seleccionar una opción</div>
+                                </div>
+                            </div>
+                        </div>
+                
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label class="text-secondary">N° Cédula</label>
+                                <input type="number" 
+                                    formControlName="nCedula"
+                                    class="form-control" 
+                                    placeholder="Ingresa el número de cédula..."
+                                    [ngClass]="{ 'is-invalid': f.nCedula.errors && (f.nCedula.dirty || f.nCedula.touched) }">
+                                 
+                                 <div class="invalid-feedback" *ngIf="f.nCedula.errors && (f.nCedula.dirty || f.nCedula.touched)">
+                                    <div *ngIf="f.nCedula.errors.required">Este campo es requerido y solo acepta números</div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-            
-                    <div class="col-6">
-                        <div class="form-group">
-                            <label class="text-secondary">N° Cédula</label>
-                            <input type="number" class="form-control" placeholder="Ingresa el número de cédula">
+
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label class="text-secondary">Nombre(s)</label>
+                                <input type="text" 
+                                    formControlName="nombres"
+                                    class="form-control" 
+                                    placeholder="Ingresa nombre(s)..."
+                                    [ngClass]="{ 'is-invalid': f.nombres.errors && (f.nombres.dirty || f.nombres.touched) }">
+                                
+                                <div class="invalid-feedback" *ngIf="f.nombres.errors && (f.nombres.dirty || f.nombres.touched)">
+                                    <div *ngIf="f.nombres.errors.required">{{ input_required }}</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label class="text-secondary">Apellido(s)</label>
+                                <input type="text" 
+                                    formControlName="apellidos"
+                                    class="form-control" 
+                                    placeholder="Ingresa apellido(s)..."
+                                    [ngClass]="{ 'is-invalid': f.apellidos.errors && (f.apellidos.dirty || f.apellidos.touched) }">
+                                
+                                <div class="invalid-feedback" *ngIf="f.apellidos.errors && (f.apellidos.dirty || f.apellidos.touched)">
+                                    <div *ngIf="f.apellidos.errors.required">{{ input_required }}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label class="text-secondary">Dirección</label>
+                                <input type="text" 
+                                    formControlName="direccion"
+                                    class="form-control" 
+                                    placeholder="Ingresa la dirección..."
+                                    [ngClass]="{ 'is-invalid': f.direccion.errors && (f.direccion.dirty || f.direccion.touched) }">
+                            
+                                <div class="invalid-feedback" *ngIf="f.direccion.errors && (f.direccion.dirty || f.direccion.touched)">
+                                    <div *ngIf="f.direccion.errors.required">{{ input_required }}</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label class="text-secondary">Teléfono</label>
+                                <input type="text" 
+                                    formControlName="telefono"
+                                    class="form-control" 
+                                    placeholder="Ingresa el número telefónico..."
+                                    [ngClass]="{ 'is-invalid': f.telefono.errors && (f.telefono.dirty || f.telefono.touched) }">
+                            
+                                <div class="invalid-feedback" *ngIf="f.telefono.errors && (f.telefono.dirty || f.telefono.touched)">
+                                    <div *ngIf="f.telefono.errors.required">{{ input_required }}</div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="row">
-                    <div class="col-6">
-                        <div class="form-group">
-                            <label class="text-secondary">Nombre</label>
-                            <input type="text" class="form-control" placeholder="Ingresa el nombre">
-                        </div>
-                    </div>
-                    
-                    <div class="col-6">
-                        <div class="form-group">
-                            <label class="text-secondary">Apellido</label>
-                            <input type="text" class="form-control" placeholder="Ingresa el apellido">
-                        </div>
-                    </div>
+                <div class="modal-footer">
+                    <a href="#!" #cerrarModal id="pointer" class="btn btn-secondary" data-dismiss="modal">Cerrar</a>
+                    <button type="submit" [disabled]="formCliente.invalid" class="btn btn-primary">Guardar</button>
                 </div>
-
-                <div class="row">
-                    <div class="col-6">
-                        <div class="form-group">
-                            <label class="text-secondary">Dirección</label>
-                            <input type="text" class="form-control" placeholder="Ingresa la dirección">
-                        </div>
-                    </div>
-                    
-                    <div class="col-6">
-                        <div class="form-group">
-                            <label class="text-secondary">Teléfono</label>
-                            <input type="text" class="form-control" placeholder="Ingresa el número telefónico">
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                <button type="button" class="btn btn-primary">Guardar</button>
             </div>
         </div>
     </div>
-</div>
+</form>

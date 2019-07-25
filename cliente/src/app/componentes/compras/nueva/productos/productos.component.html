@@ -1,0 +1,36 @@
+<table class="table table-hover" *ngIf="compras.length > 0">
+	<thead class="bg-secondary text-white text-center">
+		<tr>
+			<th>#</th>
+			<th>Descripción</th>
+			<th width="10%">Cantidad</th>
+			<th>Precio C.</th>
+			<th>Precio V.</th>
+			<th>Subtotal</th>
+			<th></th>
+		</tr>
+	</thead>
+	<tbody class="text-center">
+		<tr *ngFor="let dato of compras; index as i">
+			<td class="align-middle">{{ i+1 }}</td>
+			<td class="align-middle">{{ dato.producto_nombre }}</td>
+			<td class="align-middle">{{ dato.cantidad }}</td>
+			<td class="align-middle">Bs. {{ dato.precio_compra | separador }}</td>
+			<td class="align-middle">Bs. {{ dato.precio_venta | separador }}</td>
+			<td class="align-middle">Bs. {{ dato.subtotal | separador }}</td>
+			<td class="align-middle">
+				<button class="btn btn-danger btn-sm" (click)="eliminarProducto(i, dato.producto_id)">
+					<i class="fas fa-trash"></i>
+				</button>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<div class="row">
+	<div class="col-lg-12">
+		<div class="alert alert-secondary text-center" *ngIf="compras.length == 0">
+			<span class="h5"><i class="fas fa-info-circle"></i> No se ha agregado ningún registro</span>
+		</div>
+	</div>
+</div>

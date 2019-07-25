@@ -26,11 +26,9 @@
 			<div class="col-lg-4">
 				<div class="form-group">
 					<label>Categoría:</label>
-					<select class="form-control">
-						<option value="">Todas</option>
-						<option value="">Trabajos</option>
-						<option value="">Investigaciones</option>
-						<option value="">Informes</option>
+					<select class="form-control" [(ngModel)]="categoriaId" name="categoriaId">
+						<option value="" selected>Todas</option>
+						<option *ngFor="let categoria of categorias" [value]="categoria.id">{{ categoria.descripcion }}</option>
 					</select>
 				</div>
 			</div>
@@ -42,60 +40,22 @@
 						<div class="input-group-prepend">
 							<span class="input-group-text"><i class="fas fa-search"></i></span>
 						</div>
-						<input type="text" class="form-control" placeholder="Buscar palabra clave, título...">
+						<input type="text" [formControl]="palabra" class="form-control" placeholder="Buscar palabra clave, título...">
 					</div>
 				</div>
 			</div>
 		</div>
 
-		<div class="row mt-3">
-			<div class="col-lg-6">
-				<div class="card">
-					<div class="card-header bg-dark text-white">
-						<h5 class="text-center">Linguistica y Comunicación</h5>
-					</div>
-					<div class="card-body">
-						<ol>
-							<li>Que es la lingüistica </li>
-							<li>Importancia de la lingüistica </li>
-							<li>Que es la comunicación... </li> 
-						</ol>
-					</div>
-					<div class="card-footer text-right">
-						<div class="btn-group">
-							<button class="btn btn-secondary btn-lg" data-toggle="modal" data-target="#contenido">
-								<i class="fas fa-eye"></i>
-							</button>
-							<button class="btn btn-secondary btn-lg">
-								<i class="fas fa-file-word"></i>
-							</button>
-						</div>
-					</div>
-				</div>
+		<div class="row mt-3" *ngIf="transcripciones.length > 0">
+			<div class="col-lg-6" *ngFor="let transcripcion of transcripciones">
+				<app-carta [transcripcion]="transcripcion"></app-carta>
 			</div>
+		</div>
 
-			<div class="col-lg-6">
-				<div class="card">
-					<div class="card-header bg-dark text-white">
-						<h5 class="text-center">Comunicación Verbal</h5>
-					</div>
-					<div class="card-body">
-						<ol>
-							<li>Definición</li>
-							<li>Caracterisicas</li>
-							<li>Importancia...</li>
-						</ol>
-					</div>
-					<div class="card-footer text-right">
-						<div class="btn-group">
-							<button class="btn btn-secondary btn-lg">
-								<i class="fas fa-eye"></i>
-							</button>
-							<button class="btn btn-secondary btn-lg">
-								<i class="fas fa-file-word"></i>
-							</button>
-						</div>
-					</div>
+		<div class="row mt-3">
+			<div class="col-lg-12" *ngIf="error">
+				<div class="alert alert-secondary text-center">
+					<span class="h4"><i class="fas fa-info-circle"></i>No se encontraron resultados</span>
 				</div>
 			</div>
 		</div>
