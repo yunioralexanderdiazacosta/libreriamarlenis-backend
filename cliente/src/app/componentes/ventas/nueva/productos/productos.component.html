@@ -28,7 +28,7 @@
 	</thead>
 	<tbody class="text-center">
 		<tr *ngFor="let dato of productosVenta; index as i">
-			<td class="align-middle">{{ cont+1 }}</td>
+			<td class="align-middle">{{ i+1 }}</td>
 			<td class="align-middle">{{ dato.producto_nombre }}</td>
 			<td class="align-middle">{{ dato.cantidad }}</td>
 			<td class="align-middle">Bs. {{ dato.precio_venta }}</td>

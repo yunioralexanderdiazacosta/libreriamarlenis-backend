@@ -1,4 +1,4 @@
-<ul class="sidebar navbar-nav" id="posicion">
+<ul class="sidebar navbar-nav" id="posicion" *ngIf="usuario">
 	<li class="nav-item" routerLinkActive="active">
 		<a class="nav-link" routerLink="/inicio">
 			<i class="fas fa-home"></i> <span class="ml-2">Inicio</span>
@@ -17,7 +17,7 @@
 		</a>
 	</li>
 
-	<li class="nav-item dropdown" routerLinkActive="active">
+	<li class="nav-item dropdown" routerLinkActive="active" *ngIf="usuario.rol_id == 1">
 		<a class="nav-link dropdown-toggle" href="#!" id="menu1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 			<i class="fas fa-truck-loading"></i> <span class="ml-2">Compras</span>
 		</a>
@@ -29,7 +29,7 @@
 	</li>
 
  
-	<li class="nav-item dropdown" routerLinkActive="active">
+	<li class="nav-item dropdown" routerLinkActive="active" *ngIf="usuario.rol_id == 1">
 		<a class="nav-link dropdown-toggle" href="#!" id="menu2" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 			<i class="fas fa-box"></i> <span class="ml-2">Inventario</span>
 		</a>
@@ -52,13 +52,13 @@
 		</div>
 	</li>
 
-	<li class="nav-item" routerLinkActive="active">
+	<li class="nav-item" routerLinkActive="active" *ngIf="usuario.rol_id == 1">
 		<a class="nav-link" routerLink="/reportes">
 			<i class="fas fa-file-pdf"></i> <span class="ml-2">Reportes</span>
 		</a>
 	</li>
 
-	<li class="nav-item" routerLinkActive="active">
+	<li class="nav-item" routerLinkActive="active" *ngIf="usuario.rol_id == 1">
 		<a class="nav-link" routerLink="/estadisticas">
 			<i class="fas fa-chart-line"></i> <span class="ml-2">Estadistícas</span>
 		</a>

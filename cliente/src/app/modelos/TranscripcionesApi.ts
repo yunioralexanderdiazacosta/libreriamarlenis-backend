@@ -6,6 +6,7 @@ export class TranscripcionesApi {
 	public fechaEntrega: string,
 	public monto: number,
 	public archivo_inv: number,
+	public tipo_transcripcion: number,
 	public venta_id: number,
 	public usuario_id: number
 	) {}

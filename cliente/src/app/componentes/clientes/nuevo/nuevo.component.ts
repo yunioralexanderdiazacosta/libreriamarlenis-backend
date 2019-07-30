@@ -1,11 +1,12 @@
-import { Component, OnInit, Output, EventEmitter, ViewChild } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, ViewChild, ChangeDetectionStrategy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ClientesService } from '../../../servicios/clientes/clientes.service';
 
 @Component({
 	selector: 'app-nuevo-cliente',
 	templateUrl: './nuevo.component.html',
-	styleUrls: ['./nuevo.component.css']
+	styleUrls: ['./nuevo.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class NuevoClienteComponent implements OnInit {
 	/**
@@ -29,6 +30,13 @@ export class NuevoClienteComponent implements OnInit {
   	*/
 	formCliente: FormGroup;
 
+    /**
+    * Verifica si el formulario ha sido enviado
+    * 
+    * @property {boolean}
+    */
+    submitted: boolean = false
+
 	/**
 	*Mensaje de error
 	*
@@ -43,7 +51,7 @@ export class NuevoClienteComponent implements OnInit {
 
 	ngOnInit() {
 		this.formCliente = this.fb.group({
-			nacionalidad: ['', Validators.required],
+			nacionalidad: ['V', Validators.required],
   			nCedula: ['', [ Validators.required, Validators.pattern('[0-9]+')]],
   			nombres: ['', Validators.required],
   			apellidos: ['', Validators.required],
@@ -66,6 +74,8 @@ export class NuevoClienteComponent implements OnInit {
 	**/
   	almacenarCliente()
   	{
+        this.submitted = true
+        if(this.formCliente.invalid){ return }
   		let datosEnviar = {
   			cedula: this.formCliente.value.nacionalidad+'-'+this.formCliente.value.nCedula, 
   			nombres: this.formCliente.value.nombres,
@@ -90,6 +100,7 @@ export class NuevoClienteComponent implements OnInit {
   	* @return {void}
   	*/
   	resetearCampos(){
+         this.submitted = false
     	this.formCliente.setValue({
 			nacionalidad: '',
   			nCedula: '',

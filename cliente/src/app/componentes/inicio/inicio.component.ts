@@ -10,9 +10,27 @@ import { TokenPayload } from '../../modelos/tokenPayload';
   styleUrls: ['./inicio.component.css']
 })
 export class InicioComponent implements OnInit {
+    /**
+    *Obtiene cada una de las transcripciones pendientes
+    *
+    *@property {Array<any>}
+    **/
     tpendientes: any = [] 
+
+    /**
+    *Almacena los datos del usuario conectado
+    *
+    *@property {TokenPayload}
+    **/
 	usuario: TokenPayload
+
+    /**
+    *Contador para saber la cantidad de transcripciones pendientes
+    *
+    *@property {number}
+    **/
 	cont_pend = 0;
+
 	constructor(
 		public usuariosService: UsuariosService,
 		public transcripcionesService: TranscripcionesService) 
@@ -44,8 +62,7 @@ export class InicioComponent implements OnInit {
   					var nuevaFecha = moment(fecha_entrega, "YYYY-MM-DD")
   					var hoy = moment(fecha_hoy, "YYYY-MM-DD")
   					var dias = nuevaFecha.diff(hoy, 'days')
-					Object.defineProperty(dato, 'dias', { value: dias })
-  					return dato.fecha_entrega = moment().format(dato.fecha_entrega) 
+					Object.defineProperty(dato, 'dias', { value: dias }) 
 	  			})
 	  		},
 	  		err => {

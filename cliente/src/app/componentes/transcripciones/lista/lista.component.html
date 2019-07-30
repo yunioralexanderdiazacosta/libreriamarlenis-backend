@@ -21,7 +21,7 @@
 					<div class="input-group-prepend">
 						<span class="input-group-text"><i class="fas fa-search"></i></span>
 					</div>
-					<input type="text" class="form-control" placeholder="Buscar...">
+					<input type="text" class="form-control" placeholder="Buscar..." [(ngModel)]="busqueda">
 				</div>
 			</div>
 
@@ -46,11 +46,11 @@
 				</tr>
 			</thead>
 			<tbody class="text-center">
-				<tr *ngFor="let transcripcion of transcripciones; index as i">
+				<tr *ngFor="let transcripcion of transcripciones | filtro: { tipo: busqueda, titulo: busqueda}; index as i">
 					<td class="align-middle">{{ i+1 }}</td>
 					<td class="align-middle">{{ transcripcion.created_at | date: 'dd-MM-yyyy hh:mm a' }}</td>
 					<td class="align-middle">{{ transcripcion.usuario.usuario }}</td>
-					<td class="align-middle">{{ transcripcion.tipos_transcripcione.descripcion  }}</td>
+					<td class="align-middle">{{ transcripcion.tipo  }}</td>
 					<td class="align-middle">{{ transcripcion.titulo }}</td>
 					<td class="aling-middle">
 						<i [ngClass]="transcripcion.estatus_tarea == 0 ? 'fas fa-times text-danger' : 'fas fa-check text-success'"></i>

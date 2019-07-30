@@ -20,7 +20,7 @@
 	<tbody class="text-center">
 		<tr *ngFor="let transcripcion of transcripciones; index as i">
 			<td>{{ i+1 }}</td>
-			<td>{{ transcripcion.fechaEntrega }}</td>
+			<td>{{ transcripcion.fechaEntrega | date: 'dd-MM-yyyy' }}</td>
 			<td>{{ transcripcion.titulo }}</td>
 			<td>{{ transcripcion.encargado_usuario }}</td>
 			<td>Bs. {{ transcripcion.subtotal }}</td>

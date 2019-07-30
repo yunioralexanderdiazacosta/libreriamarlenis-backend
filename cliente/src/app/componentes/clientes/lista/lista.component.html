@@ -21,7 +21,7 @@
 					<div class="input-group-prepend">
 						<span class="input-group-text"><i class="fas fa-search"></i></span>
 					</div>
-					<input type="text" class="form-control" placeholder="Buscar...">
+					<input type="text" class="form-control" placeholder="Buscar..." [(ngModel)]="busqueda">
 				</div>
 			</div>
 
@@ -43,7 +43,7 @@
 				</tr>
 			</thead>
 			<tbody class="text-center">
-				<tr *ngFor="let cliente of clientes">
+				<tr *ngFor="let cliente of clientes | filtro: { cedula: busqueda, nombres: busqueda, apellidos: busqueda }">
 				  	<td class="align-middle">{{ cliente.cedula }} </td>
 				  	<td class="align-middle">{{ cliente.nombres }}</td>
 				  	<td class="align-middle">{{ cliente.apellidos }}</td>

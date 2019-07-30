@@ -5,7 +5,9 @@ import { FormsModule } from '@angular/forms';
 import{ ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
+import { NgSelectModule } from '@ng-select/ng-select';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 import { AuthInterceptorService } from './_interceptores/auth.interceptor';
 import { SeparadorPipe } from './_utilidades/separador/separador.pipe';
@@ -43,6 +45,8 @@ import { CompraComponent } from './componentes/compras/nueva/compra/compra.compo
 
 import { ListaProveedoresComponent } from './componentes/compras/proveedores/lista/lista.component';
 import { NuevoProveedorComponent } from './componentes/compras/proveedores/nuevo/nuevo.component';
+import { ProveedorVistaComponent } from './componentes/proveedores/vista/vista.component';
+import { ProveedorEdicionComponent } from './componentes/proveedores/edicion/edicion.component';
 /**********************************************************************************************************/
 
 /*************************************** INVENTARIO ********************************************************/
@@ -101,6 +105,7 @@ import { NavbarComponent } from './componentes/layouts/navbar/navbar.component';
 /**********************************************************************************************************/
 import { RespaldosBdComponent } from './componentes/respaldos-bd/respaldos-bd.component';
 import { VentasTranscripcionesComponent } from './componentes/ventas/nueva/transcripciones/transcripciones.component';
+import { FiltroPipe } from './_utilidades/filtro/filtro.pipe';
 
 @NgModule({
     declarations: [
@@ -139,6 +144,8 @@ import { VentasTranscripcionesComponent } from './componentes/ventas/nueva/trans
 
         ListaProveedoresComponent,
         NuevoProveedorComponent,
+        ProveedorVistaComponent,
+        ProveedorEdicionComponent,
         /***************************/
 
         /******* INVENTARIO ********/
@@ -198,7 +205,8 @@ import { VentasTranscripcionesComponent } from './componentes/ventas/nueva/trans
         //respaldos
         RespaldosBdComponent,
         /*****************************/
-        SeparadorPipe
+        SeparadorPipe,
+        FiltroPipe
     ],
     imports: [
         BrowserModule,
@@ -207,6 +215,8 @@ import { VentasTranscripcionesComponent } from './componentes/ventas/nueva/trans
         FormsModule,
         ReactiveFormsModule,
         HttpClientModule,
+        NgSelectModule,
+        NgxPaginationModule,
         ToastrModule.forRoot()
     ],
     providers: [

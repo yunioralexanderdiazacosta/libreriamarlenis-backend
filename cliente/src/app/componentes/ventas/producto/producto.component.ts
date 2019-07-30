@@ -1,6 +1,7 @@
 import { Component, OnInit, Output, EventEmitter, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ProductosService } from '../../../servicios/productos/productos.service';
+import { NgSelectConfig } from '@ng-select/ng-select';
 
 @Component({
 	selector: 'app-producto',
@@ -13,12 +14,41 @@ export class ProductoComponent implements OnInit {
 	* 
 	* @property {EventEmitter<boolean>}
 	*/
-	@Output() actualizarMontos = new EventEmitter<boolean>();
-	formProducto: FormGroup;
-	productos: any = [];
-	producto;
-	productosArreglo;
+	@Output() actualizarMontos = new EventEmitter<boolean>()
+	
+	/**
+	* Formulario que almacena los datos del producto
+	* 
+	* @property {FormGroup}
+	*/
+	formProducto: FormGroup
 
+    /**
+	* Almacena los productos obtenidos de la API
+	* 
+	* @property {Array<any>}
+	*/
+	productos: any = [];
+
+	/**
+	* Obtiene los datos de un producto seleccionado
+	* 
+	* @property {Array<any>}
+	*/
+	producto
+
+	/**
+	* Almacena los productos obtenidos del arreglo
+	* 
+	* @property {Array<any>}
+	*/
+	productosArreglo
+
+	/**
+	* Verifica si el formulario ha sido enviado
+	* 
+	* @property {boolean}
+	*/
 	submitted: boolean = false;
 
 	/**
@@ -30,7 +60,10 @@ export class ProductoComponent implements OnInit {
 
 	constructor(
 	public productosService: ProductosService,
-	public fb: FormBuilder) { }
+	public fb: FormBuilder,
+	private config: NgSelectConfig,) { 
+		this.config.notFoundText = 'No se encontraron resultados';
+	}
 
 	ngOnInit() {
 		this.listarProductos();
@@ -49,27 +82,29 @@ export class ProductoComponent implements OnInit {
 
 	listarProductos()
 	{
-
 		this.productos = this.productosService.obtenerProductosArreglo()
 	}
 
 	obtenerProducto(id)
 	{
-		this.productosService.obtenerProducto(id).subscribe(
-		res => {
-			this.producto = res;
-			this.formProducto.patchValue({
-				producto_nombre: this.producto.nombre,
-				stock: this.producto.stock,
-				precio_venta: this.producto.precio_venta
+		if(id)
+		{
+			this.productosService.obtenerProducto(id).subscribe(
+			res => {
+				this.producto = res;
+				this.formProducto.patchValue({
+					producto_nombre: this.producto.nombre,
+					stock: this.producto.stock,
+					precio_venta: this.producto.precio_venta
+				})
+				const cantidad = this.formProducto.get('cantidad');
+				cantidad.setValidators(Validators.max(this.producto.stock));
+				cantidad.updateValueAndValidity();
+			},
+			err => {
+				console.log(err)
 			})
-			const cantidad = this.formProducto.get('cantidad');
-			cantidad.setValidators(Validators.max(this.producto.stock));
-			cantidad.updateValueAndValidity();
-		},
-		err => {
-			console.log(err)
-		})
+		}
 	}
 
 	almacenarProducto()

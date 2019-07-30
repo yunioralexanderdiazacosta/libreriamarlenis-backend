@@ -1,0 +1,122 @@
+<div class="row">
+	<div class="col-lg-12">
+		<span class="text-secondary h4"><i class="fas fa-store"></i> Editar Proveedor</span>
+		<ol class="breadcrumb" style="float: right;">
+	  		<li class="breadcrumb-item">
+	    		<a routerLink="/inicio">
+	    			<i class="fas fa-home"></i>
+	    		</a>
+	  		</li>
+	  		<li class="breadcrumb-item">
+	  			<a routerLink="/proveedores">
+	  				Proveedores
+	  			</a>
+	  		</li>
+
+	  		<li class="breadcrumb-item active">
+		  		Edición
+		  	</li>
+		</ol>
+		<hr id="linea">
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-lg-12 mb-3">
+		<h5 class="bg-light text-center p-2"><i class="fas fa-user"></i> Formulario</h5>
+	</div>
+</div>
+     
+<form [formGroup]="formProveedor" (ngSubmit)="actualizarProveedor()" *ngIf="proveedor">              
+	<div class="row">
+	    <div class="col-6">
+	        <div class="form-group">
+	            <label class="text-secondary">Razón Social</label>
+	            <input type="text" 
+	                formControlName="razon_social"
+	                class="form-control" 
+	                placeholder="Ingresa la razon social"
+	                [ngClass]="{ 'is-invalid': f.razon_social.errors && submitted }">
+
+	            <div class="invalid-feedback" *ngIf="f.razon_social.errors && submitted">
+	                <div *ngIf="f.razon_social.errors.required">{{ input_required }}</div>
+	            </div>
+	        </div>
+	    </div>
+
+	    <div class="col-6">
+	        <div class="form-group">
+	            <label class="text-secondary">Contacto</label>
+	            <input type="text" 
+	                formControlName="contacto"
+	                class="form-control" 
+	                placeholder="Ingresa el nombre del contacto"
+	                [ngClass]="{ 'is-invalid': f.contacto.errors && submitted }">
+
+	            <div class="invalid-feedback" *ngIf="f.contacto.errors && submitted">
+	                <div *ngIf="f.contacto.errors.required">{{ input_required }}</div>
+	            </div>
+	        </div>
+	    </div>
+	</div>
+
+	<div class="row">
+	    <div class="col-6">
+	        <div class="form-group">
+	            <label class="text-secondary">Correo Electrónico</label>
+	            <input type="text" 
+	                formControlName="correo"
+	                class="form-control" 
+	                placeholder="Ingresa el correo electrónico"
+	                [ngClass]="{ 'is-invalid': f.correo.errors && submitted }">
+
+	            <div class="invalid-feedback" *ngIf="f.correo.errors && submitted">
+	                <div *ngIf="f.correo.errors.required">{{ input_required }}</div>
+	                <div *ngIf="f.correo.errors.email">El correo electrónico no es válido</div>
+	            </div>
+	        </div>
+	    </div>
+	    
+	    <div class="col-6">
+	        <div class="form-group">
+	            <label class="text-secondary">Teléfono</label>
+	            <input type="text" 
+	                formControlName="telefono"
+	                class="form-control" 
+	                placeholder="Ingresa el número telefónico"
+	                [ngClass]="{ 'is-invalid': f.telefono.errors && submitted }">
+
+	            <div class="invalid-feedback" *ngIf="f.telefono.errors && submitted">
+	                <div *ngIf="f.correo.errors.required">{{ input_required }}</div>
+	            </div>
+	        </div>
+	    </div>
+	</div>
+
+	<div class="row">
+	    <div class="col-12">
+	        <div class="form-group">
+	            <label class="text-secondary">Dirección</label>
+	            <textarea class="form-control"
+	                formControlName="direccion" 
+	                placeholder="Ingresa la dirección"
+	                [ngClass]="{ 'is-invalid': f.direccion.errors && submitted }"></textarea>
+	            
+	            <div class="invalid-feedback" *ngIf="f.direccion.errors && submitted">
+	                <div *ngIf="f.direccion.errors.required">{{ input_required }}</div>
+	            </div>
+	        </div>
+	    </div>
+	    <div class="col-lg-12">
+	    	<br>
+	    	<div class="form-group text-right">
+	    		<button type="submit" class="btn btn-primary btn-lg">
+	    			<i class="fas fa-sync"></i> Actualizar
+	    		</button>
+	    	</div>
+	    </div>
+	</div>
+</form>
+
+
+           

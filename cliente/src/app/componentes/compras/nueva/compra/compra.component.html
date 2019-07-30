@@ -12,22 +12,19 @@
 		    	<div class="row">
 		            <div class="col-6">
 		                <div class="form-group">
-		                    <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#agregarProducto">
-		                    	<i class="fas fa-plus"></i>
-		                    </button>
 		                    <label class="ml-1">Producto</label>
-		                    <select class="form-control" 
-		                    	formControlName="producto_id"
-		                    	[ngClass]="{ 'is-invalid': f.producto_id.errors && submitted }"
-		                    	(change)="obtenerProducto(f.producto_id.value)">
-		                        <option value="" disabled>Seleccione...</option>
-		                        <ng-container *ngFor="let producto of productos">
-		                       	<option *ngIf="producto.estado == 0" [value]="producto.id">{{ producto.nombre }}</option>
-		                       	</ng-container>
-		                    </select>
+		                    <ng-select formControlName="producto_id"
+							    placeholder="Filtrar producto..."
+							    class="custom"
+							    [dropdownPosition]="'bottom'"
+							    (change)="obtenerProducto(f.producto_id.value)">
+							    	<ng-container *ngFor="let producto of productos">
+										<ng-option *ngIf="producto.estado == 0" [value]="producto.id">{{ producto.nombre }}</ng-option>
+									</ng-container>
+							</ng-select>
 
-		                    <div class="invalid-feedback" *ngIf="f.producto_id.errors && submitted">
-								<div *ngIf="f.producto_id.errors.required">Debe seleccionar una opción</div>
+		                    <div *ngIf="f.producto_id.errors && submitted">
+								<div class="text-danger" *ngIf="f.producto_id.errors.required">Debe seleccionar una opción</div>
 		                    </div>
 		                </div>
 		            </div>

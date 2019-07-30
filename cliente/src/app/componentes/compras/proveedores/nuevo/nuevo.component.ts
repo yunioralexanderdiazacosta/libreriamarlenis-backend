@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter, ViewChild } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, ViewChild, ChangeDetectionStrategy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ProveedoresService } from '../../../../servicios/proveedores/proveedores.service';
 import { Router } from '@angular/router';
@@ -6,7 +6,8 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-nuevo-proveedor',
   templateUrl: './nuevo.component.html',
-  styleUrls: ['./nuevo.component.css']
+  styleUrls: ['./nuevo.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class NuevoProveedorComponent implements OnInit {
 	/**
@@ -23,8 +24,25 @@ export class NuevoProveedorComponent implements OnInit {
 	*/
 	@ViewChild('cerrarModal') cerrarModal
 
+	/**
+	* Formulario para almacenar los datos del proveedor
+	*
+	* @property {FormGroup}
+	*/
 	formProveedor: FormGroup
+
+	/**
+	* Verifica si el formulario ha sido enviado
+	*
+	* @property {boolean}
+	*/
 	submitted: boolean = false
+
+	/**
+	* Mensaje de error en validación de input
+	*
+	* @property {string}
+	*/
 	input_required: string = 'Este campo no puede quedar vacío'
 
 	constructor(

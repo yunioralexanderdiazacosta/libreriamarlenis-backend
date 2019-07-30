@@ -18,4 +18,14 @@ export class VentasService {
 	{
 		return this.http.post(`${API_URI}/ventas`, venta)
 	}
+
+	anularVenta(id, dato)
+	{
+		return this.http.put(`${API_URI}/ventas/anular/${id}`, dato)
+	}
+
+	reactivarVenta(id, dato)
+	{
+		return this.http.put(`${API_URI}/ventas/reactivar/${id}`, dato)
+	}
 }

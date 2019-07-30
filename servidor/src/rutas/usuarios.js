@@ -6,10 +6,11 @@ const bcrypt = require('bcrypt')
 const config = require('../config')
 
 const Usuario = require('../modelos/Usuario')
-usuarios.use(cors())
+const Rol = require('../modelos/Rol')
+
 
 /*
-****** Obtener Usuarios ******
+****** OBTENER USUARIOS ******
 */
 usuarios.get('/', (req, res) => {
 	Usuario.findAll()
@@ -22,7 +23,7 @@ usuarios.get('/', (req, res) => {
 })
 
 /*
-****** Registro de usuarios ******
+****** REGISTRO DE USUARIOS
 */
 usuarios.post('/register', (req, res) => {
 	const dia = new Date()
@@ -67,9 +68,9 @@ usuarios.post('/register', (req, res) => {
 	})
 })
 
-/*
-****** Login de usuarios ******
-*/
+/**
+****** LOGIN DE USUARIOS 
+**/
 usuarios.post('/login', (req, res) => {
 	Usuario.findOne({
 		where: {
@@ -101,6 +102,9 @@ usuarios.post('/login', (req, res) => {
 	})
 })
 
+/**
+****** DATOS DEL USUARIO CONECTADO
+**/
 usuarios.get('/profile', (req, res) => {
 	Usuario.findOne({
 		where: {

@@ -38,4 +38,14 @@ export class ComprasService {
 	{
 		return this.http.post(`${API_URI}/compras/pedidos`, pedido)
 	}
+
+	anularCompra(id, dato)
+	{
+		return this.http.put(`${API_URI}/compras/anular/${id}`, dato)
+	}
+
+	reactivarCompra(id, dato)
+	{
+		return this.http.put(`${API_URI}/compras/reactivar/${id}`, dato)
+	}
 }

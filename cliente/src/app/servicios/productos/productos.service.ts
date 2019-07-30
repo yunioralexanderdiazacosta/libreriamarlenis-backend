@@ -51,6 +51,11 @@ export class ProductosService {
 		return this.http.post(`${API_URI}/pedidoproductos`, producto)
 	}
 
+	guardarRegistroProducto(producto)
+	{
+		return this.http.post(`${API_URI}/productos`, producto)
+	}
+
 	actualizarInventarioProducto(producto)
 	{
 		return this.http.put(`${API_URI}/productos/inventario`, producto)

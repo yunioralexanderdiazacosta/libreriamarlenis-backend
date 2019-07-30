@@ -13,6 +13,7 @@ import { CopiasApi } from '../../../modelos/CopiasApi';
 import { TranscripcionesApi } from '../../../modelos/TranscripcionesApi';
 import { Venta } from '../../../modelos/Venta';
 import { ToastrService } from 'ngx-toastr';
+import { NgSelectConfig } from '@ng-select/ng-select';
 import { Router } from '@angular/router';
 
 @Component({
@@ -193,9 +194,9 @@ export class NuevaVentaComponent implements OnInit {
     /** 
     * Almacena los datos del usuario conectado
     *
-    *@property {number}
+    *@property {Object}
     **/
-    usuario;
+    usuario
 
     /** 
     * Para activar el el envio del formulario
@@ -221,7 +222,11 @@ export class NuevaVentaComponent implements OnInit {
         public transcripcionesService: TranscripcionesService,
         public usuariosService: UsuariosService,
         public toastr: ToastrService,
-        public router: Router) { }
+        private config: NgSelectConfig,
+        public router: Router) 
+    { 
+        this.config.notFoundText = 'No se encontraron resultados';
+    }
 
     ngOnInit() {
         this.obtenerClientes();
@@ -321,17 +326,20 @@ export class NuevaVentaComponent implements OnInit {
     **/
     obtenerDatos(id)
     {
-        this.clientesService.obtenerCliente(id).subscribe(
-        (res: any) => {
-            this.cliente = res;
-            this.formCliente.patchValue({
-                nombre: this.cliente.nombres,
-                apellido: this.cliente.apellidos
+        if(id)
+        {
+            this.clientesService.obtenerCliente(id).subscribe(
+            (res: any) => {
+                this.cliente = res;
+                this.formCliente.patchValue({
+                    nombre: this.cliente.nombres,
+                    apellido: this.cliente.apellidos
+                })
+            },
+            err => {
+                console.log(err);
             })
-        },
-        err => {
-            console.log(err);
-        })
+        }
     }
 
     /** 
@@ -496,12 +504,13 @@ export class NuevaVentaComponent implements OnInit {
                 if(this.transcripciones.length > 0)
                 {
                     this.transcripciones.filter(dato => {
-                        this.TranscripcionApi = new TranscripcionesApi('', '', '', null, 0, null, null)
+                        this.TranscripcionApi = new TranscripcionesApi('', '', '', null, 0, null, null, null)
                         this.TranscripcionApi.titulo = dato.titulo
                         this.TranscripcionApi.contenido = dato.contenido
                         this.TranscripcionApi.fechaEntrega = dato.fechaEntrega
                         this.TranscripcionApi.monto = dato.subtotal
                         this.TranscripcionApi.archivo_inv =  dato.archivo_id
+                        this.TranscripcionApi.tipo_transcripcion = parseInt(dato.categoria)
                         this.TranscripcionApi.venta_id =  this.venta_id
                         this.TranscripcionApi.usuario_id = parseInt(dato.encargado_id)
                         
@@ -523,7 +532,7 @@ export class NuevaVentaComponent implements OnInit {
         }
         else
         {
-            this.toastr.error('No se ha insertado ningún registro.', 'Error');
+            this.toastr.error('No se ha insertado ningún registro.', 'Error')
         }
     }
 }

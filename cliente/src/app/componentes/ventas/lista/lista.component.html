@@ -21,7 +21,7 @@
 					<div class="input-group-prepend">
 						<span class="input-group-text"><i class="fas fa-search"></i></span>
 					</div>
-					<input type="text" class="form-control" placeholder="Buscar...">
+					<input type="text" [(ngModel)]="busqueda" class="form-control" placeholder="Buscar...">
 				</div>
 			</div>
 
@@ -44,13 +44,13 @@
 			</thead>
 
 			<tbody class="text-center">
-				<tr *ngFor="let venta of ventas">
-					<td class="align-middle">{{ venta.created_at | date: 'dd-MM-yyyy hh:mm a' }}</td>
-					<td class="align-middle">{{ venta.cliente.cedula }} - {{ venta.cliente.nombres }} {{ venta.cliente.apellidos }} </td>
+				<tr *ngFor="let venta of ventas | filtro: { created_at: busqueda, clienteAtendido: busqueda, estatusTexto: busqueda } | paginate: { itemsPerPage: 5, currentPage: p }">
+					<td class="align-middle">{{ venta.created_at }}</td>
+					<td class="align-middle">{{ venta.clienteAtendido }} </td>
 					<td class="align-middle">Bs. {{ venta.total | separador }} </td>
 					<td class="align-middle">
-						<span [ngClass]="venta.estatus == 1 ? 'badge badge-pill badge-success' : 'badge badge-pill badge-danger'"> 
-						{{ venta.estatus == 1 ? 'Procesada' : 'Anulada' }}
+						<span [ngClass]="venta.estatusTexto == 'Procesada' ? 'badge badge-pill badge-success' : 'badge badge-pill badge-danger'"> 
+						{{ venta.estatusTexto }}
 						</span>
 					</td>
 					<td>
@@ -58,14 +58,19 @@
 							<button class="btn btn-secondary" data-toggle="tooltip" title="Ver">
 								<i class="fas fa-eye"></i>
 							</button>
-							<button class="btn btn-secondary" data-toggle="tooltip" title="Anular">
-								<i class="fas fa-times"></i>
+							<button class="btn btn-secondary" 
+								data-toggle="tooltip" 
+								[title]="venta.estatus == 1 ? 'Anular' : 'Reactivar'" 
+								*ngIf="usuario?.rol_id == 1"
+								(click)="venta.estatus == 1 ? anularVenta(venta.id) : reactivarVenta(venta.id)">
+								<i [ngClass]="venta.estatus == 1 ? 'fas fa-times' : 'fas fa-check'"></i>
 							</button>
 						</div>
 					</td>
 				</tr>
 			</tbody>
 		</table>
+		<pagination-controls class="text-right" (pageChange)="p = $event"></pagination-controls>
 	</div>
 
 	<div class="col-lg-12">

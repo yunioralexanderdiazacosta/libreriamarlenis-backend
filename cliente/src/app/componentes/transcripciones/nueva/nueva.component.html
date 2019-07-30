@@ -10,13 +10,14 @@
             </div>
             <div class="modal-body">
 				<div class="row">
-					<div class="col-lg-6">
+					<div class="col-lg-4">
 						<div class="form-group">
 							<label class="text-secondary">Fecha de Entrega</label>
 							<input 
 								type="date" 
 								formControlName="fechaEntrega"
 								class="form-control"
+								[min]="hoy"
 								[ngClass]="{ 'is-invalid': f.fechaEntrega.errors && submitted }">
 
 								<div class="invalid-feedback" *ngIf="f.fechaEntrega.errors && submitted">
@@ -25,7 +26,23 @@
 						</div>
 					</div>
 
-					<div class="col-lg-6">
+					<div class="col-lg-4">
+						<div class="form-group">
+							<label class="text-secondary">Hora de Entrega</label>
+							<ng-select formControlName="horaEntrega"
+						    placeholder="Filtrar hora..."
+						    class="custom"
+						    [dropdownPosition]="'bottom'">
+								<ng-option *ngFor="let hora of horas" [value]="hora.item">{{ hora.item }}</ng-option>
+							</ng-select>
+
+							<div *ngIf="f.horaEntrega.errors && submitted">
+								<small class="text-danger" *ngIf="f.horaEntrega.errors.required">Debe seleccionar una opción</small>
+							</div>
+						</div>
+					</div>
+
+					<div class="col-lg-4">
 						<div class="form-group">
 							<label class="text-secondary">Subtotal</label>
 							<div class="input-group">
@@ -46,18 +63,23 @@
 					</div>
 
 					<div class="col-lg-6">
-						<div class="form-group">
+						<div class="form-group" *ngIf="usuario">
 							<label class="text-secondary">Encargado</label>
 							<select class="form-control"
 								formControlName="encargado_id"
 								[ngClass]="{ 'is-invalid': f.encargado_id.errors && submitted }"
-								(change)="obtenerEncargado(f.encargado_id.value)">
+								(change)="obtenerEncargado(f.encargado_id.value)"
+								*ngIf="usuario?.rol_id == 1">
 								<option value="">Seleccione...</option>
 								<option *ngFor="let usuario of usuarios" [value]="usuario.id">{{ usuario.usuario }}</option>
 							</select>
 
+							<ng-container *ngIf="usuario">
+							<input type="text" class="form-control" formControlName="encargado_usuario" *ngIf="usuario.rol_id != 1" readonly>
+							</ng-container>
+
 							<div class="invalid-feedback" *ngIf="f.encargado_id.errors && submitted">
-									<div *ngIf="f.encargado_id.errors.required">Debes asignar un encargado</div>
+								<div *ngIf="f.encargado_id.errors.required">Debes asignar un encargado</div>
 							</div>
 						</div>
 					</div>

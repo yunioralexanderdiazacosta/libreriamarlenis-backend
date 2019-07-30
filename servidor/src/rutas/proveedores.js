@@ -15,6 +15,38 @@ proveedores.get('/', (req, res) => {
 	})
 })
 
+proveedores.get('/:id', (req, res) => {
+	const id = req.params.id
+	Proveedor.findOne({
+		where: { id: id }
+	})
+	.then(proveedor => {
+		res.json(proveedor)
+	})
+	.catch(err => {
+		console.log(err)
+	})
+})
+
+proveedores.put('/:id', (req, res) => {
+	const id = req.params.id
+	Proveedor.findOne({
+		where: { id: id }
+	})
+	.then(proveedor => {
+		proveedor.update(req.body)
+		.then(
+			res.json({ message: 'Datos actualizados correctamente' })
+		)
+		.catch(err => {
+			console.log(err)
+		})
+	})
+	.catch(err => {
+		console.log(err)
+	})
+})
+
 proveedores.post('/', (req, res) => {
 	const proveedor = {
 		razon_social: req.body.razon_social,
@@ -29,6 +61,53 @@ proveedores.post('/', (req, res) => {
 	.then(
 		res.status(200).json({ message: 'Datos insetados correctamente' })
 	)
+	.catch(err => {
+		res.send(err)
+	})
+})
+
+
+/**
+****** DESACTIVAR PROVEEDOR
+**/
+proveedores.put('/desactivar/:id', (req, res) => {
+	const id = req.params.id
+	Proveedor.findOne({
+		where: { id: id }
+	})
+	.then(proveedorU => {
+		const dato = { estatus: req.body.estatus }
+		proveedorU.update(dato)
+		.then(
+			res.json({ message: 'Proveedor desactivado satisfactoriamente' })
+		)
+		.catch(err => {
+			res.send(err)
+		})
+	})
+	.catch(err => {
+		res.send(err)
+	})
+})
+
+/**
+****** REACTIVAR PROVEEDOR
+**/
+proveedores.put('/activar/:id', (req, res) => {
+	const id = req.params.id
+	Proveedor.findOne({
+		where: { id: id }
+	})
+	.then(proveedorU => {
+		const dato = { estatus: req.body.estatus }
+		proveedorU.update(dato)
+		.then(
+			res.json({ message: 'Proveedor reactivado correctamente' })
+		)
+		.catch(err => {
+			res.send(err)
+		})
+	})
 	.catch(err => {
 		res.send(err)
 	})

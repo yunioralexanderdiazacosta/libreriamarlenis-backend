@@ -4,6 +4,8 @@ import { UsuariosService } from '../../../servicios/usuarios/usuarios.service';
 import { TranscripcionesService } from '../../../servicios/transcripciones/transcripciones.service';
 import { TipoTranscripcionesService } from '../../../servicios/tipo-transcripciones/tipo-transcripciones.service';
 import { ArchivosService } from '../../../servicios/archivos/archivos.service';
+import { horas } from '../../../_datos/horas';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-nueva-transcripcion',
@@ -25,24 +27,86 @@ export class NuevaTranscripcionComponent implements OnInit {
 	*/
 	@ViewChild('cerrarModal') cerrarModal;
 
+	/**
+	* Formulario para almacenar la transcripcion
+	*
+	* @property {FormGroup}
+	*/
 	formTranscripcion: FormGroup;
-	usuarios;
-	tipoTranscripciones;
-	submitted: boolean = false;
-	adjuntar: boolean;
-	archivo_inv;
+
+	/**
+	* Obtiene cada uno de los usuarios registrados de la API
+	*
+	* @property {any}
+	*/
+	usuarios
+
+	/**
+	* Obtiene cada uno de los tipos de transcripciones de la API
+	*
+	* @property {any}
+	*/
+	tipoTranscripciones
+
+	/**
+	* Verifica si el formulario ha sido enviado o no
+	*
+	* @property {boolean}
+	*/
+	submitted: boolean = false
+
+	/**
+	* Campo para adjuntar los datos del formulario
+	*
+	* @property {boolean}
+	*/
+	adjuntar: boolean
+
+	/**
+	* Almacena el archivo con la investigacion
+	*
+	* @property {File}
+	*/
+	archivo_inv
+
+	/**
+	* Almacena los datos del usuario conectado
+	*
+	* @property {any}
+	*/
+	usuario
+
+	/**
+	* Almacena la fecha actual
+	*
+	* @property {any}
+	*/
+	hoy: any
+
+	/**
+	* Almacena la horas obtenidas del arreglo
+	*
+	* @property {any}
+	*/
+	horas
+
   	constructor(
   		public fb: FormBuilder,
   		public usuariosService: UsuariosService,
   		public transcripcionesService: TranscripcionesService,
   		public tipoTranscripcionesService: TipoTranscripcionesService,
-  		public archivosService: ArchivosService) { }
-
-	ngOnInit() {
-		this.listarUsuarios()
+  		public archivosService: ArchivosService) 
+  	{ 
+  		this.listarUsuarios()
 		this.listarTipoTranscripciones()
+
+		var fecha = new Date()
+        this.hoy = moment(fecha).format("YYYY-MM-DD")
+        this.horas = horas
+
 		this.formTranscripcion = this.fb.group({
 			fechaEntrega: ['', Validators.required],
+			horaEntrega: ['', Validators.required],
 			subtotal: [null, Validators.required],
 			encargado_id: ['', Validators.required],
 			encargado_usuario: ['', Validators.required],
@@ -53,6 +117,24 @@ export class NuevaTranscripcionComponent implements OnInit {
 			archivo_id: [''],
 			contenido: ['']
 		})
+
+		this.usuariosService.obtenerUsuario().subscribe(
+		res => {
+			this.usuario = res
+			if(this.usuario.rol_id != 1)
+			{
+				this.formTranscripcion.patchValue({
+					encargado_id: this.usuario.id,
+					encargado_usuario: this.usuario.usuario
+				})
+			}
+		},
+		err => {
+			console.log(err)
+		})
+  	}
+
+	ngOnInit() {
 	}
 
 	get f(){ return this.formTranscripcion.controls }
@@ -136,6 +218,12 @@ export class NuevaTranscripcionComponent implements OnInit {
 		if(this.formTranscripcion.invalid){
 			return
 		}
+
+		var fecha = this.f.fechaEntrega.value +" "+ this.f.horaEntrega.value
+		var nuevaFecha = moment(fecha, "YYYY-MM-DD HH:mm:ss").format()
+		this.formTranscripcion.patchValue({
+			fechaEntrega: nuevaFecha
+		})
 
 		if(this.adjuntar == false){
 			this.transcripcionesService.guardarTranscripcionArreglo(this.formTranscripcion.value)

@@ -8,9 +8,9 @@ CategoriaProducto.hasMany(Producto)
 Producto.belongsTo(CategoriaProducto)
 productos.use(cors())
 
-/*
-****** Obtener Productos ******
-*/
+/**
+****** OBTENER PRODUCTOS
+**/
 productos.get('/', (req, res) => {
 	Producto.findAll({ 
 		include:
@@ -22,13 +22,13 @@ productos.get('/', (req, res) => {
 		res.json(listarProductos)
 	})
 	.catch(err => {
-		console.log(err)
+		res.send(err)
 	})
 })
 
-/*
-****** Obtener Producto ******
-*/
+/**
+****** OBTENER PRODUCTO
+**/
 productos.get('/:id', (req, res) => {
 	const id = req.params.id
 	Producto.findOne({
@@ -40,56 +40,78 @@ productos.get('/:id', (req, res) => {
 		res.json(mostrarProducto)
 	})
 	.catch(err => {
-		console.log(err)
+		res.send(err)
 	})
 })
 
 /*
-****** Restar cantidad en stock ******
+****** RESTAR CANTIDAD EN STOCK ******
 */
 productos.put('/inventario', (req, res) => {
 	const id = req.body.producto_id
 	Producto.findOne({
-			where: { id: id }
-		})
-		.then(producto => {
-			const dato = { stock: producto.stock - req.body.cantidad } 
-			producto.update(dato)
-			.then(
-				res.json({message: 'Inventario actualizado correctamente'})
-			)
-			.catch(err => {
-				console.log(err)
-			})
-		})
+		where: { id: id }
+	})
+	.then(producto => {
+		const dato = { stock: producto.stock - req.body.cantidad } 
+		producto.update(dato)
+		.then(
+			res.json({message: 'Inventario actualizado correctamente'})
+		)
 		.catch(err => {
-			console.log(err)
+			res.send(err)
 		})
+	})
+	.catch(err => {
+		res.send(err)
+	})
 })
 
-/*
-****** Aumentar cantidad en stock ******
-*/
+/**
+****** AUMENTAR CANTIDAD EN STOCK 
+**/
 productos.put('/aumentar-inventario', (req, res) => {
 	const id = req.body.producto_id
 	Producto.findOne({
 			where: { id: id }
-		})
-		.then(producto => {
-			const dato = { 
-				stock: producto.stock + req.body.cantidad_compra,
-				precio_venta: req.body.precio_venta
-			 } 
-			producto.update(dato)
-			.then(
-				res.status(200).json({message: 'Inventario actualizado correctamente'})
-			)
-			.catch(err => {
-				console.log(err)
-			})
-		})
+	})
+	.then(producto => {
+		const dato = { 
+			stock: producto.stock + req.body.cantidad_compra,
+			precio_venta: req.body.precio_venta
+		 } 
+		producto.update(dato)
+		.then(
+			res.status(200).json({message: 'Inventario actualizado correctamente'})
+		)
 		.catch(err => {
-			console.log(err)
+			res.send(err)
 		})
+	})
+	.catch(err => {
+		res.send(err)
+	})
 })
+
+/**
+****** REGISTRAR PRODUCTO 
+**/
+productos.post('/', (req, res) => {
+	const dia = new Date()
+	let datos = {
+		nombre: req.body.nombre,
+		categoriasProductoId: req.body.categoriasProductoId,
+		estado: 1,
+		created_at: dia
+	}
+	Producto.create(datos)
+	.then(
+		res.json({ message: 'Datos almacenados correctamente' })
+	)
+	.catch(err => {
+		res.send(err)
+	})
+})
+
+
 module.exports = productos

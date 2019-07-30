@@ -2,7 +2,8 @@ const Sequelize = require('sequelize')
 const db = {}
 const sequelize = new Sequelize('marlenis', 'root', '1234', {
 	host: 'localhost',
-	dialect: 'mysql'
+	dialect: 'mysql',
+	timezone: '-04:00'
 }) 
 
 db.sequelize = sequelize

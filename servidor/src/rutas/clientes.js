@@ -5,9 +5,9 @@ const cors = require('cors')
 const Cliente = require('../modelos/Cliente')
 clientes.use(cors())
 
-/*
-****** Obtener Clientes ******
-*/
+/**
+****** OBTENER CLIENTES
+**/
 clientes.get('/', (req, res) => {
 	Cliente.findAll()
 	.then(listarClientes => {
@@ -18,9 +18,9 @@ clientes.get('/', (req, res) => {
 	})
 })
 
-/*
-****** Obtener Cliente ******
-*/
+/**
+****** OBTENER CLIENTE
+**/
 clientes.get('/:id', (req, res) => {
 	const id = req.params.id
 	Cliente.findOne({
@@ -36,9 +36,9 @@ clientes.get('/:id', (req, res) => {
 	})
 })
 
-/*
-****** Guardar cliente ******
-*/
+/**
+****** GUARDAR CLIENTE
+**/
 clientes.post('/', (req, res) => {
 	const dia = new Date()
 	let datosCliente = {

@@ -57,6 +57,7 @@ pedidoTranscripciones.post('/', (req, res) => {
 		fecha_entrega: req.body.fechaEntrega,
 		monto: req.body.monto,
 		archivo_inv: req.body.archivo_inv,
+		tiposTranscripcioneId: req.body.tipo_transcripcion,
 		ventaId: req.body.venta_id,
 		usuarioId: req.body.usuario_id,
 		created_at: dia
@@ -79,7 +80,6 @@ pedidoTranscripciones.get('/pendientes/:id', (req, res) =>{
 	const mes = fecha.getMonth()+1
 	const dia = fecha.getDate()
 	const hoy = ano + "-" + mes + "-"+dia
-	/*** identificador del usuario conectado ***/
 	const id = req.params.id
 
 	Transcripcion.findAll({
@@ -116,7 +116,6 @@ pedidoTranscripciones.get('/pendientes/:id', (req, res) =>{
 ****** OBTENER  TRANSCRIPCIONES PENDIENTES DEL USUARIO CONECTADO 
 **/
 pedidoTranscripciones.get('/pedido/:id', (req, res) => {
-    /*** identificador de la transcripcion ***/
 	const id = req.params.id
 
 	Transcripcion.findOne({
@@ -171,8 +170,6 @@ pedidoTranscripciones.put('/actualizar/:id', (req, res) => {
     		datos.archivo_tarea = req.files.archivo_tarea
     		var extension = datos.archivo_tarea.name.split('.').pop();
     		var nombre_archivo = fecha +"."+extension
-
-
     	}
     	else
     	{

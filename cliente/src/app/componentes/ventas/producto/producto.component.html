@@ -13,15 +13,16 @@
                     <div class="col-6">
                         <div class="form-group">
                             <label>Producto</label>
-                            <select class="form-control" 
-                                formControlName="producto_id" 
-                                [ngClass]="{ 'is-invalid': f.producto_id.errors && submitted }"
-                                (change)="obtenerProducto(f.producto_id.value)">
-                                <option value="" disabled>Seleccione...</option>
-                                <ng-container *ngFor="let producto of productos; index as i">
-                                <option  [value]="producto.id" *ngIf="producto.estado == 0">{{ producto.nombre }}</option>
-                                </ng-container>
-                            </select>
+                             <ng-select formControlName="producto_id"
+                                placeholder="Filtrar producto..."
+                                class="custom"
+                                [dropdownPosition]="'bottom'"
+                                (change)="obtenerProducto(f.producto_id.value)"
+                                [ngClass]="{ 'is-invalid': f.producto_id.errors && submitted }">
+                                    <ng-container *ngFor="let producto of productos; index as i">
+                                    <ng-option [value]="producto.id" *ngIf="producto.estado == 0">{{ producto.nombre }}</ng-option>
+                                    </ng-container>
+                            </ng-select>
 
                             <div class="invalid-feedback" *ngIf="f.producto_id.errors && submitted">
                                 <div *ngIf="f.producto_id.errors.required">Debes seleccionar una opción</div>

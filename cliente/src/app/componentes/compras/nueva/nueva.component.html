@@ -9,8 +9,8 @@
 			</li>
 			
 			<li class="breadcrumb-item">
-				<a routerLink="/ingresos">
-					Ingresos
+				<a routerLink="/compras">
+					Compras
 				</a>
 			</li>
 
@@ -23,28 +23,28 @@
 <form [formGroup]="formCompra" (ngSubmit)="enviarDatosCompra()">
 	<div class="row">
 		<div class="col-lg-12 mb-3">
-			<button class="btn btn-primary float-left" data-toggle="modal" data-target="#nuevoProveedor">
-					<i class="fas fa-plus"></i>
-			</button>
-			<button class="btn btn-secondary ml-1" (click)="listarProveedores()">
+			<a href="#!" class="btn btn-primary float-left" data-toggle="modal" data-target="#nuevoProveedor">
+				<i class="fas fa-plus"></i>
+			</a>
+			<a id="pointer" class="btn btn-secondary ml-1 float-left" (click)="listarProveedores()">
 				<i class="fas fa-sync"></i>
-			</button>
+			</a>
 			<h5 class="bg-light text-center p-2"><i class="fas fa-store"></i> Proveedor</h5>
 		</div>
 
 		<div class="col-4">
 			<div class="form-group">
 				<label class="ml-2 text-secondary">Razon Social</label>
-				<select class="form-control" 
-					formControlName="proveedor_id" 
-					(change)="obtenerProveedor(f.proveedor_id.value)"
-					[ngClass]="{ 'is-invalid': f.proveedor_id.errors && submitted }">
-					<option value="">Seleccione...</option>
-					<option *ngFor="let proveedor of proveedores" [value]="proveedor.id">{{ proveedor.razon_social }}</option>
-				</select>
+				<ng-select formControlName="proveedor_id"
+				    placeholder="Filtrar proveedor..."
+				    class="custom"
+				    [dropdownPosition]="'bottom'"
+				    (change)="obtenerProveedor(f.proveedor_id.value)">
+						<ng-option *ngFor="let proveedor of proveedores" [value]="proveedor.id">{{ proveedor.razon_social }}</ng-option>
+				</ng-select>
 
-				<div class="invalid-feedback" *ngIf="f.proveedor_id.errors && submitted">
-					<div *ngIf="f.proveedor_id.errors.required">Debes seleccionar una opción</div>
+				<div *ngIf="f.proveedor_id.errors && submitted">
+					<div class="text-danger" *ngIf="f.proveedor_id.errors.required">Debes seleccionar una opción</div>
 				</div>
 			</div>
 		</div>

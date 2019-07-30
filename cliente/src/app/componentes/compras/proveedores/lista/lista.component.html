@@ -1,4 +1,3 @@
-
 <div>
 	<div class="row">
 		<div class="col-lg-12">
@@ -19,18 +18,18 @@
 		<div class="col-lg-12">
 			<div class="row mb-3">
 				<div class="col-lg-4">
-					<div class="input-group" *ngIf="proveedores > 0">
+					<div class="input-group" *ngIf="proveedores.length > 0">
 						<div class="input-group-prepend">
 							<span class="input-group-text"><i class="fas fa-search"></i></span>
 						</div>
-						<input type="text" class="form-control" placeholder="Buscar...">
+						<input type="text" [(ngModel)]="busqueda" class="form-control" placeholder="Buscar...">
 					</div>
 				</div>
 
 				<div class="col-lg-8 text-right">
-					<button class="btn btn-primary">
+					<a href="#!" class="btn btn-primary" data-toggle="modal" data-target="#agregarProveedor">
 						<i class="fas fa-plus"></i>
-					</button>
+					</a>
 				</div>
 			</div>
 
@@ -41,33 +40,40 @@
 						<th>Razon Social</th>
 						<th>Contacto</th>
 						<th>Teléfono</th>
+						<th>Estatus</th>
 						<th></th>
 					</tr>
 				</thead>
 				<tbody class="text-center">
-					  <tr *ngFor="let proveedor of proveedores; index as i">
+					  <tr *ngFor="let proveedor of proveedores | filtro: { razon_social: busqueda, contacto: busqueda }  | paginate: { itemsPerPage: 5, currentPage: p }; index as i">
 					  	<td class="align-middle">{{ i+1 }}</td>
 					  	<td class="align-middle">{{ proveedor.razon_social }}</td>
 					  	<td class="align-middle">{{ proveedor.contacto }}</td>
 					  	<td class="align-middle">{{ proveedor.telefono }}</td>
+					  	<td class="align-middle">
+					  		<span [ngClass]="proveedor.estatus == 1 ? 'badge badge-pill badge-success' : 'badge badge-pill badge-danger'">
+							{{ proveedor.estatusTexto }}
+							</span>
+					  	</td>
 					  	<td class="align-middle">
 					  		<div class="btn btn-group">
 					  		    <a routerLink="#!" class="btn btn-secondary">
 					  				<i class="fas fa-eye"></i>
 					  			</a>
 
-					  			<a routerLink="#!" class="btn btn-secondary">
+					  			<a [routerLink]="['/proveedores/edicion', proveedor.id]" class="btn btn-secondary">
 					  				<i class="fas fa-edit"></i>
 					  			</a>
 
-					  			<button class="btn btn-secondary">
-					  				<i class="fas fa-trash"></i>
+					  			<button class="btn btn-secondary" (click)="proveedor.estatus == 1 ? desactivar(proveedor.id) : activar(proveedor.id)">
+					  				<i [ngClass]="proveedor.estatus == 1 ? 'fas fa-trash' : 'fas fa-check'"></i>
 					  			</button>
 					  		</div>
 					  	</td>
 					  </tr>
 				</tbody>
 			</table>
+			<pagination-controls class="text-right" (pageChange)="p = $event"></pagination-controls>
 
 			<div class="alert alert-secondary text-center" *ngIf="proveedores.length == 0">
 				<span class="h5"><i class="fas fa-info-circle"></i> No se encontraron registros</span>

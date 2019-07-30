@@ -21,7 +21,7 @@
 					<div class="input-group-prepend">
 						<span class="input-group-text"><i class="fas fa-search"></i></span>
 					</div>
-					<input type="text" class="form-control" placeholder="Buscar...">
+					<input type="text" [(ngModel)]="busqueda" class="form-control" placeholder="Buscar...">
 				</div>
 			</div>
 
@@ -44,13 +44,13 @@
 			</thead>
 
 			<tbody class="text-center">
-				<tr *ngFor="let compra of compras">
-					<td class="align-middle">{{ compra.created_at | date: 'dd-MM-yyyy hh:mm a' }}</td>
-					<td class="align-middle">{{ compra.proveedore.razon_social }}</td>
+				<tr *ngFor="let compra of compras | filtro: { created_at: busqueda, proveedorNombre: busqueda, estatusTexto: busqueda } | paginate: { itemsPerPage: 5, currentPage: p }">
+					<td class="align-middle">{{ compra.created_at }}</td>
+					<td class="align-middle">{{ compra.proveedorNombre }}</td>
 					<td class="align-middle">Bs. {{ compra.total | separador }}</td>
 					<td class="align-middle">
 						<span [ngClass]="compra.estatus == 1 ? 'badge badge-pill badge-success' : 'badge badge-pill badge-danger'">
-							{{ compra.estatus == 1 ? 'Procesada' : 'Anulada' }}
+							{{ compra.estatusTexto }}
 						</span>
 					</td>
 					<td>
@@ -58,7 +58,10 @@
 							<button class="btn btn-secondary" data-toggle="tooltip" title="Ver">
 								<i class="fas fa-eye"></i>
 							</button>
-							<button class="btn btn-secondary" data-toggle="tooltip" title="Anular">
+							<button class="btn btn-secondary" 
+								data-toggle="tooltip" 
+								[title]="compra.estatus == 1 ? 'Anular' : 'Reactivar'"
+								(click)="compra.estatus == 1 ? anularCompra(compra.id) : reactivarCompra(compra.id)">
 								<i class="fas fa-times"></i>
 							</button>
 						</div>
@@ -66,5 +69,6 @@
 				</tr>
 			</tbody>
 		</table>
+		<pagination-controls class="text-right" (pageChange)="p = $event"></pagination-controls>
 	</div>
 </div>

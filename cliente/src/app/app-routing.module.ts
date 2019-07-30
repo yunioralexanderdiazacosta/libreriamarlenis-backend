@@ -15,6 +15,7 @@ import { ListaComprasComponent } from './componentes/compras/lista/lista.compone
 import { NuevaCompraComponent } from './componentes/compras/nueva/nueva.component';
 
 import { ListaProveedoresComponent } from './componentes/compras/proveedores/lista/lista.component';
+import { ProveedorEdicionComponent } from './componentes/proveedores/edicion/edicion.component';
 /***********************************************************************************************************/
 
 /***************************************** INVENTARIO ******************************************************/
@@ -110,6 +111,11 @@ const routes: Routes = [
 		path: 'proveedores',
 		component: ListaProveedoresComponent
 	},
+
+	{
+		path: 'proveedores/edicion/:id',
+		component: ProveedorEdicionComponent
+	},
 	/************************************/
 
 	/*********** INVENTARIO *************/
@@ -163,12 +169,12 @@ const routes: Routes = [
 	},
 
     {
-    	path: 'reportes/ventas',
+    	path: 'reportes/ventas/:desde/:hasta',
     	component: ReporteVentasComponent
     },
 
     {
-    	path: 'reportes/compras',
+    	path: 'reportes/compras/:desde/:hasta',
     	component: ReporteComprasComponent
     },
 
@@ -183,7 +189,7 @@ const routes: Routes = [
     },
 
     {
-    	path: 'reportes/fotocopias',
+    	path: 'reportes/fotocopias/:desde/:hasta',
     	component: ReporteFotocopiasComponent
     },
 	/************************************/

@@ -30,18 +30,18 @@
 		</div>
 
 		<div class="col-4">
-			<div class="form-group">
+			<div class="form-group"> 
 				<label class="ml-2 text-secondary">Cédula de Identidad</label>
-				<select class="form-control" 
-					formControlName="cliente" 
-					(change)="obtenerDatos(f.cliente.value)"
-					[ngClass]="{ 'is-invalid': f.cliente.errors && submitted }">
-					<option value="" disabled>Seleccione...</option>
-					<option *ngFor="let cliente of clientes; index as i" [value]="cliente.id">{{ cliente.cedula}}</option>
-				</select>
+				<ng-select formControlName="cliente"
+				    placeholder="Filtrar cedula..."
+				    class="custom"
+				    [dropdownPosition]="'bottom'"
+				    (change)="obtenerDatos(f.cliente.value)">
+						<ng-option *ngFor="let cliente of clientes; index as i" [value]="cliente.id">{{ cliente.cedula}}</ng-option>
+				</ng-select>
 
-				<div class="invalid-feedback" *ngIf="f.cliente.errors && submitted">
-					<div *ngIf="f.cliente.errors.required">Debes seleccionar un cliente</div>
+				<div *ngIf="f.cliente.errors && submitted">
+					<small class="text-danger" *ngIf="f.cliente.errors.required">Debes seleccionar un cliente</small>
 				</div>
 			</div>
 		</div>

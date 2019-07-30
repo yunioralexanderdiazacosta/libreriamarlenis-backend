@@ -14,7 +14,7 @@ module.exports = db.sequelize.define(
 		precio_compra: Sequelize.BIGINT,
 		subtotal: Sequelize.BIGINT,
 		producto_id: Sequelize.INTEGER,
-		compra_id: Sequelize.INTEGER,
+		compraId: Sequelize.INTEGER,
 		created_at: {
 			type: Sequelize.DATE,
 			defaultValue: Sequelize.NOW

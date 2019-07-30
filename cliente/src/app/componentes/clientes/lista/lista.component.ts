@@ -9,6 +9,8 @@ import {  ClientesService } from '../../../servicios/clientes/clientes.service';
 export class ListaClientesComponent implements OnInit {
 	clientes;
 
+  busqueda: string = ''
+
 	constructor(public clientesService: ClientesService) { }
 
   	ngOnInit() {
