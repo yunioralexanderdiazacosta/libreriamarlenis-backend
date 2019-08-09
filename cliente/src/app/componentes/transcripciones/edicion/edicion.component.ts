@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TranscripcionesService } from '../../../servicios/transcripciones/transcripciones.service';
+import { ArchivosService } from '../../../servicios/archivos/archivos.service';
 import { ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -60,9 +61,17 @@ export class EdicionTranscripcionComponent implements OnInit {
 	**/
 	id: number
 
+	/**
+	* Obtiene los datos del archivo de la investigación (solo si no hay contenido)
+	*
+	*@property {any}
+	**/
+	datosArchivo
+
 	constructor(
 		public fb: FormBuilder,
 		public transcripcionesService: TranscripcionesService,
+		public archivosService: ArchivosService,
 		public activatedRoute: ActivatedRoute,
 		public toastr: ToastrService,
         public router: Router) { 
@@ -87,6 +96,18 @@ export class EdicionTranscripcionComponent implements OnInit {
 						estatus_tarea: this.transcripcion.estatus_tarea,
 						estatus_entrega: this.transcripcion.estatus_entrega
 					})
+  			}
+
+  			if(this.transcripcion.contenido == '')
+  			{
+  				const id_archivo = parseInt(this.transcripcion.archivo_inv)
+  				this.archivosService.obtenerArchivoInvestigacion(id_archivo).subscribe(
+  				res => {
+  					this.datosArchivo = res
+  				},
+  				err => {
+  					console.log(err)
+  				})
   			}
   		},
   		err => {

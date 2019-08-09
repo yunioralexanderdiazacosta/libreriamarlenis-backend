@@ -28,15 +28,16 @@ export class AlmacenamientoComponent implements OnInit {
   			debounceTime(1000),
   			switchMap(value => 
   				this.transcripcionesService.buscarTranscripcionItems(this.categoriaId, value).pipe(
-  				err => {
-  					this.transcripciones.length = 0
-  					this.error = true
-  					return EMPTY
-  				})
+  				catchError(err => {
+                      this.transcripciones.length = 0
+                      this.error = true
+                      return EMPTY
+                  }) )
   			)
   		).subscribe(
   		res => {
   			this.transcripciones = res
+        console.log(this.transcripciones)
   		},
   		err => {
   			console.log(err)

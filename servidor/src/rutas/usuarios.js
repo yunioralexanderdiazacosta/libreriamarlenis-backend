@@ -18,10 +18,27 @@ usuarios.get('/', (req, res) => {
 		res.json(listarUsuarios)
 	})
 	.catch(err => {
-		console.log(err)
+		res.send(err)
 	})
 })
 
+/*
+****** OBTENER USUARIO ******
+*/
+usuarios.get('/estadistica/:id', (req, res) => {
+	const id = req.params.id
+	Usuario.findOne({
+		where: {
+			id: id
+		}
+	})
+	.then(obtenerUsuario => {
+		res.json(obtenerUsuario)
+	})
+	.catch(err => {
+		res.send(err)
+	})
+})
 /*
 ****** REGISTRO DE USUARIOS
 */

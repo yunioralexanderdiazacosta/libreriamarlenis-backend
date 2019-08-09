@@ -29,7 +29,21 @@ export class InicioComponent implements OnInit {
     *
     *@property {number}
     **/
-	cont_pend = 0;
+	cont_pend = 0
+
+    /**
+    *Contador para saber la cantidad de transcripciones pendientes
+    *
+    *@property {string}
+    **/
+    busqueda: string = ''
+
+    /**
+    *Pagina inicial de la paginacion
+    *
+    *@property {number}
+    **/
+    p: number = 1
 
 	constructor(
 		public usuariosService: UsuariosService,
@@ -48,7 +62,7 @@ export class InicioComponent implements OnInit {
   	{
   		this.usuariosService.obtenerUsuario().subscribe( 
   		(res: any) => {
-  			this.usuario = res
+  		this.usuario = res
 			this.tpendientes = this.transcripcionesService.obtenerTranscripcionesPendientes(this.usuario.id).subscribe(
 	  		res => {
 	  			this.tpendientes = res
@@ -61,9 +75,12 @@ export class InicioComponent implements OnInit {
   					var fecha_hoy = new Date()				
   					var nuevaFecha = moment(fecha_entrega, "YYYY-MM-DD")
   					var hoy = moment(fecha_hoy, "YYYY-MM-DD")
-  					var dias = nuevaFecha.diff(hoy, 'days')
-					Object.defineProperty(dato, 'dias', { value: dias }) 
-	  			})
+  					var dias = nuevaFecha.diff(hoy, 'days')                   
+					Object.defineProperty(dato, 'dias', { value: dias+1 }) 
+                    dato.fecha_entrega = moment(dato.fecha_entrega).format("DD-MM-YYYY hh:mm a")
+                    Object.defineProperty(dato, 'clienteAtendido', { value: dato.venta.cliente.cedula+' - '+dato.venta.cliente.nombres+" "+dato.venta.cliente.apellidos })
+	  			    Object.defineProperty(dato, 'tipoTranscripcion', { value: dato.tipos_transcripcione.descripcion })
+                  })
 	  		},
 	  		err => {
 	  			console.log(err)

@@ -14,6 +14,11 @@ export class ProveedoresService {
 		return this.http.get(`${API_URI}/proveedores`)
 	}
 
+	obtenerUltimoProveedor()
+	{
+		return this.http.get(`${API_URI}/proveedores/ultimo-registro`)
+	}
+
 	obtenerProveedor(id)
 	{
 		return this.http.get(`${API_URI}/proveedores/${id}`)

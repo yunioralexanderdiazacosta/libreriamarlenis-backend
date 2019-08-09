@@ -3,7 +3,7 @@
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header bg-secondary text-white">
-                <h5 class="modal-title">Nueva Transcripción</h5>
+                <h5 class="modal-title">Nueva Tarea</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -33,7 +33,7 @@
 						    placeholder="Filtrar hora..."
 						    class="custom"
 						    [dropdownPosition]="'bottom'">
-								<ng-option *ngFor="let hora of horas" [value]="hora.item">{{ hora.item }}</ng-option>
+								<ng-option *ngFor="let hora of horas" [value]="hora.value">{{ hora.item }}</ng-option>
 							</ng-select>
 
 							<div *ngIf="f.horaEntrega.errors && submitted">

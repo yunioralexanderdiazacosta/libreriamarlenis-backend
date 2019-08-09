@@ -113,5 +113,25 @@ productos.post('/', (req, res) => {
 	})
 })
 
-
+/**
+****** ACTUALIZAR PRODUCTO
+**/
+productos.put('/:id', (req, res) => {
+	const id = req.params.id
+	Producto.findOne({
+		where: { id: id }
+	})
+	.then(obtenerProducto => {
+		obtenerProducto.update(req.body)
+		.then(
+			res.json({ message: 'Datos actualizados correctamente' })
+		)
+		.catch(err => {
+			res.send(err)
+		})
+	})
+	.catch(err => {
+		res.send(err)
+	})
+})
 module.exports = productos

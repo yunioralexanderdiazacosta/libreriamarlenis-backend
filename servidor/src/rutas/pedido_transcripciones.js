@@ -23,6 +23,109 @@ pedidoTranscripciones.use(cors())
 pedidoTranscripciones.use(fileUpload({ preserveExtension: true }))
 
 /**
+****** OBTENER TRANSCRIPCIONES ASIGNADAS A UN USUARIO EN DETERMINADO MES
+**/
+pedidoTranscripciones.get('/user/:id/month/:mes', (req, res) => {
+	const dia = new Date()
+	var diaActual = dia.getDate()
+	var mesActual = dia.getMonth()+1
+	const ano = dia.getFullYear()
+	const hoy = ano+"-"+mesActual+"-"+diaActual
+
+	const id = req.params.id
+	const mes = req.params.mes
+
+	Transcripcion.findAll({
+		where: [
+			{ 
+				usuarioId: id, 
+				fecha_entrega: {
+					[op.lt]: hoy
+				}
+			},
+			Sequelize.where(Sequelize.fn('YEAR', Sequelize.col('created_at')), '=', ano),
+			Sequelize.where(Sequelize.fn('MONTH', Sequelize.col('created_at')), '=', mes)
+		],
+		attributes: ['id', 'fecha_entrega', 'estatus_tarea', 'created_at', 'updated_at']
+	})
+	.then(transcripciones => {
+		res.json(transcripciones)
+	})
+	.catch(err => {
+		res.send(err)
+	})
+})
+
+/**
+****** OBTENER TOTAL DE TRANSCRIPCIONES ASIGNADAS A UN USUARIO EN DETERMINADO MES
+**/
+pedidoTranscripciones.get('/usuario/:id/mes/:mes', (req, res) => {
+	const dia = new Date()
+	var diaActual = dia.getDate()
+	var mesActual = dia.getMonth()+1
+	const ano = dia.getFullYear()
+	const hoy = ano+"-"+mesActual+"-"+diaActual
+
+	const id = req.params.id
+	const mes = req.params.mes
+	Transcripcion.findOne({
+		attributes: [
+			[Sequelize.literal(`COUNT(id)`), 'totalTranscripcionesAsignadas']
+		],
+		where: [
+			{ 
+				usuarioId: id,
+				fecha_entrega: {
+					[op.lt]: hoy
+				}
+			 },
+			Sequelize.where(Sequelize.fn('YEAR', Sequelize.col('created_at')), '=', ano),
+			Sequelize.where(Sequelize.fn('MONTH', Sequelize.col('created_at')), '=', mes)
+		]
+	})
+	.then(transcripcionesAsignadas => {
+		res.json(transcripcionesAsignadas)
+	}).catch(err => {
+		console.log(err)
+	})
+})
+
+/**
+****** OBTENER TOTAL DE TRANSCRIPCIONES ASIGNADAS EN GENERAL EN UN DETERMINADO MES
+**/
+pedidoTranscripciones.get('/general/mes/:mes', (req, res) => {
+	const dia = new Date()
+	var diaActual = dia.getDate()
+	var mesActual = dia.getMonth()+1
+	const ano = dia.getFullYear()
+	const hoy = ano+"-"+mesActual+"-"+diaActual
+
+	const mes = req.params.mes
+
+	Transcripcion.findOne({
+		attributes: [ 
+			[Sequelize.literal(`COUNT(id)`), 'totalTranscripcionesAsignadas']
+		],
+		where: [
+		{ 
+			fecha_entrega: {
+				[op.lt]: hoy
+			} 
+		},
+		Sequelize.where(Sequelize.fn('YEAR', Sequelize.col('created_at')), '=', ano),
+		Sequelize.where(Sequelize.fn('MONTH', Sequelize.col('created_at')), '=', mes)
+		]
+	})
+	.then(totalTranscripciones => {
+		res.json(totalTranscripciones)
+	})
+	.catch(err => {
+		console.log(err)
+	})
+})
+
+
+/**
 ****** OBTENER TRANSCRIPCIONES
 **/
 pedidoTranscripciones.get('/', (req, res) => {
@@ -60,7 +163,8 @@ pedidoTranscripciones.post('/', (req, res) => {
 		tiposTranscripcioneId: req.body.tipo_transcripcion,
 		ventaId: req.body.venta_id,
 		usuarioId: req.body.usuario_id,
-		created_at: dia
+		created_at: dia,
+		updated_at: dia
 	}
 	Transcripcion.create(datos)
 	.then(
@@ -128,7 +232,8 @@ pedidoTranscripciones.get('/pedido/:id', (req, res) => {
  			attributes: ['cedula', 'nombres', 'apellidos']
  		}
  	}], 
-	where: { id: id }
+	where: { id: id },
+	order: ['fecha_entrega DESC', 'estatus_tarea ASC']
 	})
 	.then(transcripcion => {
 		res.json(transcripcion)
@@ -153,7 +258,14 @@ pedidoTranscripciones.put('/actualizar/:id', (req, res) => {
 		const datos = {
 			estatus_tarea: parseInt(req.body.estatus_tarea),
 			archivo_tarea: '',
-			estatus_entrega: parseInt(req.body.estatus_entrega)
+			estatus_entrega: parseInt(req.body.estatus_entrega),
+			updated_at:  ''
+		}
+
+		if(datos.estatus_entrega == 1)
+		{
+			const date = new Date()
+			datos.updated_at = date
 		}
 
     	if(req.files)
@@ -166,7 +278,7 @@ pedidoTranscripciones.put('/actualizar/:id', (req, res) => {
 			var minutos = hoy.getMinutes()
 			var segundos = hoy.getSeconds() 
 			var fecha = `${dia}${mes}${ano}${hora}${minutos}${segundos}`
-			var path = '/home/fliadiaz/libreria/servidor/src/tarea_archivos/'
+			var path = '/home/fliadiaz/libreria/cliente/src/assets/tarea_archivos/'
     		datos.archivo_tarea = req.files.archivo_tarea
     		var extension = datos.archivo_tarea.name.split('.').pop();
     		var nombre_archivo = fecha +"."+extension
@@ -215,9 +327,7 @@ pedidoTranscripciones.get('/buscar/:id/:palabra', (req, res) => {
 			titulo: {
 				[op.substring]: palabra
 			},
-			tiposTranscripcioneId: {
-				[op.substring]: id
-			},
+			tiposTranscripcioneId: id,
 			estatus_entrega: 1
 		}
 	})
@@ -225,7 +335,7 @@ pedidoTranscripciones.get('/buscar/:id/:palabra', (req, res) => {
 		res.json(transcripciones)
 	})
 	.catch(err => {
-		console.log(err)
+		res.send(err)
 	})
 })
 
@@ -247,7 +357,7 @@ pedidoTranscripciones.get('/buscar/:palabra', (req, res) => {
 		res.json(transcripciones)
 	})
 	.catch(err => {
-		console.log(err)
+		res.send(err)
 	})
 })
 

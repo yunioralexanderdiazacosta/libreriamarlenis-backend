@@ -21,7 +21,7 @@
 					<div class="input-group-prepend">
 						<span class="input-group-text"><i class="fas fa-search"></i></span>
 					</div>
-					<input type="text" class="form-control" placeholder="Buscar Producto...">
+					<input type="text" [(ngModel)]="busqueda" class="form-control" placeholder="Buscar Producto...">
 				</div>
 			</div>
 
@@ -45,20 +45,18 @@
 				</tr>
 			</thead>
 			<tbody class="text-center">
-				<tr *ngFor="let producto of productos; index as i">
+				<tr *ngFor="let producto of productos | filtro: { nombre: busqueda, categoriaNombre: busqueda, estadoTexto: busqueda } | paginate: { itemsPerPage: 5, currentPage: p }; index as i">
 					<td class="align-middle">{{ i+1 }}</td>
 					<td class="align-middle">{{ producto.nombre }}</td>
-					<td class="align-middle">{{ producto.categorias_producto.nombre }}</td>
+					<td class="align-middle">{{ producto.categoriaNombre }}</td>
 					<td class="align-middle">Bs. {{ producto.precio_venta | separador }}</td>
 					<td class="align-middle">
 						<span [ngClass]="producto.stock > 0  ? 'h4 text-success' : 'h4 text-danger'">
-						{{
-							 producto.stock 
-						}}
+						{{ producto.stock }}
 						</span>
 					</td> 
 					<td class="align-middle">
-						<span class="badge badge-pill badge-success">Activo</span>
+						<span [ngClass]="producto.estado == 1 ? 'badge badge-pill badge-success' : 'badge badge-pill badge-danger'">{{ producto.estadoTexto }}</span>
 					</td>
 					<td>
 						<div class="btn-group">
@@ -66,11 +64,11 @@
 								<i class="fas fa-eye"></i>
 							</button>
 
-							<button class="btn btn-secondary">
+							<a class="btn btn-secondary" [routerLink]="['/inventario/editar', producto.id]">
 								<i class="fas fa-edit"></i>
-							</button>
+							</a>
 
-							<button class="btn btn-secondary">
+							<button class="btn btn-secondary" (click)="producto.estado == 1 ? desactivarProducto(producto.id) : activarProducto(producto.id)">
 								<i class="fas fa-trash"></i>
 							</button>
 						</div>
@@ -78,6 +76,7 @@
 				</tr>
 			</tbody>
 		</table>
+		<pagination-controls class="text-right" (pageChange)="p = $event"></pagination-controls>
 	</div>
 </div>
 <app-producto-compra (actualizarProductos)="listarProductos()"></app-producto-compra>

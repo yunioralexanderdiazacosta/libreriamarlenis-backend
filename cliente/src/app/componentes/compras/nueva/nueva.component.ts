@@ -144,6 +144,18 @@ export class NuevaCompraComponent implements OnInit {
         })
     }
 
+    ultimoProveedor(){
+        this.listarProveedores()
+        this.proveedoresService.obtenerUltimoProveedor().subscribe(
+        res => {
+            this.formCompra.patchValue({ proveedor_id: res })
+            this.obtenerProveedor(res)
+        },
+        err => {
+            console.log(err)
+        })
+    }
+
     obtenerProveedor(id)
     {
         this.proveedores.find(dato => {

@@ -72,7 +72,7 @@
 		<div class="dropdown-menu" id="bg-none" aria-labelledby="menu4">
 			<a class="dropdown-item" routerLink="/empleados">Empleados</a>
 			<a class="dropdown-item" routerLink="/cambiar-contrasena">Cambiar contraseña</a>
-			<a class="dropdown-item" routerLink="/respaldos">Respaldos</a>
+			<a class="dropdown-item" routerLink="/respaldos" *ngIf="usuario.rol_id == 1">Respaldos</a>
 		</div>
 	</li>
 </ul>

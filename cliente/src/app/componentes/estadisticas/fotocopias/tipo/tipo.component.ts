@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { CopiasService } from '../../../../servicios/copias/copias.service';
 import { Chart } from 'chart.js';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-estadistica-fotocopias-tipo',
@@ -12,16 +14,54 @@ export class EstadisticaFotocopiasTipoComponent implements OnInit {
   	*
   	*@property {Array} 
   	*/
-    totalFotocopiasTipo = [];
+    totalFotocopiasTipo = []
 
-    data: any = [491,119,30,11];
+    /**
+    * Almacena la cantidad de copias de las categorias correspondientes de la API
+    *
+    *@property {any} 
+    */
+    copias
 
-	  constructor() { }
+    /**
+    * Almacena los nombres de las copias
+    *
+    *@property {any} 
+    */
+    copiasNombre: any = []
 
-  	ngOnInit() {
-  		this.grafico();
-  	}
+    /**
+    * Almacena la cantidad de cada una de las categorias encontradas
+    *
+    *@property {any} 
+    */
+    data: any = []
 
+	  constructor(
+          public copiasService: CopiasService,
+          public activatedRoute: ActivatedRoute) { 
+
+          const params = this.activatedRoute.snapshot.params
+          this.obtenerFotocopiasCategorias(params.mes)
+      }
+
+  	ngOnInit() {}
+
+    obtenerFotocopiasCategorias(mes)
+    {
+        this.copiasService.obtenerFotocopiasEfectuadasCategoriasMes(mes).subscribe(
+        res => {
+            this.copias = res
+            this.copias.filter(dato => {
+                this.copiasNombre.push(dato.tipos_copia.descripcion)
+                this.data.push(parseInt(dato.cantidadCopias))
+            })
+            this.grafico()
+        },
+        err => {
+             console.log(err)
+        })
+    }
     /**
   	* Grafico que muestra el total de copias realizadas por tipo 
   	*
@@ -51,7 +91,7 @@ export class EstadisticaFotocopiasTipoComponent implements OnInit {
   			type: "doughnut",
   			data: 
   			{
-  				labels: ["Carta","Oficio","Ampliación / Reducción","Reciclaje"],
+  				labels: this.copiasNombre,
   				datasets:[{
   					label:"Productos más vendidos",
   					backgroundColor: coloR,

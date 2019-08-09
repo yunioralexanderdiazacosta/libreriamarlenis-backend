@@ -69,14 +69,14 @@ export class NuevaVentaComponent implements OnInit {
     *
     *@property {Array}
     **/
-    productos;
+    productos
 
     /** 
     * Almacena monto total de cada uno de los productos    
     *
     *@property {number}
     **/
-    montoProductos = 0;
+    montoProductos = 0
 
     /** 
     * Almacena las copias obtenidas del arreglo
@@ -225,14 +225,14 @@ export class NuevaVentaComponent implements OnInit {
         private config: NgSelectConfig,
         public router: Router) 
     { 
+        this.obtenerClientes();
         this.config.notFoundText = 'No se encontraron resultados';
     }
 
     ngOnInit() {
-        this.obtenerClientes();
-        this.obtenerMontoVenta();
-        this.obteniendoProductos();
-        this.obteniendoTipoCopias();
+        this.obtenerMontoVenta()
+        this.obteniendoProductos()
+        this.obteniendoTipoCopias()
         this.formCliente = this.fb.group({
             cliente: [''],
             nombre: [''],
@@ -310,13 +310,25 @@ export class NuevaVentaComponent implements OnInit {
     obtenerClientes()
     {
         this.clientesService.obtenerClientes().subscribe(
-            (res: any) => {
-                this.clientes = res;
-            },
-            err => {
-                console.log(err);
-            }
-        )
+        (res: any) => {
+            this.clientes = res
+        },
+        err => {
+            console.log(err)
+        })
+    }
+
+    obtenerUltimoCliente()
+    {
+        this.obtenerClientes()
+        this.clientesService.obtenerUltimoCliente().subscribe(
+        res => {
+            this.formCliente.patchValue({ cliente: res })
+            this.obtenerDatos(res)
+        },
+        err => {
+            console.log(err)
+        })
     }
 
     /** 

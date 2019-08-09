@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import * as moment from 'moment'; 
 import { VentasService } from '../../../servicios/ventas/ventas.service';
 import { UsuariosService } from '../../../servicios/usuarios/usuarios.service';
-import { ToastrService } from 'ngx-toastr';
+import { ToastrService } from 'ngx-toastr'; 
 
 @Component({
   selector: 'app-lista-ventas',
@@ -85,8 +85,7 @@ export class ListaVentasComponent implements OnInit {
         },     
         err => {
             console.log(err)
-        }
-        )
+        })
     }
 
     /**

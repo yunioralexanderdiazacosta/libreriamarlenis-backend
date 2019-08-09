@@ -39,26 +39,28 @@
 					<th>Nombre(s)</th>
 					<th>Apellido(s)</th>
 					<th>Teléfono</th>
+					<th>Direccion</th>
 					<th></th>
 				</tr>
 			</thead>
 			<tbody class="text-center">
-				<tr *ngFor="let cliente of clientes | filtro: { cedula: busqueda, nombres: busqueda, apellidos: busqueda }">
+				<tr *ngFor="let cliente of clientes | filtro: { cedula: busqueda, nombres: busqueda, apellidos: busqueda } | paginate: { itemsPerPage: 10, currentPage: p }">
 				  	<td class="align-middle">{{ cliente.cedula }} </td>
 				  	<td class="align-middle">{{ cliente.nombres }}</td>
 				  	<td class="align-middle">{{ cliente.apellidos }}</td>
 				  	<td class="align-middle">{{ cliente.telefono }}</td>
+				  	<td class="align-middle">{{ cliente.direccion }}
 				  	<td class="align-middle">
 				  		<div class="btn btn-group">
-				  		    <a routerLink="/clientes/historico" class="btn btn-secondary">
+				  		    <a [routerLink]="['/clientes/historico', cliente.id]" class="btn btn-secondary">
 				  				<i class="fas fa-eye"></i>
 				  			</a>
 
-				  			<a routerLink="#!" class="btn btn-secondary">
+				  			<a [routerLink]="['/clientes/edicion', cliente.id]" class="btn btn-secondary" *ngIf="usuario?.rol_id == 1">
 				  				<i class="fas fa-edit"></i>
 				  			</a>
 
-				  			<button class="btn btn-secondary">
+				  			<button class="btn btn-secondary" *ngIf="usuario?.rol_id == 1">
 				  				<i class="fas fa-trash"></i>
 				  			</button>
 				  		</div>
@@ -66,6 +68,7 @@
 				</tr>
 			</tbody>
 		</table>
+		<pagination-controls class="text-right" (pageChange)="p = $event"></pagination-controls>
 	</div>
 </div>
 <app-nuevo-cliente></app-nuevo-cliente>

@@ -11,16 +11,26 @@ export class ClientesService {
 
 	obtenerClientes()
 	{
-		return this.http.get(`${API_URI}/clientes`);
+		return this.http.get(`${API_URI}/clientes`)
 	}
 
 	obtenerCliente(id)
 	{
-		return this.http.get(`${API_URI}/clientes/${id}`);
+		return this.http.get(`${API_URI}/clientes/${id}`)
+	}
+
+	obtenerUltimoCliente()
+	{
+		return this.http.get(`${API_URI}/clientes/ultimo-registro`)
+	}
+
+	actualizarCliente(id, cliente)
+	{
+		return this.http.put(`${API_URI}/clientes/${id}`, cliente)
 	}
 
 	guardarCliente(cliente)
 	{
-		return this.http.post(`${API_URI}/clientes`, cliente);
+		return this.http.post(`${API_URI}/clientes`, cliente)
 	}
 }

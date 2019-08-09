@@ -14,6 +14,41 @@ export class VentasService {
 		return this.http.get(`${API_URI}/ventas`)
 	}
 
+	obtenerVentasPorMes()
+	{
+		return this.http.get(`${API_URI}/ventas/mes`)
+	}
+
+	ultimasVentasSemana()
+	{
+		return this.http.get(`${API_URI}/ventas/ultimas`)
+	}
+
+	obtenerAtencionesCliente(id)
+	{
+		return this.http.get(`${API_URI}/ventas/cliente/${id}`)
+	}
+
+	obtenerClientesAtendidosMes()
+	{
+		return this.http.get(`${API_URI}/ventas/clientes-atendidos`)
+	}
+
+	obtenerClientesFrecuentes()
+	{
+		return this.http.get(`${API_URI}/ventas/clientes-frecuentes`)
+	}
+	
+	obtenerVentasRealizadasPorUsuario(id, mes)
+	{
+		return this.http.get(`${API_URI}/ventas/usuario/${id}/mes/${mes}`)
+	}
+
+	obtenerTotalVentasRealizadas(mes)
+	{
+		return this.http.get(`${API_URI}/ventas/general/mes/${mes}`)
+	}
+
 	guardarVenta(venta)
 	{
 		return this.http.post(`${API_URI}/ventas`, venta)

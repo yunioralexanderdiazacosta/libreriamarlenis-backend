@@ -3,13 +3,13 @@
 		<span class="text-secondary h4"><i class="fas fa-shopping-cart"></i> Nueva Venta</span>
 		<ol class="breadcrumb" style="float: right;">
 			<li class="breadcrumb-item">
-				<a href="#">
+				<a routerLink="/inicio">
 					<i class="fas fa-home"></i>
 				</a>
 			</li>
 			
 			<li class="breadcrumb-item">
-				<a href="#">
+				<a routerLink="/ventas">
 					Ventas
 				</a>
 			</li>
@@ -24,8 +24,13 @@
 	<div class="row">
 		<div class="col-lg-12 mb-3">
 			<a href="#!" class="btn btn-primary float-left" data-toggle="modal" data-target="#nuevoCliente">
-					<i class="fas fa-plus"></i>
+				<i class="fas fa-plus"></i>
 			</a>
+			
+			<a id="pointer" class="btn btn-secondary float-left ml-1" (click)="obtenerUltimoCliente()">
+				<i class="fas fa-sync"></i>
+			</a>
+
 			<h5 class="bg-light text-center p-2"><i class="fas fa-user"></i> Cliente</h5>
 		</div>
 
@@ -76,7 +81,7 @@
 
 			<div class="form-check form-check-inline">
 				<input class="form-check-input" type="checkbox" id="transcripciones" (change)="activarFormTranscripciones()" [disabled]="f.cliente.errors || transcripciones.length > 0">
-				<label class="form-check-label" for="transcripciones">Transcripciones</label>
+				<label class="form-check-label" for="transcripciones">Tareas</label>
 			</div>
 		</div>
 	</div>
@@ -118,7 +123,7 @@
 					<div class="card-header" id="headingThree">
 						<h2 class="mb-0 text-center">
 							<button class="btn btn-link collapsed text-success" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-					  			<span class="h5"><i class="fas fa-file-alt"></i> Transcripciones</span>
+					  			<span class="h5"><i class="fas fa-file-alt"></i> Tareas</span>
 							</button>
 				  		</h2>
 					</div>
@@ -179,12 +184,12 @@
 		</div>
 	</div>
 
-<div class="row mt-5">
-	<div class="col-lg-12 text-right">
-		<button class="btn btn-secondary btn-lg mr-2">Cancelar</button>
-		<button class="btn btn-primary btn-lg">Confirmar</button>
+	<div class="row mt-5">
+		<div class="col-lg-12 text-right">
+			<button class="btn btn-secondary btn-lg mr-2">Cancelar</button>
+			<button class="btn btn-primary btn-lg">Confirmar</button>
+		</div>
 	</div>
-</div>
 </form>
 
 <app-nuevo-cliente (actualizarClientes)="obtenerClientes()"></app-nuevo-cliente>

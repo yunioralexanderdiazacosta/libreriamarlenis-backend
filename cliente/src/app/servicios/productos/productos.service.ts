@@ -38,12 +38,32 @@ export class ProductosService {
 
 	obtenerProductos()
 	{
-		return this.http.get(`${API_URI}/productos`);
+		return this.http.get(`${API_URI}/productos`)
 	}
 
 	obtenerProducto(id)
 	{
-		return this.http.get(`${API_URI}/productos/${id}`);
+		return this.http.get(`${API_URI}/productos/${id}`)
+	}
+
+	obtenerProductosVendidosMes()
+	{
+		return this.http.get(`${API_URI}/pedidoproductos/mes`)
+	}
+
+	obtenerProductosMasVendidos()
+	{
+		return this.http.get(`${API_URI}/pedidoproductos/mas-vendidos`)
+	}
+
+	obtenerCategoriasProductosMasVendidos()
+	{
+		return this.http.get(`${API_URI}/pedidoproductos/categorias-mas-vendidas`)
+	}
+
+	actualizarProducto(id, producto)
+	{
+		return this.http.put(`${API_URI}/productos/${id}`, producto)
 	}
 
 	guardarProducto(producto)

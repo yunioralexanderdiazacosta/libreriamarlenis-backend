@@ -106,6 +106,9 @@ import { NavbarComponent } from './componentes/layouts/navbar/navbar.component';
 import { RespaldosBdComponent } from './componentes/respaldos-bd/respaldos-bd.component';
 import { VentasTranscripcionesComponent } from './componentes/ventas/nueva/transcripciones/transcripciones.component';
 import { FiltroPipe } from './_utilidades/filtro/filtro.pipe';
+import { ProductosEdicionComponent } from './componentes/productos/edicion/edicion.component';
+import { ComprasMesComponent } from './componentes/estadisticas/ventas/compras-mes/compras-mes.component';
+import { ClientesEdicionComponent } from './componentes/clientes/edicion/edicion.component';
 
 @NgModule({
     declarations: [
@@ -124,6 +127,7 @@ import { FiltroPipe } from './_utilidades/filtro/filtro.pipe';
         ListaClientesComponent,
         NuevoClienteComponent,
         HistoricoClienteComponent,
+        ClientesEdicionComponent,
         /***************************/
         
         /********* VENTAS **********/ 
@@ -153,6 +157,7 @@ import { FiltroPipe } from './_utilidades/filtro/filtro.pipe';
         ListaEntradasComponent,
         NuevaEntradaComponent,
         CategoriasProductosComponent,
+        ProductosEdicionComponent,
         /***************************/
 
         /***** TRANSCRIPCIONES *****/
@@ -206,7 +211,8 @@ import { FiltroPipe } from './_utilidades/filtro/filtro.pipe';
         RespaldosBdComponent,
         /*****************************/
         SeparadorPipe,
-        FiltroPipe
+        FiltroPipe,
+        ComprasMesComponent,
     ],
     imports: [
         BrowserModule,

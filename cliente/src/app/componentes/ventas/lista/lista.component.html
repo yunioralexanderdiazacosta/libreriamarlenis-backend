@@ -44,7 +44,7 @@
 			</thead>
 
 			<tbody class="text-center">
-				<tr *ngFor="let venta of ventas | filtro: { created_at: busqueda, clienteAtendido: busqueda, estatusTexto: busqueda } | paginate: { itemsPerPage: 5, currentPage: p }">
+				<tr *ngFor="let venta of ventas | filtro: { created_at: busqueda, clienteAtendido: busqueda, estatusTexto: busqueda } | paginate: { itemsPerPage: 10, currentPage: p }">
 					<td class="align-middle">{{ venta.created_at }}</td>
 					<td class="align-middle">{{ venta.clienteAtendido }} </td>
 					<td class="align-middle">Bs. {{ venta.total | separador }} </td>

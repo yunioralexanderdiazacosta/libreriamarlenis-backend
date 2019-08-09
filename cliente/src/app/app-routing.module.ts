@@ -3,8 +3,12 @@ import { Routes, RouterModule } from '@angular/router';
 import { IniciarsesionComponent } from './componentes/iniciarsesion/iniciarsesion.component';
 import { InicioComponent } from './componentes/inicio/inicio.component';
 
+/****************************************** CLIENTE *********************************************************/
 import { ListaClientesComponent } from './componentes/clientes/lista/lista.component';
+import { ClientesEdicionComponent } from './componentes/clientes/edicion/edicion.component';
 import { HistoricoClienteComponent } from './componentes/clientes/historico/historico.component';
+/***********************************************************************************************************/
+
 /****************************************** VENTAS *********************************************************/
 import { ListaVentasComponent } from './componentes/ventas/lista/lista.component';
 import { NuevaVentaComponent } from './componentes/ventas/nueva/nueva.component';
@@ -23,6 +27,7 @@ import { ListaInventarioComponent } from './componentes/inventario/lista/lista.c
 import { ListaEntradasComponent } from './componentes/inventario/entradas/lista/lista.component';
 import { NuevaEntradaComponent } from './componentes/inventario/entradas/nueva/nueva.component';
 import { CategoriasProductosComponent } from './componentes/inventario/categorias/categorias.component';
+import { ProductosEdicionComponent } from './componentes/productos/edicion/edicion.component';
 /***********************************************************************************************************/
 
 /************************************* TRANSCRIPCIONES *****************************************************/
@@ -79,7 +84,12 @@ const routes: Routes = [
 	},
 
 	{
-		path: 'clientes/historico',
+		path: 'clientes/edicion/:id',
+		component: ClientesEdicionComponent
+	},
+
+	{
+		path: 'clientes/historico/:id',
 		component: HistoricoClienteComponent
 	},
     /*************************************/
@@ -127,6 +137,11 @@ const routes: Routes = [
 	{
 		path: 'inventario/entradas',
 		component: ListaEntradasComponent
+	},
+
+	{
+		path: 'inventario/editar/:id',
+		component: ProductosEdicionComponent
 	},
 
 	{
@@ -206,12 +221,12 @@ const routes: Routes = [
     },
 
     {
-    	path: 'estadisticas/empleados',
+    	path: 'estadisticas/empleados/:id/mes/:mes',
     	component: EstadisticasEmpleadosComponent
     },
 
     {
-    	path: 'estadisticas/fotocopias',
+    	path: 'estadisticas/fotocopias/:mes',
     	component: EstadisticasFotocopiasComponent
     },
     /************************************/

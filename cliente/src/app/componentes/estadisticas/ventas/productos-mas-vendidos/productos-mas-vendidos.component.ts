@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ProductosService } from '../../../../servicios/productos/productos.service';
 import { Chart } from 'chart.js';
 
 @Component({
@@ -12,13 +13,39 @@ export class ProductosMasVendidosComponent implements OnInit {
 	*
 	*@property {Array} 
 	*/
-	productosMasVendidos = []; 
-	data: any = [78,56,36,23,18];
+	productosMasVendidos = []
 
-	constructor() { }
+	productos
+	
+	nombreProductos: any = []
+
+	data: any = []
+
+
+
+	constructor(public productosService: ProductosService) { 
+		this.obtenerProductosMasVendidos()
+	}
 
 	ngOnInit() {
-		this.grafico();
+	}
+
+
+	obtenerProductosMasVendidos()
+	{
+		this.productosService.obtenerProductosMasVendidos().subscribe(
+		res => {
+			this.productos = res
+			this.productos.filter(dato => {
+				this.nombreProductos.push(dato.producto.nombre)
+				this.data.push(parseInt(dato.cantidadProductos))
+			})
+			this.grafico()
+		},
+		err => {
+			console.log(err)
+		}
+		)
 	}
 
 	/**
@@ -50,12 +77,7 @@ export class ProductosMasVendidosComponent implements OnInit {
 			type: "doughnut",
 			data: 
 			{
-				labels: [
-					"Portaminas Paper Mate",
-					"Colores De Madera Kores Hexagonal",
-					"Cuaderno College Caligrafía Horizontal Artel",
-					"Libro de Ciencias Naturales",
-					"El coronel no tiene quien le escriba"],
+				labels: this.nombreProductos,
 				datasets:[{
 					label:"Productos más vendidos",
 					backgroundColor: coloR,

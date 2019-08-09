@@ -9,7 +9,7 @@ export class UsuariosService {
 
 constructor(private http: HttpClient) { }
 
-	obtenerUsuarios()
+	  obtenerUsuarios()
   	{
   		return this.http.get(`${API_URI}/usuarios`)
   	}
@@ -18,6 +18,11 @@ constructor(private http: HttpClient) { }
   	{
   		return this.http.get(`${API_URI}/usuarios/profile`)
   	}
+
+    obtenerUsuarioEstadistica(id)
+    {
+        return this.http.get(`${API_URI}/usuarios/estadistica/${id}`)
+    }
 
   	guardarUsuario(usuario)
   	{

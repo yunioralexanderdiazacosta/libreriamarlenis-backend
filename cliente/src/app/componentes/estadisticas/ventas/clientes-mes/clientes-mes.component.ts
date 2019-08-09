@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { VentasService } from '../../../../servicios/ventas/ventas.service';
 import { Chart } from 'chart.js';
 
 @Component({
@@ -8,12 +9,36 @@ import { Chart } from 'chart.js';
 })
 export class ClientesMesVentasComponent implements OnInit {
 	clientesMes = [];
-	constructor() { }
 
-  	ngOnInit() {
-  		this.grafico();
-  	}
+    clientes
 
+    datosClientes: any = []
+
+    totalAtencion: any = []
+
+
+	constructor(public ventasService: VentasService) { 
+        this.listarClientesFrecuentes()
+    }
+
+  	ngOnInit() {}
+
+    listarClientesFrecuentes()
+    {
+        this.ventasService.obtenerClientesFrecuentes().subscribe(
+        res => {
+            this.clientes = res
+            this.clientes.filter(dato => {
+            var cliente = dato.cliente.cedula+" - "+dato.cliente.nombres +" "+dato.cliente.apellidos
+                this.datosClientes.push(cliente)
+                this.totalAtencion.push(parseInt(dato.totalAtencion))
+            })
+            this.grafico()
+        },
+        err => {
+            console.log(err)
+        })
+    }
 
   	grafico()
   	{
@@ -22,10 +47,10 @@ export class ClientesMesVentasComponent implements OnInit {
   		    type: "polarArea",
             data: 
             {
-                labels: ["V-23895594 - Juan Rodriguez","V-22720255 Pedro Jimenez","V-21010122 - Luis Sanchez","V-21241001 Pedro Martinez", "V-11011912 Pablo Escobar"],
+                labels: this.datosClientes,
                 datasets: [{
-                    label: "My First Dataset",
-                    data: [12,16,7,3,14],
+                    label: "Total de Atenciones",
+                    data: this.totalAtencion,
                     backgroundColor: ["rgb(255, 99, 132)","rgb(75, 192, 192)","rgb(255, 205, 86)","rgb(201, 203, 207)","rgb(54, 162, 235)"
                     ]
                 }]

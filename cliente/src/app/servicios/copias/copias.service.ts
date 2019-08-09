@@ -24,6 +24,31 @@ export class CopiasService {
     {
         return copias.splice(indice, 1);
     }
+    
+    ultimasCopiasSemana()
+    {
+        return this.http.get(`${API_URI}/pedidocopias/ultimas`)
+    }
+
+    obtenerFotocopiasEfectuadasMes(mes)
+    {
+        return this.http.get(`${API_URI}/pedidocopias/efectuadas/${mes}`)
+    }
+    
+    obtenerFotocopiasEfectuadasCategoriasMes(mes)
+    {
+        return this.http.get(`${API_URI}/pedidocopias/categorias/${mes}`)
+    }
+
+    ultimasCopiasDanadasSemana(dia)
+    {
+        return this.http.get(`${API_URI}/copiasdanadas/ultimas/${dia}`)
+    }
+
+    obtenerCopiasDanadasMes(mes)
+    {
+        return this.http.get(`${API_URI}/copiasdanadas/total/${mes}`)
+    }
 
     guardarCopias(copia)
     {

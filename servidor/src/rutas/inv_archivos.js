@@ -19,7 +19,7 @@ invArchivos.post('/', (req, res) => {
 	var minutos = hoy.getMinutes()
 	var segundos = hoy.getSeconds() 
 	var fecha = `${dia}${mes}${ano}${hora}${minutos}${segundos}`
-	var path = '/home/fliadiaz/libreria/servidor/src/inv_archivos/'
+	var path = '/home/fliadiaz/libreria/cliente/src/assets/inv_archivos/'
 	var extension = archivo.name.split('.').pop();
     var nombre_archivo = fecha +"."+extension
 
@@ -39,6 +39,22 @@ invArchivos.post('/', (req, res) => {
 	})
 	.catch(err =>{
 		 console.log(err)
+	})
+})
+
+invArchivos.get('/:id', (req, res) => {
+	const id = req.params.id
+
+	InvArchivo.findOne({
+		where: {
+			id: id
+		}
+	})
+	.then(datosArchivo => {
+		res.json(datosArchivo)
+	})
+	.catch(err => {
+		res.send(err)
 	})
 })
 module.exports = invArchivos

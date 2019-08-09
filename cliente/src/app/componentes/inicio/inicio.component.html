@@ -34,7 +34,7 @@
 								<div class="input-group-prepend">
 									<span class="input-group-text"><i class="fas fa-search"></i></span>
 								</div>
-								<input type="text" class="form-control" placeholder="Buscar...">
+								<input type="text" [(ngModel)]="busqueda" class="form-control" placeholder="Buscar...">
 							</div>
 						</div>
 					</div>
@@ -51,16 +51,16 @@
 							</tr>
 						</thead>
 						<tbody class="text-center">
-							<tr *ngFor="let dato of tpendientes" id="pointer" [routerLink]="['/transcripciones/actualizar', dato.id]" data-toggle="tooltip" title="actualizar">
+							<tr *ngFor="let dato of tpendientes | filtro: { fecha_entrega: busqueda, clienteAtendido: busqueda, tipoTranscripcion: busqueda,  titulo: busqueda } | paginate: { itemsPerPage: 10, currentPage: p }" id="pointer" [routerLink]="['/transcripciones/actualizar', dato.id]" data-toggle="tooltip" title="actualizar">
 								<ng-container *ngIf=" dato.estatus_tarea == 0 || dato.estatus_entrega == 0">
-									<td class="align-middle">{{ dato.fecha_entrega | date: 'dd-MM-yyyy hh:mm a' }}</td>
+									<td class="align-middle">{{ dato.fecha_entrega }}</td>
 									<td class="align-middle"> 
 										<label class="h5">
-											<span class="badge badge-pill badge-danger"> {{ dato.dias }} días</span>
+											<span class="badge badge-pill badge-danger"> {{ dato.dias }}  {{ dato.dias == 1 ? 'dia' : 'días'}}</span>
 										</label>
 									</td>
-									<td class="align-middle">{{ dato.venta.cliente.cedula }} - {{ dato.venta.cliente.nombres }} {{ dato.venta.cliente.apellidos }}</td>
-									<td class="align-middle"> {{ dato.tipos_transcripcione.descripcion }} </td>
+									<td class="align-middle">{{ dato.clienteAtendido }}</td>
+									<td class="align-middle"> {{ dato.tipoTranscripcion }} </td>
 									<td class="align-middle">{{ dato.titulo }} </td>
 									<td class="align-middle">
 										<i [ngClass]="dato.estatus_tarea == 0 ? 'fas fa-times text-danger' : 'fas fa-check text-success'" [title]="dato.estatus_tarea == 0 ? 'No realizada' : 'Realizada'"></i>
@@ -69,6 +69,7 @@
 							</tr>
 						</tbody>
 					</table>
+					<pagination-controls class="text-right" (pageChange)="p = $event" *ngIf="tpendientes.length > 0"></pagination-controls>
 					<div class="alert alert-secondary text-center" *ngIf="tpendientes.length == 0 || cont_pend == 0">
 						<span class="h5"><i class="fas fa-info-circle"></i> No se ha encontrado resultados</span>
 					</div>

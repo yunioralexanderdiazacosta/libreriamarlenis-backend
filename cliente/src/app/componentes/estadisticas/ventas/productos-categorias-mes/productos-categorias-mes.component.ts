@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ProductosService } from '../../../../servicios/productos/productos.service';
 import { Chart } from 'chart.js';
 
 @Component({
@@ -12,18 +13,57 @@ export class ProductosCategoriasMesComponent implements OnInit {
 	*
 	*@property {Array} 
 	*/
-	productosCategoriasMes = []; 
-	data: any = [491,119,27];
+	productosCategoriasMes = []
 
-	constructor() { }
+	/**
+	*Almacena cada uno de los porductos por categorias mas vendidos obtenidos de la API
+	*
+	*@property {any} 
+	**/
+	productos
+
+
+	/**
+	*Almacena los nombres de las categorias de productos encontradors en el arreglo
+	*
+	*
+	*@property {any} 
+	**/
+	categoriaNombres: any = []
+
+	/**
+	*Almacena la cantidad de productos vendidos de las categorias de productos encontradors en el arreglo
+	*
+	*
+	*@property {any} 
+	**/
+	data: any = []
+
+	constructor(public productosService: ProductosService) { 
+		this.obtenerCategoriasVendidas()
+	}
 
 	/**
 	* Grafico que muestra las categorias de productos vendidos por mes 
 	*
 	*@return {void} 
 	*/
-	ngOnInit() {
-		this.grafico();
+	ngOnInit() {}
+
+	obtenerCategoriasVendidas()
+	{
+		this.productosService.obtenerCategoriasProductosMasVendidos().subscribe(
+		res => {
+			this.productos = res
+			this.productos.filter(dato => {
+				this.categoriaNombres.push(dato.producto.categorias_producto.nombre)
+				this.data.push(parseInt(dato.cantidadProductos))
+			})
+			this.grafico()
+		},
+		err => {
+			console.log(err)
+		})
 	}
 
 	grafico()
@@ -50,7 +90,7 @@ export class ProductosCategoriasMesComponent implements OnInit {
 			type: "doughnut",
 			data: 
 			{
-				labels: ["Utiles Escolares","Libros","Papeleria"],
+				labels: this.categoriaNombres,
 				datasets:[{
 					label:"Productos más vendidos",
 					backgroundColor: coloR,
@@ -75,5 +115,4 @@ export class ProductosCategoriasMesComponent implements OnInit {
 			}
 		})
 	}
-
 }

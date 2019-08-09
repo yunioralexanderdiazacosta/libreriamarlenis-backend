@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { VentasService } from '../../../servicios/ventas/ventas.service';
 import {  Chart } from 'chart.js';
 
 @Component({
@@ -12,13 +13,57 @@ export class VentasSemanaComponent implements OnInit {
   	*
   	*@property {Array} 
   	*/
-	  ventasSemana = [];
+	ventasSemana = []
 
-  	constructor() { }
+    /**
+    * Almacena las ultimas ventas obtenidas de la API
+    *
+    *@property {any} 
+    */    
+    ultimasVentas
+
+    /**
+    * Almacena cada una de las fechas obtenidas de la API
+    *
+    *@property {any} 
+    */
+    fecha: any = []
+
+
+    /**
+    * Almacena el total de cada una de las ventas de la API
+    *
+    *@property {any} 
+    */
+    totalVenta: any = []
+
+  	constructor(public ventasService: VentasService) { 
+          this.obtenerUltimasVentas()
+    }
 
   	ngOnInit() {
-  		this.grafico();
   	}
+
+    /**
+    * Obtiene las ultimas ventas de la API y las almacena en los arreglos correspondientes
+    *
+    *@return {void} 
+    */
+    obtenerUltimasVentas()
+    {
+        this.ventasService.ultimasVentasSemana().subscribe(
+        res => {
+            this.ultimasVentas = res
+            this.ultimasVentas.filter(dato => {
+                this.fecha.push(dato.fecha)
+                this.totalVenta.push(parseInt(dato.totalVenta))
+            })
+            this.grafico()
+        }, 
+        err => {
+            console.log(err)
+        })
+    }
 
     /**
     * Grafico que muestra las ventas realizadas en la ultima semana 
@@ -32,24 +77,16 @@ export class VentasSemanaComponent implements OnInit {
 	  		type: "bar",
   			data: 
   			{
-  				labels: ["02-07-2019","03-07-2019","04-07-2019","05-07-2019", "08-07-2019"],
+  				labels: this.fecha,
   				datasets: [
   					{ 
   						label: "Total de Ingresos",
-  						data:[10000,30000,15000,12000,45000],
+  						data: this.totalVenta,
   						backgroundColor: "rgba(130,224,170, 0.5)",
   						fill:false,
   						borderColor: "#20c998",
   						borderWidth: 1
   					},
-
-  					{
-  						label: 'Total de Productos',
-            			data: [20, 10, 20, 40, 20],
-            			backgroundColor: "rgba(86, 101, 115, 0.5)",
-            			borderColor: "#6c757d",
-            			type: 'line'
-  					}
   				]
   			},
   			options:{

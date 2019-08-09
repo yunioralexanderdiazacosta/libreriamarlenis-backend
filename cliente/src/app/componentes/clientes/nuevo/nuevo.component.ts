@@ -21,14 +21,14 @@ export class NuevoClienteComponent implements OnInit {
   	*
   	* @property {ViewChild}
   	*/
-  	@ViewChild('cerrarModal') cerrarModal;
+  	@ViewChild('cerrarModal') cerrarModal
 	
   	/**
   	* Almacena los datos del formulario
   	* 
   	* @property {FormGroup}
   	*/
-	formCliente: FormGroup;
+	formCliente: FormGroup
 
     /**
     * Verifica si el formulario ha sido enviado
@@ -42,7 +42,7 @@ export class NuevoClienteComponent implements OnInit {
 	*
 	*@property {string}
 	**/
-  	input_required: string = "Este campo es requerido";
+  	input_required: string = "Este campo es requerido"
 
 	constructor(
   		public fb: FormBuilder,

@@ -1,13 +1,27 @@
 const express = require('express')
 const clientes = express.Router()
 const cors = require('cors')
-
+const Sequelize = require('sequelize')
 const Cliente = require('../modelos/Cliente')
 clientes.use(cors())
 
 /**
+****** OBTENER ULTIMO CLIENTE REGISTRADO
+**/
+clientes.get('/ultimo-registro', (req, res) => {
+	Cliente.max('id')
+	.then(listarClientes => {
+		res.json(listarClientes)
+	})
+	.catch(err => {
+		console.log(err)
+	})
+})
+
+/**
 ****** OBTENER CLIENTES
 **/
+
 clientes.get('/', (req, res) => {
 	Cliente.findAll()
 	.then(listarClientes => {
@@ -30,6 +44,29 @@ clientes.get('/:id', (req, res) => {
 	})
 	.then(mostrarCliente => {
 		res.json(mostrarCliente)
+	})
+	.catch(err => {
+		console.log(err)
+	})
+})
+
+/**
+****** ACTUALIZAR CLIENTE
+**/
+clientes.put('/:id', (req, res) => {
+	const id = req.params.id
+
+	Cliente.findOne({
+		where: { id: id }
+	})
+	.then(obtenerCliente => {
+		obtenerCliente.update(req.body)
+		.then(
+			res.json({ message: 'Datos actualizados correctamente' })
+		)
+		.catch(err => {
+			console.log(err)
+		})
 	})
 	.catch(err => {
 		console.log(err)

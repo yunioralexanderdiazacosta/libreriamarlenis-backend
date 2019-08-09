@@ -5,6 +5,19 @@ const cors = require('cors')
 const Proveedor = require('../modelos/Proveedor')
 proveedores.use(cors())
 
+/**
+****** OBTENER ULTIMO PROVEEDOR REGISTRADO
+**/
+proveedores.get('/ultimo-registro', (req, res) => {
+	Proveedor.max('id')
+	.then(ultimoProveedor => {
+		res.json(ultimoProveedor)
+	})
+	.catch(err => {
+		console.log(err)
+	})
+})
+
 proveedores.get('/', (req, res) => {
 	Proveedor.findAll()
 	.then(listarProveedores => {

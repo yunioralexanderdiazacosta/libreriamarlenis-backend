@@ -13,4 +13,9 @@ export class ArchivosService {
 	{
 		return this.http.post(`${API_URI}/inv_archivo`, archivo)
 	}
+
+	obtenerArchivoInvestigacion(id)
+	{
+		return this.http.get(`${API_URI}/inv_archivo/${id}`)
+	}
 }

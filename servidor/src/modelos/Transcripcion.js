@@ -23,6 +23,10 @@ module.exports = db.sequelize.define(
 		created_at: {
 			type: Sequelize.DATE,
 			defaultValue: Sequelize.NOW
+		},
+		updated_at: {
+			type: Sequelize.DATE,
+			defaultValue: Sequelize.NOW
 		}
 	},
 	{

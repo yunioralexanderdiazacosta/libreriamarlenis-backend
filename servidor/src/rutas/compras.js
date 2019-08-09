@@ -16,6 +16,29 @@ PedidoCompra.belongsTo(Compra)
 compras.use(cors())
 
 /**
+****** OBTENER COMPRAS DE LOS ULTIMOS MESES
+**/
+compras.get('/mes', (req, res) => {
+	const hoy = new Date()
+	const ano = hoy.getFullYear()
+	Compra.findAll({
+		attributes: [
+			[Sequelize.literal(`ELT(MONTH(created_at), "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre")`), 'mes'],
+			[Sequelize.literal(`SUM(total)`), 'totalCompra']
+		],
+		where: Sequelize.where(Sequelize.fn('YEAR', Sequelize.col('created_at')), '=', ano),
+		group: ['mes']
+	})
+	.then(comprasMes => {
+		res.json(comprasMes)
+	})
+	.catch(err => {
+		res.send(err)
+	})
+})
+
+
+/**
 ****** BUSCAR COMPRAS POR RANGO DE FECHAS
 **/
 compras.get('/:desde/:hasta', (req, res) => {

@@ -35,6 +35,21 @@ export class TranscripcionesService {
 		return this.http.post(`${API_URI}/pedidotranscripciones`, transcripcion)
 	}
 
+	obtenerTranscripcionesAsignadasEmpleado(id, mes)
+	{
+		return this.http.get(`${API_URI}/pedidotranscripciones/usuario/${id}/mes/${mes}`)
+	}
+
+	obtenerTotalTranscripcionesAsignadas(mes)
+	{
+		return this.http.get(`${API_URI}/pedidotranscripciones/general/mes/${mes}`)
+	}
+
+	obtenerTranscripcionesAsignadas(id, mes)
+	{
+		return this.http.get(`${API_URI}/pedidotranscripciones/user/${id}/month/${mes}`)
+	}
+
 	obtenerTranscripcionesPendientes(id)
 	{
 		return this.http.get(`${API_URI}/pedidotranscripciones/pendientes/${id}`)
@@ -52,13 +67,13 @@ export class TranscripcionesService {
 
 	buscarTranscripcionItems(id, palabra)
 	{
-		if(id == '')
+		if(id)
 		{
-			return this.http.get(`${API_URI}/pedidotranscripciones/buscar/${palabra}`)
+			return this.http.get(`${API_URI}/pedidotranscripciones/buscar/${id}/${palabra}`)
 		}
 		else
 		{
-			return this.http.get(`${API_URI}/pedidotranscripciones/buscar/${id}/${palabra}`)
+			return this.http.get(`${API_URI}/pedidotranscripciones/buscar/${palabra}`)	
 		}
 	}
 }

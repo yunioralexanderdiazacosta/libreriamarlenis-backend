@@ -30,6 +30,11 @@ export class ComprasService {
 		return this.http.get(`${API_URI}/compras`)
 	}
 
+	obtenerComprasPorMes()
+	{
+		return this.http.get(`${API_URI}/compras/mes`)
+	}
+
 	guardarCompraApi(compra){
 		return this.http.post(`${API_URI}/compras`, compra)
 	}

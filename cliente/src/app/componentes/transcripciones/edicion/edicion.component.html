@@ -1,6 +1,6 @@
 <div class="row">
 	<div class="col-lg-12">
-		<span class="text-secondary h4"><i class="fas fa-check-square"></i> Actualizar Transcripción</span>
+		<span class="text-secondary h4"><i class="fas fa-check-square"></i> Actualizar Tarea</span>
 		<ol class="breadcrumb" style="float: right;">
 	  		<li class="breadcrumb-item">
 	    		<a routerLink="/inicio">
@@ -9,7 +9,7 @@
 	  		</li>
 	  		<li class="breadcrumb-item">
 	  			<a routerLink="/transcripciones">
-	  				Transcripciones
+	  				Tareas
 	  			</a>
 	  		</li>
 	  		<li class="breadcrumb-item active">
@@ -42,7 +42,13 @@
 
 		<div class="text-right">
 	    	<b>Contenido a investigar:</b>
-			<button class="btn btn-secondary ml-1" data-toggle="modal" data-target="#contenido"><i class="fas fa-eye"></i></button>
+			<button class="btn btn-secondary ml-1" data-toggle="modal" data-target="#contenido" *ngIf="transcripcion?.contenido != ''">
+				<i class="fas fa-eye"></i>
+			</button>
+
+			<a class="btn btn-secondary ml-1" [href]="'/assets/inv_archivos/'+datosArchivo?.archivo" *ngIf="datosArchivo?.archivo" target="_blank">
+				<i class="fas fa-eye"></i>
+			</a>
 		</div>
 
 		<form [formGroup]="formTranscripcion" (ngSubmit)="guardarCambiosTranscripcion()">
@@ -74,7 +80,7 @@
 					<tr>
 						<th class="align-middle">Archivo de la investigación:</th>
 						<td class="align-middle">
-							<div class="form-group">
+							<div class="form-group" *ngIf="transcripcion?.archivo_tarea == ''">
 								<input type="file" *ngIf="est_tarea == true" (change)="guardarArchivo($event)">
 								<div class="alert alert-info" *ngIf="est_tarea == false">
 									<i class="fas fa-info-circle"></i> No se adjuntado el archivo
@@ -83,6 +89,8 @@
 									<div class="text-danger" *ngIf="f.archivo_tarea.errors.required">Debe adjuntar el archivo</div>
 								</div>
 							</div>
+
+							<a [href]="'/assets/tarea_archivos/'+transcripcion?.archivo_tarea" class="btn btn-secondary" target="_blank" *ngIf="transcripcion?.archivo_tarea != ''">Ver archivo</a>
 						</td>
 					</tr>
 
