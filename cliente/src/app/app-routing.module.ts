@@ -12,11 +12,13 @@ import { HistoricoClienteComponent } from './componentes/clientes/historico/hist
 /****************************************** VENTAS *********************************************************/
 import { ListaVentasComponent } from './componentes/ventas/lista/lista.component';
 import { NuevaVentaComponent } from './componentes/ventas/nueva/nueva.component';
+import { DetallesVentaComponent } from './componentes/ventas/detalles/detalles.component';
 /***********************************************************************************************************/
 
 /**************************************** COMPRAS **********************************************************/
 import { ListaComprasComponent } from './componentes/compras/lista/lista.component';
 import { NuevaCompraComponent } from './componentes/compras/nueva/nueva.component';
+import { DetallesCompraComponent } from './componentes/compras/detalles/detalles.component';
 
 import { ListaProveedoresComponent } from './componentes/compras/proveedores/lista/lista.component';
 import { ProveedorEdicionComponent } from './componentes/proveedores/edicion/edicion.component';
@@ -33,6 +35,7 @@ import { ProductosEdicionComponent } from './componentes/productos/edicion/edici
 /************************************* TRANSCRIPCIONES *****************************************************/
 import { ListaTranscripcionesComponent } from './componentes/transcripciones/lista/lista.component';
 import { NuevaTranscripcionComponent  } from './componentes/transcripciones/nueva/nueva.component';
+import { EditarTrancripcionComponent  } from './componentes/transcripciones/editar/editar.component';
 import { EdicionTranscripcionComponent } from './componentes/transcripciones/edicion/edicion.component';
 import { AlmacenamientoComponent } from './componentes/transcripciones/almacenamiento/almacenamiento.component';
 /***********************************************************************************************************/
@@ -58,6 +61,7 @@ import { ListaEmpleadosComponent } from './componentes/ajustes/empleados/lista/l
 /***********************************************************************************************************/
 
 import { RespaldosBdComponent } from './componentes/respaldos-bd/respaldos-bd.component';
+import { CambiarContrasenaComponent } from './componentes/ajustes/cambiar-contrasena/cambiar-contrasena.component';
 
 const routes: Routes = [
 	{
@@ -104,6 +108,11 @@ const routes: Routes = [
 		path: 'ventas/nueva',
 		component: NuevaVentaComponent
 	},
+
+	{
+		path: 'ventas/detalles/:id',
+		component: DetallesVentaComponent
+	},
 	/*************************************/
 
 	/*********** COMPRAS ****************/
@@ -115,6 +124,11 @@ const routes: Routes = [
 	{
 		path: 'compras/nueva',
 		component: NuevaCompraComponent
+	},
+
+	{
+		path: 'compras/detalles/:id',
+		component: DetallesCompraComponent
 	},
 
 	{
@@ -164,6 +178,11 @@ const routes: Routes = [
 	{
 		path: 'transcripciones/nueva',
 		component: NuevaTranscripcionComponent
+	},
+
+	{
+		path:'transcripciones/editar/:id',
+		component: EditarTrancripcionComponent
 	},
 
 	{
@@ -236,12 +255,21 @@ const routes: Routes = [
     	path: 'empleados',
     	component: ListaEmpleadosComponent
     },
+    /************************************/
 
     /*********** RESPALDOS ***********/
     {
     	path: 'respaldos',
     	component: RespaldosBdComponent
+    },
+    /************************************/
+
+    /*********** CAMBIAR CONTRASEÑA ***********/
+    {
+    	path: 'cambiar-contrasena',
+    	component: CambiarContrasenaComponent
     }
+    /************************************/
 ];
 
 @NgModule({

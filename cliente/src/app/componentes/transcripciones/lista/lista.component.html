@@ -1,13 +1,13 @@
 <div class="row">
 	<div class="col-lg-12">
-		<span class="text-secondary h4"><i class="fas fa-file-alt"></i> Gestión de las Transcripciones</span>
+		<span class="text-secondary h4"><i class="fas fa-file-alt"></i> Gestión de Tareas</span>
 		<ol class="breadcrumb" style="float: right;">
 	  		<li class="breadcrumb-item">
 	    		<a href="#">
 	    			<i class="fas fa-home"></i>
 	    		</a>
 	  		</li>
-	  		<li class="breadcrumb-item active">Transcripciones</li>
+	  		<li class="breadcrumb-item active">Tareas</li>
 		</ol>
 		<hr id="linea">
 	</div>
@@ -46,10 +46,10 @@
 				</tr>
 			</thead>
 			<tbody class="text-center">
-				<tr *ngFor="let transcripcion of transcripciones | filtro: { tipo: busqueda, titulo: busqueda}; index as i">
+				<tr *ngFor="let transcripcion of transcripciones | filtro: { encargado: busqueda, tipo: busqueda, titulo: busqueda, estatusTexto: busqueda} | paginate:{ itemsPerPage: 10, currentPage: p }; index as i">
 					<td class="align-middle">{{ i+1 }}</td>
 					<td class="align-middle">{{ transcripcion.created_at | date: 'dd-MM-yyyy hh:mm a' }}</td>
-					<td class="align-middle">{{ transcripcion.usuario.usuario }}</td>
+					<td class="align-middle">{{ transcripcion.encargado }}</td>
 					<td class="align-middle">{{ transcripcion.tipo  }}</td>
 					<td class="align-middle">{{ transcripcion.titulo }}</td>
 					<td class="aling-middle">
@@ -57,7 +57,7 @@
 					</td>
 					<td class="align-middle">
 						<span [ngClass]="transcripcion.estatus_entrega == 0 ? 'badge badge-pill badge-danger' : 'badge badge-pill badge-success'">
-							{{ transcripcion.estatus_entrega == 0 ? 'No Entregado' : 'Entregado' }}
+							{{ transcripcion.estatusTexto }}
 						</span>
 					</td>
 					<td>
@@ -66,13 +66,18 @@
 								<i class="fas fa-eye"></i>
 							</button>
 
-							<button class="btn btn-secondary">
+							<a class="btn btn-secondary" [routerLink]="['/transcripciones/editar', transcripcion.id]">
 								<i class="fas fa-edit"></i>
-							</button>
+							</a>
+
+							<a class="btn btn-secondary" [routerLink]="['/transcripciones/actualizar', transcripcion.id]">
+								<i class="fas fa-sync"></i>
+							</a>
 						</div>
 					</td>
 				</tr>
 			</tbody>
 		</table>
+		<pagination-controls class="text-right" (pageChange)="p = $event"></pagination-controls>
 	</div>
 </div>

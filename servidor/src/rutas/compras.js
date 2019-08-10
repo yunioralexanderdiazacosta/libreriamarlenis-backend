@@ -8,12 +8,59 @@ const op = Sequelize.Op
 const Compra = require('../modelos/Compra')
 const Proveedor = require('../modelos/Proveedor')
 const PedidoCompra = require('../modelos/PedidoCompra')
+const Producto = require('../modelos/Producto')
 Proveedor.hasMany(Compra)
 Compra.belongsTo(Proveedor)
 Compra.hasMany(PedidoCompra)
 PedidoCompra.belongsTo(Compra)
-
+Producto.hasMany(PedidoCompra, { foreignKey: 'producto_id'})
+PedidoCompra.belongsTo(Producto, {foreignKey: 'producto_id' })
+ 
 compras.use(cors())
+
+/**
+****** OBTENER  DETALLES DE UNA COMPRA ASOCIADA A UNA VENTA
+**/
+compras.get('/detalles/compra/:id', (req, res) => {
+	const id = req.params.id
+
+	PedidoCompra.findAll({
+		include: [{
+			model: Producto,
+			attributes: ['nombre']
+		}],
+		where: { compraId: id }
+	})
+	.then(obtenerProductos => {
+		res.json(obtenerProductos)
+	})
+	.catch(err => {
+		res.send(err)
+	})
+})
+
+/**
+****** OBTENER COMPRA
+**/
+compras.get('/detalles/:id', (req, res) => {
+	const id = req.params.id
+
+	Compra.findOne({
+		include: [{
+			model: Proveedor,
+			attributes: ['razon_social']
+		}],
+		where: {
+			id: id
+		}
+	})
+	.then(obtenerCompras => {
+		res.json(obtenerCompras)
+	})
+	.catch(err => {
+		console.log(err)
+	})
+})
 
 /**
 ****** OBTENER COMPRAS DE LOS ULTIMOS MESES

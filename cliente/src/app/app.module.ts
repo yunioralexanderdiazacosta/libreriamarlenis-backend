@@ -26,6 +26,7 @@ import { IndicadoresComponent } from './componentes/inicio/indicadores/indicador
 import { ListaClientesComponent } from './componentes/clientes/lista/lista.component';
 import { NuevoClienteComponent } from './componentes/clientes/nuevo/nuevo.component';
 import { HistoricoClienteComponent } from './componentes/clientes/historico/historico.component';
+import { ClientesEdicionComponent } from './componentes/clientes/edicion/edicion.component';
 /***********************************************************************************************************/
 
 /******************************************** VENTAS *******************************************************/
@@ -34,6 +35,12 @@ import { NuevaVentaComponent } from './componentes/ventas/nueva/nueva.component'
 import { ProductoComponent } from './componentes/ventas/producto/producto.component';
 import { VentasProductosComponent } from './componentes/ventas/nueva/productos/productos.component';
 import { VentasCopiasComponent } from './componentes/ventas/nueva/copias/copias.component';
+//detalles
+import { DetallesVentaComponent } from './componentes/ventas/detalles/detalles.component';
+import { DetallesProductosVentaComponent } from './componentes/ventas/detalles/productos/productos.component';
+import { DetallesTareasVentaComponent } from './componentes/ventas/detalles/tareas/tareas.component';
+import { DetallesCopiasVentaComponent } from './componentes/ventas/detalles/copias/copias.component';
+
 /***********************************************************************************************************/
 
 /*************************************** COMPRAS ********************************************************/
@@ -42,6 +49,9 @@ import { NuevaCompraComponent } from './componentes/compras/nueva/nueva.componen
 import { ProductoCompraComponent } from './componentes/compras/producto/producto.component';
 import { CompraProductosComponent } from './componentes/compras/nueva/productos/productos.component';
 import { CompraComponent } from './componentes/compras/nueva/compra/compra.component';
+import { DetallesCompraComponent } from './componentes/compras/detalles/detalles.component';
+import { DetallesProductosCompraComponent } from './componentes/compras/detalles/productos/productos.component';
+
 
 import { ListaProveedoresComponent } from './componentes/compras/proveedores/lista/lista.component';
 import { NuevoProveedorComponent } from './componentes/compras/proveedores/nuevo/nuevo.component';
@@ -54,11 +64,13 @@ import { ListaInventarioComponent } from './componentes/inventario/lista/lista.c
 import { ListaEntradasComponent } from './componentes/inventario/entradas/lista/lista.component';
 import { NuevaEntradaComponent } from './componentes/inventario/entradas/nueva/nueva.component';
 import { CategoriasProductosComponent } from './componentes/inventario/categorias/categorias.component';
+import { ProductosEdicionComponent } from './componentes/productos/edicion/edicion.component';
 /**********************************************************************************************************/
 
 /************************************** TRANSCRIPCIONES ***************************************************/
 import { ListaTranscripcionesComponent } from './componentes/transcripciones/lista/lista.component';
 import { NuevaTranscripcionComponent } from './componentes/transcripciones/nueva/nueva.component';
+import { EditarTrancripcionComponent } from './componentes/transcripciones/editar/editar.component';
 import { EdicionTranscripcionComponent } from './componentes/transcripciones/edicion/edicion.component';
 import { AlmacenamientoComponent } from './componentes/transcripciones/almacenamiento/almacenamiento.component';
 import { ContenidoComponent } from './componentes/transcripciones/contenido/contenido.component';
@@ -82,6 +94,7 @@ import { ReporteFotocopiasComponent } from './componentes/reportes/fotocopias/fo
 import { EstadisticasSeleccionComponent } from './componentes/estadisticas/seleccion/seleccion.component';
 
 import { EstadisticasVentasComponent } from './componentes/estadisticas/ventas/ventas.component';
+import { ComprasMesComponent } from './componentes/estadisticas/ventas/compras-mes/compras-mes.component';
 import { IngresosMesVentasComponent } from './componentes/estadisticas/ventas/ingresos-mes/ingresos-mes.component';
 import { ProductosMesVentasComponent } from './componentes/estadisticas/ventas/productos-mes/productos-mes.component';
 import { ProductosMasVendidosComponent } from './componentes/estadisticas/ventas/productos-mas-vendidos/productos-mas-vendidos.component';
@@ -106,9 +119,7 @@ import { NavbarComponent } from './componentes/layouts/navbar/navbar.component';
 import { RespaldosBdComponent } from './componentes/respaldos-bd/respaldos-bd.component';
 import { VentasTranscripcionesComponent } from './componentes/ventas/nueva/transcripciones/transcripciones.component';
 import { FiltroPipe } from './_utilidades/filtro/filtro.pipe';
-import { ProductosEdicionComponent } from './componentes/productos/edicion/edicion.component';
-import { ComprasMesComponent } from './componentes/estadisticas/ventas/compras-mes/compras-mes.component';
-import { ClientesEdicionComponent } from './componentes/clientes/edicion/edicion.component';
+import { CambiarContrasenaComponent } from './componentes/ajustes/cambiar-contrasena/cambiar-contrasena.component';
 
 @NgModule({
     declarations: [
@@ -137,6 +148,12 @@ import { ClientesEdicionComponent } from './componentes/clientes/edicion/edicion
         VentasProductosComponent,
         VentasCopiasComponent,
         VentasTranscripcionesComponent,
+        //detalles
+        DetallesVentaComponent,
+        DetallesProductosVentaComponent,
+        DetallesTareasVentaComponent,
+        DetallesCopiasVentaComponent,
+
         /***************************/
 
         /********* COMPRAS **********/ 
@@ -145,6 +162,8 @@ import { ClientesEdicionComponent } from './componentes/clientes/edicion/edicion
         ProductoCompraComponent,
         CompraProductosComponent,
         CompraComponent,
+        DetallesCompraComponent,
+        DetallesProductosCompraComponent,
 
         ListaProveedoresComponent,
         NuevoProveedorComponent,
@@ -163,6 +182,7 @@ import { ClientesEdicionComponent } from './componentes/clientes/edicion/edicion
         /***** TRANSCRIPCIONES *****/
         ListaTranscripcionesComponent,
         NuevaTranscripcionComponent,
+        EditarTrancripcionComponent,
         EdicionTranscripcionComponent,
         AlmacenamientoComponent,
         CartaComponent,
@@ -186,6 +206,7 @@ import { ClientesEdicionComponent } from './componentes/clientes/edicion/edicion
         EstadisticasSeleccionComponent,
         //ventas
         EstadisticasVentasComponent,
+        ComprasMesComponent,
         IngresosMesVentasComponent,
         ProductosMesVentasComponent,
         ProductosMasVendidosComponent,
@@ -212,8 +233,8 @@ import { ClientesEdicionComponent } from './componentes/clientes/edicion/edicion
         /*****************************/
         SeparadorPipe,
         FiltroPipe,
-        ComprasMesComponent,
-    ],
+        CambiarContrasenaComponent,
+        ],
     imports: [
         BrowserModule,
         BrowserAnimationsModule,

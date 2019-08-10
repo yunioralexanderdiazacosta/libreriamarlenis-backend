@@ -13,9 +13,16 @@ export class VentasTranscripcionesComponent implements OnInit {
 	* @property {EventEmitter<boolean>}
 	*/
 	@Output() actualizarMontos = new EventEmitter<boolean>()
-	cont = 0
-	transcripciones
-	constructor(public transcripcionesService: TranscripcionesService) { }
+	
+  /**
+  * Almacena las transcripciones obtenidas de la API
+  * 
+  * @property {any}
+  */
+	transcripciones: any = []
+
+	constructor(public transcripcionesService: TranscripcionesService) { 
+  }
 
 	ngOnInit() {
 		this.listarTranscripciones()

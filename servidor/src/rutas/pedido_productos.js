@@ -10,6 +10,23 @@ Producto.hasMany(PedidoProducto, { foreignKey: 'producto_id'})
 PedidoProducto.belongsTo(Producto, { foreignKey: 'producto_id'})
 pedidoProductos.use(cors())
 
+pedidoProductos.get('/venta/:id', (req, res) => {
+	const id = req.params.id
+	PedidoProducto.findAll({
+		include: [{
+			model: Producto,
+			attributes: ['nombre']
+		}],
+		where:  { venta_id: id } 
+	})
+	.then(obtenerProductos => {
+		res.json(obtenerProductos)
+	})
+	.catch(err => {
+		console.log(err)
+	})
+})
+
 pedidoProductos.get('/mes', (req, res) => {
 	const dia = new Date()
 	const ano = dia.getFullYear()

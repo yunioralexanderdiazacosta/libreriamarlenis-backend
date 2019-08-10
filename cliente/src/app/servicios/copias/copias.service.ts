@@ -10,21 +10,26 @@ export class CopiasService {
 
   	constructor(public http: HttpClient) { }
 
-	  obtenerCopiasArreglo()
+	obtenerCopiasArreglo()
   	{
-  		return copias;
+  		return copias
   	}
+
+    resetearCopiasArreglo()
+    {
+        return copias.length = 0
+    }
 
   	guardarCopiaArreglo(copia)
   	{
-  		return copias.push(copia);
+  		return copias.push(copia)
   	}
 
     eliminarCopiaArreglo(indice)
     {
-        return copias.splice(indice, 1);
+        return copias.splice(indice, 1)
     }
-    
+
     ultimasCopiasSemana()
     {
         return this.http.get(`${API_URI}/pedidocopias/ultimas`)
@@ -48,6 +53,11 @@ export class CopiasService {
     obtenerCopiasDanadasMes(mes)
     {
         return this.http.get(`${API_URI}/copiasdanadas/total/${mes}`)
+    }
+
+    obtenerCopiasVenta(id)
+    {
+        return this.http.get(`${API_URI}/pedidocopias/venta/${id}`)
     }
 
     guardarCopias(copia)

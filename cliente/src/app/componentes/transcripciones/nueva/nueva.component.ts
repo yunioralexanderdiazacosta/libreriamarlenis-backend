@@ -142,25 +142,23 @@ export class NuevaTranscripcionComponent implements OnInit {
 	listarUsuarios()
 	{
 		this.usuariosService.obtenerUsuarios().subscribe(
-			res => {
-				this.usuarios = res
-			},
-			err => {
-				console.log(err)
-			}
-		)
+		res => {
+			this.usuarios = res
+		},
+		err => {
+			console.log(err)
+		})
 	}
 
 	listarTipoTranscripciones()
 	{
 		this.tipoTranscripcionesService.obtenerTipoTranscripciones().subscribe(
-			res => {
-				this.tipoTranscripciones = res
-			},
-			err => {
-				console.log(err)
-			}
-		)
+		res => {
+			this.tipoTranscripciones = res
+		},
+		err => {
+			console.log(err)
+		})
 	}
 
 	obtenerEncargado(id)

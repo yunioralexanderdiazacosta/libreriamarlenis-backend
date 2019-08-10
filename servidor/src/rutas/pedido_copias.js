@@ -15,6 +15,30 @@ PedidoCopia.belongsTo(Venta, { foreignKey: 'venta_id'})
 
 pedidoCopias.use(cors())
 
+/**
+**** FOTOCOPIAS EFECTUADAS EN UNA DETERMINADA VENTA
+**/
+pedidoCopias.get('/venta/:id', (req, res) => {
+	const id = req.params.id
+
+	PedidoCopia.findAll({
+		include: [{
+			model: TipoCopia,
+			attributes: ['descripcion']
+		}],
+		where: { venta_id: id }
+	})
+	.then(obtenerCopias => {
+		res.json(obtenerCopias)
+	})
+	.catch(err => {
+		console.log(err)
+	})
+})
+
+/**
+**** FOTOCOPIAS EFECTUADAS EN UN MES DETERMINADO
+**/
 pedidoCopias.get('/efectuadas/:mes', (req, res) => {
 	const fecha = new Date()
 	const ano = fecha.getFullYear()
@@ -41,6 +65,9 @@ pedidoCopias.get('/efectuadas/:mes', (req, res) => {
 	})
 })
 
+/**
+**** FOTOCOPIAS EFECTUADAS POR CATEGORIAS DE ACUERDO A UN MES DETERMINADO
+**/
 pedidoCopias.get('/categorias/:mes', (req, res) => {
 	const fecha = new Date()
 	const ano = fecha.getFullYear()
@@ -105,6 +132,8 @@ pedidoCopias.get('/ultimas', (req, res) => {
 		console.log(err)
 	})
 })
+
+
 
 /**
 **** BUSCAR COPIAS POR RANGO DE FECHAS

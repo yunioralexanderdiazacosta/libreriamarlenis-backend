@@ -55,9 +55,9 @@
 					</td>
 					<td>
 						<div class="btn-group">
-							<button class="btn btn-secondary" data-toggle="tooltip" title="Ver">
+							<a [routerLink]="['/ventas/detalles', venta.id]" class="btn btn-secondary" data-toggle="tooltip" title="Ver">
 								<i class="fas fa-eye"></i>
-							</button>
+							</a>
 							<button class="btn btn-secondary" 
 								data-toggle="tooltip" 
 								[title]="venta.estatus == 1 ? 'Anular' : 'Reactivar'" 

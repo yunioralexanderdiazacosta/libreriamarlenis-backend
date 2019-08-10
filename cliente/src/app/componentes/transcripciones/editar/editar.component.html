@@ -1,0 +1,166 @@
+<div class="row">
+	<div class="col-lg-12">
+		<span class="text-secondary h4"><i class="fas fa-edit"></i> Editar Tarea</span>
+		<ol class="breadcrumb" style="float: right;">
+	  		<li class="breadcrumb-item">
+	    		<a routerLink="/inicio">
+	    			<i class="fas fa-home"></i>
+	    		</a>
+	  		</li>
+	  		<li class="breadcrumb-item">
+	  			<a routerLink="/transcripciones">
+	  				Tareas
+	  			</a>
+	  		</li>
+
+	  		<li class="breadcrumb-item active">
+		  		Edición
+		  	</li>
+		</ol>
+		<hr id="linea">
+	</div>
+</div>
+
+<form [formGroup]="formTranscripcion" (ngSubmit)="actualizarTranscripcion()" *ngIf="transcripcion">
+	<div class="row">
+		<div class="col-lg-4">
+			<div class="form-group">
+				<label class="text-secondary">Fecha de Entrega</label>
+				<input 
+					type="date" 
+					formControlName="fechaEntrega"
+					class="form-control"
+					[ngClass]="{ 'is-invalid': f.fechaEntrega.errors && submitted }">
+
+					<div class="invalid-feedback" *ngIf="f.fechaEntrega.errors && submitted">
+						<div *ngIf="f.fechaEntrega.errors.required">Este es campo es requerido</div>
+					</div>
+			</div>
+		</div>
+
+		<div class="col-lg-4">
+			<div class="form-group">
+				<label class="text-secondary">Hora de Entrega</label>
+				<ng-select formControlName="horaEntrega"
+			    placeholder="Filtrar hora..."
+			    class="custom"
+			    [dropdownPosition]="'bottom'">
+					<ng-option *ngFor="let hora of horas" [value]="hora.value">{{ hora.item }}</ng-option>
+				</ng-select>
+
+				<div *ngIf="f.horaEntrega.errors && submitted">
+					<small class="text-danger" *ngIf="f.horaEntrega.errors.required">Debe seleccionar una opción</small>
+				</div>
+			</div>
+		</div>
+
+		<div class="col-lg-4">
+			<div class="form-group">
+				<label class="text-secondary">Subtotal</label>
+				<div class="input-group">
+					<div class="input-group-prepend">
+						<span class="input-group-text">Bs.</span>
+					</div>
+					<input type="number" 
+						formControlName="subtotal"
+						class="form-control" 
+						placeholder="Ingresa el monto"
+						[ngClass]="{ 'is-invalid': f.subtotal.errors && submitted }">
+
+					<div class="invalid-feedback" *ngIf="f.subtotal.errors && submitted">
+						<div *ngIf="f.subtotal.errors.required">Este campo es requerido y solo acepta números</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="col-lg-6">
+			<div class="form-group">
+				<label class="text-secondary">Encargado</label>
+				<select class="form-control"
+					formControlName="encargado_id"
+					[ngClass]="{ 'is-invalid': f.encargado_id.errors && submitted }"
+					(change)="obtenerEncargado(f.encargado_id.value)">
+					<option value="">Seleccione...</option>
+					<option *ngFor="let usuario of usuarios" [value]="usuario.id">{{ usuario.usuario }}</option>
+				</select>
+
+				<div class="invalid-feedback" *ngIf="f.encargado_id.errors && submitted">
+					<div *ngIf="f.encargado_id.errors.required">Debes asignar un encargado</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="col-lg-6">
+			<label class="text-secondary">Categoría</label>
+			<select class="form-control"
+				formControlName="categoria"
+				[ngClass]="{ 'is-invalid': f.categoria.errors && submitted }">
+				<option value="">Seleccione</option>
+				<option *ngFor="let dato of tipoTranscripciones" [value]="dato.id">{{ dato.descripcion }}</option>
+			</select>
+
+			<div class="invalid-feedback" *ngIf="f.categoria.errors && submitted">
+				<div *ngIf="f.categoria.errors.required">Debes seleccionar una categoría</div>
+			</div>
+		</div>
+
+		<div class="col-lg-12">
+			<div class="form-group">
+				<label class="text-secondary">Titulo</label>
+				<textarea 
+					formControlName="titulo"
+					class="form-control" 
+					rows="2" 
+					placeholder="Ingresa el titulo"
+					[ngClass]="{ 'is-invalid': f.titulo.errors && submitted }"></textarea>
+
+				<div class="invalid-feedback" *ngIf="f.titulo.errors && submitted">
+					<div *ngIf="f.titulo.errors.required">Este campo es requerido</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="col-lg-12" *ngIf="transcripcion.contenido != ''">
+			<div class="form-group">
+				<label class="text-secondary">Contenido de la investigación</label>
+				<textarea class="form-control" 
+					formControlName="contenido" 
+					rows="4" 
+					placeholder="Ingresa el contenido a investigar..."
+					[ngClass]="{ 'is-invalid': f.contenido.errors && submitted }"></textarea>
+					
+				<div class="invalid-feedback" *ngIf="f.contenido.errors && submitted">
+					<div *ngIf="f.contenido.errors.required">Este campo es requerido</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="col-lg-12 mt-3" *ngIf="transcripcion.contenido == ''">
+			<div class="form-group">
+				<a [href]="'/assets/inv_archivos/'+archivo?.archivo" target="_blank" class="btn btn-secondary">
+					<i class="fas fa-eye"></i> Contenido de la Investigación
+				</a>
+			</div>
+		</div>
+
+		<div class="col-lg-12" *ngIf="transcripcion.contenido == ''">
+			<div class="form-group">
+				<label class="text-secondary">Cambiar archivo</label><br>
+				<input type="file" (change)="guardarArchivo($event)">
+
+				<div *ngIf="f.archivo_inv.errors && submitted">
+					<small class="text-danger" *ngIf="f.archivo_inv.errors.required">Debe adjuntar el archivo</small>
+				</div>
+			</div>
+		</div>
+		<hr>
+	    <div class="col-lg-12">
+	    	<div class="form-group text-right">
+		        <button type="submit" [disabled]="formTranscripcion.invalid" class="btn btn-primary btn-lg">	    
+		        	<i class="fas fa-sync"></i> Actualizar
+		       	</button>
+	       	</div>
+	    </div>
+	</div>
+</form>

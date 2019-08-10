@@ -69,7 +69,7 @@ export class NuevaVentaComponent implements OnInit {
     *
     *@property {Array}
     **/
-    productos
+    productos: any = []
 
     /** 
     * Almacena monto total de cada uno de los productos    
@@ -83,7 +83,7 @@ export class NuevaVentaComponent implements OnInit {
     *
     *@property {Array}
     **/
-    copias;
+    copias: any = []
 
     /** 
     * Almacena monto total de cada una de las copias    
@@ -154,7 +154,7 @@ export class NuevaVentaComponent implements OnInit {
     *
     *@property {Array}
     **/
-    transcripciones;
+    transcripciones: any = []
 
     /** 
     * Almacena los datos a enviar de cada producto a la API
@@ -225,8 +225,11 @@ export class NuevaVentaComponent implements OnInit {
         private config: NgSelectConfig,
         public router: Router) 
     { 
-        this.obtenerClientes();
-        this.config.notFoundText = 'No se encontraron resultados';
+        this.obtenerClientes()
+        this.config.notFoundText = 'No se encontraron resultados'
+        this.transcripcionesService.resetearTranscripcionesArreglo()
+        this.copiasService.resetearCopiasArreglo()
+        this.productosService.resetearProductosVenta()
     }
 
     ngOnInit() {

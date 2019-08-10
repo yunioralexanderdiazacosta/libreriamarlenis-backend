@@ -7,9 +7,13 @@ const op = Sequelize.Op
 
 const Venta = require('../modelos/Venta')
 const Cliente = require('../modelos/Cliente')
+const Usuario = require('../modelos/Usuario')
 const PedidoCopia = require('../modelos/PedidoCopia')
 Cliente.hasMany(Venta)
 Venta.belongsTo(Cliente)
+Usuario.hasMany(Venta, { foreignKey: 'usuario_id'})
+Venta.belongsTo(Usuario, { foreignKey: 'usuario_id'})
+
 
 ventas.use(cors())
 
@@ -220,6 +224,33 @@ ventas.get('/:desde/:hasta', (req, res) => {
 	})
 	.then(ventas => {
 		res.json(ventas)
+	})
+	.catch(err => {
+		console.log(err)
+	})
+})
+
+
+/**
+***** OBTENER VENTA
+**/
+ventas.get('/:id', (req, res) => {
+	const id = req.params.id
+
+	Venta.findOne({
+		include: [{
+			model: Cliente,
+			attributes: ['cedula', 'nombres', 'apellidos']
+		},
+		{
+			model: Usuario,
+			attributes: ['usuario']
+		}],
+		where: { id: id },
+		attributes: ['id', 'total', 'created_at']
+	})
+	.then(obtenerVenta => {
+		res.json(obtenerVenta)
 	})
 	.catch(err => {
 		console.log(err)

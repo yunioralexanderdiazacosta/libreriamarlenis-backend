@@ -14,6 +14,11 @@ export class VentasService {
 		return this.http.get(`${API_URI}/ventas`)
 	}
 
+	obtenerVenta(id)
+	{
+		return this.http.get(`${API_URI}/ventas/${id}`)
+	}
+
 	obtenerVentasPorMes()
 	{
 		return this.http.get(`${API_URI}/ventas/mes`)

@@ -15,6 +15,11 @@ export class TranscripcionesService {
 		return transcripciones
 	}
 
+	resetearTranscripcionesArreglo()
+	{
+		return transcripciones.length = 0
+	}
+
 	guardarTranscripcionArreglo(transcripcion)
 	{
 		return transcripciones.push(transcripcion)
@@ -23,6 +28,10 @@ export class TranscripcionesService {
 	eliminarTranscripcionArreglo(indice)
 	{
 		return transcripciones.splice(indice, 1)
+	}
+	actualizarTranscripcion(id, transcripcion)
+	{
+		return this.http.put(`${API_URI}/pedidotranscripciones/${id}`, transcripcion)
 	}
 
 	actualizarTranscripcionPendiente(id, transcripcion)
@@ -33,6 +42,11 @@ export class TranscripcionesService {
 	guardarTranscripcion(transcripcion)
 	{
 		return this.http.post(`${API_URI}/pedidotranscripciones`, transcripcion)
+	}
+
+	obtenerTranscripcionesVenta(id)
+	{
+		return this.http.get(`${API_URI}/pedidotranscripciones/venta/${id}`)
 	}
 
 	obtenerTranscripcionesAsignadasEmpleado(id, mes)
@@ -63,6 +77,11 @@ export class TranscripcionesService {
 	obtenerTranscripciones()
 	{
 		return this.http.get(`${API_URI}/pedidotranscripciones`)
+	}
+
+	obtenerTranscripcion(id)
+	{
+		return this.http.get(`${API_URI}/pedidotranscripciones/${id}`)
 	}
 
 	buscarTranscripcionItems(id, palabra)

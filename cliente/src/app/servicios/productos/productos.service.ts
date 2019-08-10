@@ -13,22 +13,27 @@ export class ProductosService {
 
 	obtenerProductosVenta()
 	{
-		return productosVenta;
+		return productosVenta
+	}
+
+	resetearProductosVenta()
+	{
+		return productosVenta.length = 0
 	}
 
 	guardarProductoVenta(venta)
 	{
-		return productosVenta.push(venta);
+		return productosVenta.push(venta)
 	}
 
 	eliminarProductoVenta(indice)
 	{
-		return productosVenta.splice(indice, 1);
+		return productosVenta.splice(indice, 1)
 	}
 
 	obtenerProductosArreglo()
 	{
-		return productos;
+		return productos
 	}
 
 	guardarProductoArreglo(producto)
@@ -44,6 +49,11 @@ export class ProductosService {
 	obtenerProducto(id)
 	{
 		return this.http.get(`${API_URI}/productos/${id}`)
+	}
+
+	obtenerProductosDetallesVenta(id)
+	{
+		return this.http.get(`${API_URI}/pedidoproductos/venta/${id}`)
 	}
 
 	obtenerProductosVendidosMes()

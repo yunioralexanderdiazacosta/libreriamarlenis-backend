@@ -22,6 +22,42 @@ Transcripcion.belongsTo(Usuario)
 pedidoTranscripciones.use(cors())
 pedidoTranscripciones.use(fileUpload({ preserveExtension: true }))
 
+pedidoTranscripciones.get('/:id', (req, res) => {
+	const id = req.params.id
+
+	Transcripcion.findOne({
+		where: { id: id }
+	})
+	.then(obtenerTranscripcion => {
+		res.json(obtenerTranscripcion)
+	})
+	.catch(err => {
+		res.send(err)
+	})
+})
+
+/**
+****** OBTENER TRANSCRIPCIONES ASOCIADAS A UNA VENTA DETERMINADA
+**/
+pedidoTranscripciones.get('/venta/:id', (req, res) => {
+	const id = req.params.id
+
+	Transcripcion.findAll({
+		include: [{
+			model: Usuario,
+			attributes: ['usuario']
+		}],
+		where: { ventaId: id },
+		attributes: ['fecha_entrega','titulo', 'monto']
+	})
+	.then(obtenerTareas => {
+		res.json(obtenerTareas)
+	})
+	.catch(err => {
+		console.log(err)
+	})
+})
+
 /**
 ****** OBTENER TRANSCRIPCIONES ASIGNADAS A UN USUARIO EN DETERMINADO MES
 **/
@@ -176,7 +212,7 @@ pedidoTranscripciones.post('/', (req, res) => {
 }) 
 
 /**
-****** OBTENER UNA TRANSCRIPCIÓN PENDIENTE
+****** OBTENER LAS TRANSCRIPCIONES PENDIENTES DE UN USUARIO DETERMINADO
 **/
 pedidoTranscripciones.get('/pendientes/:id', (req, res) =>{
 	const fecha = new Date()
@@ -206,7 +242,11 @@ pedidoTranscripciones.get('/pendientes/:id', (req, res) =>{
 				[op.gte]: hoy
 			} 
 		},
-		attributes: ['id', 'fecha_entrega', 'titulo', 'estatus_tarea', 'estatus_entrega']
+		attributes: ['id', 'fecha_entrega', 'titulo', 'estatus_tarea', 'estatus_entrega'],
+		order: [ 
+			['fecha_entrega', 'DESC'],
+			['estatus_tarea', 'ASC']
+		]
 	}) 
 	.then(listarPendientes => {
 		res.json(listarPendientes)
@@ -217,7 +257,7 @@ pedidoTranscripciones.get('/pendientes/:id', (req, res) =>{
 })
 
 /**
-****** OBTENER  TRANSCRIPCIONES PENDIENTES DEL USUARIO CONECTADO 
+****** OBTENER  TRANSCRIPCIONES PENDIENTE 
 **/
 pedidoTranscripciones.get('/pedido/:id', (req, res) => {
 	const id = req.params.id
@@ -232,11 +272,31 @@ pedidoTranscripciones.get('/pedido/:id', (req, res) => {
  			attributes: ['cedula', 'nombres', 'apellidos']
  		}
  	}], 
-	where: { id: id },
-	order: ['fecha_entrega DESC', 'estatus_tarea ASC']
+	where: { id: id }
 	})
 	.then(transcripcion => {
 		res.json(transcripcion)
+	})
+	.catch(err => {
+		console.log(err)
+	})
+})
+
+
+pedidoTranscripciones.put('/:id', (req,res) => {
+	const id = req.params.id
+
+	Transcripcion.findOne({
+		where: { id: id }
+	})
+	.then(obtenerTarea => {
+		obtenerTarea.update(req.body)
+		.then(
+			res.json({ message: 'Datos actulizados correctamente' })
+		)
+		.catch(err => {
+			console.log(err)
+		})
 	})
 	.catch(err => {
 		console.log(err)

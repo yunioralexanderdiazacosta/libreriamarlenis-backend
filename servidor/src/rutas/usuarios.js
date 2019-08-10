@@ -119,6 +119,39 @@ usuarios.post('/login', (req, res) => {
 	})
 })
 
+/*
+****** ACTUALIZAR CONTRASEÑA ******
+*/
+usuarios.put('/cambiar-clave', (req, res) => {
+	Usuario.findOne({
+		where: { id: req.user.id }
+	})
+	.then(usuarioE => {
+		console.log(req.user.id)
+		if(bcrypt.compareSync(req.body.claveActual, usuarioE.clave))
+		{
+			const hash = bcrypt.hashSync(req.body.clave, 10)
+			req.body.clave = hash
+
+			const dato = { clave: req.body.clave  }
+			usuarioE.update(dato)
+			.then(
+				res.json({ message: 'Datos actualizados correctamente' })
+			)
+			.catch(err => {
+				res.send(err)
+			})
+		}
+		else
+		{
+			res.status(403).send('Contraseña incorrecta')
+		}
+	})
+	.catch(err => {
+		res.send(err)
+	})
+})
+
 /**
 ****** DATOS DEL USUARIO CONECTADO
 **/

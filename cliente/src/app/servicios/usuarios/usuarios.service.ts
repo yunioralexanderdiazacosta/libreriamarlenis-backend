@@ -26,6 +26,11 @@ constructor(private http: HttpClient) { }
 
   	guardarUsuario(usuario)
   	{
-  		return this.http.post(`${API_URI}/usuarios/register`, usuario);
+  		return this.http.post(`${API_URI}/usuarios/register`, usuario)
   	}
+
+    cambiarClaveUsuario(clave)
+    {
+       return this.http.put(`${API_URI}/usuarios/cambiar-clave`, clave)
+    }
 }
