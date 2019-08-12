@@ -15,14 +15,9 @@ export class TipoCopiasService {
 		return this.http.get(`${API_URI}/tipocopias`);
 	}
 
-	obtenerTipoCopia(id)
-	{
-		return this.http.get(`${API_URI}/tipocopias/${id}`)
-	}
-
 	obtenerTipoCopiasArreglo()
 	{
-		return tipoCopias;
+		return tipoCopias
 	}
 
 	guardarTipoCopiaArreglo(tipo)
@@ -30,4 +25,28 @@ export class TipoCopiasService {
 		return tipoCopias.push(tipo)
 	}
 
+	obtenerTipoCopia(id)
+	{
+		return this.http.get(`${API_URI}/tipocopias/${id}`)
+	}
+
+	actualizarTipoCopia(id, tipocopia)
+	{
+		return this.http.put(`${API_URI}/tipocopias/${id}`, tipocopia)
+	}
+
+	desactivarTipoCopia(id, estatus)
+	{
+		return this.http.put(`${API_URI}/tipocopias/desactivar/${id}`, estatus)
+	}
+
+	reactivarTipoCopia(id, estatus)
+	{
+		return this.http.put(`${API_URI}/tipocopias/reactivar/${id}`, estatus)
+	}
+
+	guardarTipoCopia(tipocopia)
+	{
+		return this.http.post(`${API_URI}/tipocopias`, tipocopia)
+	}
 }

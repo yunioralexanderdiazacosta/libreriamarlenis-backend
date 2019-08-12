@@ -17,7 +17,7 @@
 <div class="row mt-3">
 	<div class="col-lg-8 offset-lg-2">
 
-		<button class="btn btn-primary float-right mb-3">
+		<button class="btn btn-primary float-right mb-3" data-toggle="modal" data-target="#agregarCategoria">
 			<i class="fas fa-plus"></i>
 		</button>
 
@@ -26,6 +26,7 @@
 				<tr>
 					<th>#</th>
 					<th>Nombre</th>
+					<th>Estatus</th>
 					<th></th>
 				</tr>
 			</thead>
@@ -34,13 +35,21 @@
 					<td>{{ i+1 }}</td>
 					<td>{{ categoria.nombre }}</td>
 					<td>
+						<span [ngClass]="categoria.estatus == 1 ? 'badge badge-pill badge-success' : 'badge badge-pill badge-danger'"> 
+						{{ categoria.estatus == 1 ? 'Activo' : 'Desactivado' }}
+						</span>
+					</td>
+					<td>
 						<div class="btn-group">
-							<button class="btn btn-secondary">
+							<a [routerLink]="['/inventario/categorias-productos/editar', categoria.id]" class="btn btn-secondary">
 								<i class="fas fa-edit"></i>
-							</button>
+							</a>
 
-							<button class="btn btn-secondary">
-								<i class="fas fa-trash"></i>
+							<button class="btn btn-secondary" 
+								data-toggle="tooltip" 
+								[title]="categoria.estatus == 1 ? 'Desactivar' : 'Reactivar'" 
+								(click)="categoria.estatus == 1 ? anularCategoria(categoria.id) : reactivarCategoria(categoria.id)">
+								<i [ngClass]="categoria.estatus == 1 ? 'fas fa-trash' : 'fas fa-check'"></i>
 							</button>
 						</div>
 					</td>
@@ -53,3 +62,4 @@
 		</div>
 	</div>
 </div>
+<app-nueva-categoria-producto (actualizarCategorias)="listarCategoriasProductos()"></app-nueva-categoria-producto>

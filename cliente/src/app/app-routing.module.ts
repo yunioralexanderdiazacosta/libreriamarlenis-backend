@@ -21,6 +21,7 @@ import { NuevaCompraComponent } from './componentes/compras/nueva/nueva.componen
 import { DetallesCompraComponent } from './componentes/compras/detalles/detalles.component';
 
 import { ListaProveedoresComponent } from './componentes/compras/proveedores/lista/lista.component';
+import { ProveedorVistaComponent } from './componentes/proveedores/vista/vista.component';
 import { ProveedorEdicionComponent } from './componentes/proveedores/edicion/edicion.component';
 /***********************************************************************************************************/
 
@@ -29,6 +30,7 @@ import { ListaInventarioComponent } from './componentes/inventario/lista/lista.c
 import { ListaEntradasComponent } from './componentes/inventario/entradas/lista/lista.component';
 import { NuevaEntradaComponent } from './componentes/inventario/entradas/nueva/nueva.component';
 import { CategoriasProductosComponent } from './componentes/inventario/categorias/categorias.component';
+import { CategoriaProductoEditarComponent } from './componentes/inventario/categorias/editar/editar.component';
 import { ProductosEdicionComponent } from './componentes/productos/edicion/edicion.component';
 /***********************************************************************************************************/
 
@@ -38,6 +40,9 @@ import { NuevaTranscripcionComponent  } from './componentes/transcripciones/nuev
 import { EditarTrancripcionComponent  } from './componentes/transcripciones/editar/editar.component';
 import { EdicionTranscripcionComponent } from './componentes/transcripciones/edicion/edicion.component';
 import { AlmacenamientoComponent } from './componentes/transcripciones/almacenamiento/almacenamiento.component';
+//tipo de tareas
+import { TipoTareasListaComponent } from './componentes/transcripciones/categorias/lista/lista.component';
+import {TipoTareasEditarComponent } from './componentes/transcripciones/categorias/editar/editar.component';
 /***********************************************************************************************************/
 
 /****************************************** REPORTES *******************************************************/
@@ -58,15 +63,22 @@ import { EstadisticasFotocopiasComponent } from './componentes/estadisticas/foto
 
 /****************************************** EMPLEADOS *******************************************************/
 import { ListaEmpleadosComponent } from './componentes/ajustes/empleados/lista/lista.component';
+import { DetallesEmpleadoComponent } from './componentes/ajustes/empleados/detalles/detalles.component';
+import { EditarEmpleadoComponent } from './componentes/ajustes/empleados/editar/editar.component';
 /***********************************************************************************************************/
 
+/****************************************** AJUSTES *******************************************************/
 import { RespaldosBdComponent } from './componentes/respaldos-bd/respaldos-bd.component';
 import { CambiarContrasenaComponent } from './componentes/ajustes/cambiar-contrasena/cambiar-contrasena.component';
+import { ListaTiposCopiasComponent } from './componentes/ajustes/tiposcopias/lista/lista.component'
+import { EditarTipoCopiaComponent } from './componentes/ajustes/tiposcopias/editar/editar.component';
+/***********************************************************************************************************/
+import { AuthGuardService } from './servicios/auth-guard/auth-guard.service';
 
 const routes: Routes = [
 	{
 		path: '',
-		redirectTo: 'iniciarsesion',
+		redirectTo: '/iniciarsesion',
 		pathMatch: 'full'
 	},
 
@@ -77,41 +89,48 @@ const routes: Routes = [
 
 	{
 		path: 'inicio',
-		component: InicioComponent
+		component: InicioComponent,
+		canActivate: [AuthGuardService]
 	},
 
 
     /************ CLIENTES ***************/
 	{
 		path: 'clientes',
-		component: ListaClientesComponent
+		component: ListaClientesComponent,
+		canActivate: [AuthGuardService]
 	},
 
 	{
 		path: 'clientes/edicion/:id',
-		component: ClientesEdicionComponent
+		component: ClientesEdicionComponent,
+		canActivate: [AuthGuardService]
 	},
 
 	{
 		path: 'clientes/historico/:id',
-		component: HistoricoClienteComponent
+		component: HistoricoClienteComponent,
+		canActivate: [AuthGuardService]
 	},
     /*************************************/
 
     /************ VENTAS *****************/
 	{
 		path: 'ventas',
-		component: ListaVentasComponent
+		component: ListaVentasComponent,
+		canActivate: [AuthGuardService]
 	},
 
 	{
 		path: 'ventas/nueva',
-		component: NuevaVentaComponent
+		component: NuevaVentaComponent,
+		canActivate: [AuthGuardService]
 	},
 
 	{
 		path: 'ventas/detalles/:id',
-		component: DetallesVentaComponent
+		component: DetallesVentaComponent,
+		canActivate: [AuthGuardService]
 	},
 	/*************************************/
 
@@ -123,93 +142,133 @@ const routes: Routes = [
 
 	{
 		path: 'compras/nueva',
-		component: NuevaCompraComponent
+		component: NuevaCompraComponent,
+		canActivate: [AuthGuardService]
 	},
 
 	{
 		path: 'compras/detalles/:id',
-		component: DetallesCompraComponent
+		component: DetallesCompraComponent,
+		canActivate: [AuthGuardService]
 	},
 
 	{
 		path: 'proveedores',
-		component: ListaProveedoresComponent
+		component: ListaProveedoresComponent,
+		canActivate: [AuthGuardService]
+	},
+
+	{
+		path: 'proveedores/detalles/:id',
+		component: ProveedorVistaComponent,
+		canActivate: [AuthGuardService]
 	},
 
 	{
 		path: 'proveedores/edicion/:id',
-		component: ProveedorEdicionComponent
+		component: ProveedorEdicionComponent,
+		canActivate: [AuthGuardService]
 	},
 	/************************************/
 
 	/*********** INVENTARIO *************/
 	{
 		path: 'inventario',
-		component: ListaInventarioComponent
+		component: ListaInventarioComponent,
+		canActivate: [AuthGuardService]
 	},
 
 	{
-		path: 'inventario/entradas',
-		component: ListaEntradasComponent
+		path: 'inventario/entradas/:id',
+		component: ListaEntradasComponent,
+		canActivate: [AuthGuardService]
 	},
 
 	{
 		path: 'inventario/editar/:id',
-		component: ProductosEdicionComponent
+		component: ProductosEdicionComponent,
+		canActivate: [AuthGuardService]
 	},
 
 	{
 		path: 'inventario/nueva-entrada',
-		component: NuevaEntradaComponent
+		component: NuevaEntradaComponent,
+		canActivate: [AuthGuardService]
 	},
 
 	{
 		path: 'inventario/categorias-productos',
-		component: CategoriasProductosComponent
+		component: CategoriasProductosComponent,
+		canActivate: [AuthGuardService]
+	},
+
+	{
+		path: 'inventario/categorias-productos/editar/:id',
+		component: CategoriaProductoEditarComponent,
+		canActivate: [AuthGuardService]
 	},
 	/************************************/
 
 	/*********** TRANSCRIPCIONES ********/
 	{
 		path: 'transcripciones',
-		component: ListaTranscripcionesComponent
+		component: ListaTranscripcionesComponent,
+		canActivate: [AuthGuardService]
 	},
 
 	{
 		path: 'transcripciones/nueva',
-		component: NuevaTranscripcionComponent
+		component: NuevaTranscripcionComponent,
+		canActivate: [AuthGuardService]
 	},
 
 	{
 		path:'transcripciones/editar/:id',
-		component: EditarTrancripcionComponent
+		component: EditarTrancripcionComponent,
+		canActivate: [AuthGuardService]
 	},
 
 	{
 		path: 'transcripciones/actualizar/:id',
-		component: EdicionTranscripcionComponent
+		component: EdicionTranscripcionComponent,
+		canActivate: [AuthGuardService]
 	},
 
 	{
 		path: 'transcripciones/almacenamiento',
 		component: AlmacenamientoComponent
 	},
+	//tipo de tareas
+	{
+		path: 'tipostareas',
+		component: TipoTareasListaComponent,
+		canActivate: [AuthGuardService]
+	},
+
+	{
+		path: 'tipostareas/editar/:id',
+		component: TipoTareasEditarComponent,
+		canActivate: [AuthGuardService]
+	},
 	/************************************/
 
 	/************* REPORTES *************/
 	{
 		path: 'reportes',
-		component: ReportesSeleccionComponent
+		component: ReportesSeleccionComponent,
+		canActivate: [AuthGuardService]
 	},
 
     {
     	path: 'reportes/ventas/:desde/:hasta',
-    	component: ReporteVentasComponent
+    	component: ReporteVentasComponent,
+    	canActivate: [AuthGuardService]
     },
 
     {
     	path: 'reportes/compras/:desde/:hasta',
-    	component: ReporteComprasComponent
+    	component: ReporteComprasComponent,
+    	canActivate: [AuthGuardService]
     },
 
     {
@@ -231,45 +290,80 @@ const routes: Routes = [
     /*********** ESTADISTICAS ***********/
     {
     	path: 'estadisticas',
-    	component: EstadisticasSeleccionComponent
+    	component: EstadisticasSeleccionComponent,
+    	canActivate: [AuthGuardService]
     },
 
     {
     	path: 'estadisticas/ventas',
-    	component: EstadisticasVentasComponent
+    	component: EstadisticasVentasComponent,
+    	canActivate: [AuthGuardService]
     },
 
     {
     	path: 'estadisticas/empleados/:id/mes/:mes',
-    	component: EstadisticasEmpleadosComponent
+    	component: EstadisticasEmpleadosComponent,
+    	canActivate: [AuthGuardService]
     },
 
     {
     	path: 'estadisticas/fotocopias/:mes',
-    	component: EstadisticasFotocopiasComponent
+    	component: EstadisticasFotocopiasComponent,
+    	canActivate: [AuthGuardService]
+
     },
     /************************************/
 
-    /*********** EMPLEADOS ***********/
+    /*********** EMPLEADOS *************/
     {
     	path: 'empleados',
-    	component: ListaEmpleadosComponent
+    	component: ListaEmpleadosComponent,
+    	canActivate: [AuthGuardService]
+    },
+
+    {
+    	path: 'empleados/detalles/:id',
+    	component: DetallesEmpleadoComponent,
+    	canActivate: [AuthGuardService]
+    },
+
+    {
+    	path: 'empleados/editar/:id',
+    	component: EditarEmpleadoComponent,
+    	canActivate: [AuthGuardService]
     },
     /************************************/
 
-    /*********** RESPALDOS ***********/
+    /************ RESPALDOS *************/
     {
     	path: 'respaldos',
-    	component: RespaldosBdComponent
+    	component: RespaldosBdComponent,
+    	canActivate: [AuthGuardService]
     },
     /************************************/
 
-    /*********** CAMBIAR CONTRASEÑA ***********/
+    /********* CAMBIAR CONTRASEÑA *******/
     {
     	path: 'cambiar-contrasena',
-    	component: CambiarContrasenaComponent
-    }
+    	component: CambiarContrasenaComponent,
+    	canActivate: [AuthGuardService]
+    },
     /************************************/
+
+    /********* TIPOS DE COPIAS **********/
+    {
+    	path: 'tiposdecopias',
+    	component: ListaTiposCopiasComponent,
+    	canActivate: [AuthGuardService]
+    },
+
+    {
+    	path: 'tiposdecopias/editar/:id',
+    	component: EditarTipoCopiaComponent,
+    	canActivate: [AuthGuardService]
+    }
+
+    /*************************************/
 ];
 
 @NgModule({

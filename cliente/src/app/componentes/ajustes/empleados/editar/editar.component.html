@@ -1,0 +1,165 @@
+<div class="row">
+	<div class="col-lg-12">
+		<span class="text-secondary h4"><i class="fas fa-edit"></i> Editar Empleado</span>
+		<ol class="breadcrumb" style="float: right;">
+	  		<li class="breadcrumb-item">
+	    		<a routerLink="/inicio">
+	    			<i class="fas fa-home"></i>
+	    		</a>
+	  		</li>
+	  		<li class="breadcrumb-item">
+	  			<a routerLink="/empleados">
+	  				Empleados
+	  			</a>
+	  		</li>
+
+	  		<li class="breadcrumb-item active">
+		  		Edición
+		  	</li>
+		</ol>
+		<hr id="linea">
+	</div>
+</div>
+
+<form [formGroup]="formUsuario" (ngSubmit)="actualizarUsuario()" *ngIf="usuario">              
+	<div class="row">
+	    <div class="col-6">
+	          <div class="form-group">
+	            <label class="text-secondary">Nacionalidad</label>
+	            <select class="form-control" 
+	                formControlName="nacionalidad"
+	                [ngClass]="{ 'is-invalid': f.nacionalidad.errors && submitted }">
+	                <option value="">Seleccione...</option>
+	                <option value="V">Venezolano</option>
+	                <option value="E">Extranjero</option>
+	            </select>
+
+	            <div class="invalid-feedback" *ngIf="f.nacionalidad.errors && submitted">
+	                <div *ngIf="f.nacionalidad.errors.required">Debes seleccionar una opción</div>
+	            </div>
+	        </div>
+	    </div>
+
+	     <div class="col-6">
+	        <div class="form-group">
+                <label class="text-secondary">N° Cédula</label>
+                <input type="number" 
+                    formControlName="nCedula"
+                    class="form-control" 
+                    placeholder="Ingresa el número de cédula..."
+                    [ngClass]="{ 'is-invalid': f.nCedula.errors && submitted }">
+                 
+                 <div class="invalid-feedback" *ngIf="f.nCedula.errors && submitted">
+                    <div *ngIf="f.nCedula.errors.required">Este campo es requerido y solo acepta números</div>
+                </div>
+            </div>
+	    </div>
+	</div>
+
+	<div class="row">
+	    <div class="col-6">
+	         <div class="form-group">
+	            <label class="text-secondary">Nombre(s)</label>
+	            <input type="text" 
+	                formControlName="nombres"
+	                class="form-control" 
+	                placeholder="Ingresa nombre(s)..."
+	                [ngClass]="{ 'is-invalid': f.nombres.errors && submitted }">
+	            
+	            <div class="invalid-feedback" *ngIf="f.nombres.errors && submitted">
+	                <div *ngIf="f.nombres.errors.required">{{ input_required }}</div>
+	            </div>
+	        </div>
+	    </div>
+	    
+	    <div class="col-6">
+	        <div class="form-group">
+                <label class="text-secondary">Apellido(s)</label>
+                <input type="text" 
+                    formControlName="apellidos"
+                    class="form-control" 
+                    placeholder="Ingresa apellido(s)..."
+                    [ngClass]="{ 'is-invalid': f.apellidos.errors && submitted }">
+                
+                <div class="invalid-feedback" *ngIf="f.apellidos.errors && submitted">
+                    <div *ngIf="f.apellidos.errors.required">{{ input_required }}</div>
+                </div>
+            </div>
+	    </div>
+	</div>
+
+	<div class="row">
+		<div class="col-6">
+			<div class="form-group">
+				<label class="text-secondary">Nombre de usuario</label>
+				<input type="text" 
+		            formControlName="usuario" 
+		            class="form-control" 
+		            placeholder="Ingresa el nombre de usuario"
+		            [ngClass]="{ 'is-invalid': f.usuario.errors && submitted }">
+			    
+		        <div class="invalid-feedback" *ngIf="f.usuario.errors && submitted">
+		            <div *ngIf="f.usuario.errors.required">{{ input_required }}</div>
+		            <div *ngIf="f.usuario.errors.minlength">El usuario debe de contener por lo menos 6 caracteres</div>
+		        </div>
+		    </div>
+	    </div>
+
+	    <div class="col-lg-6">
+    		<div class="form-group">
+        		<label class="text-secondary">Correo electrónico</label>
+        		<input type="text" 
+                    formControlName="correo" 
+                    class="form-control" 
+                    placeholder="Ingresa el correo electrónico"
+                    [ngClass]="{ 'is-invalid': f.correo.errors && submitted }">
+    		
+                <div class="invalid-feedback" *ngIf="f.correo.errors && submitted">
+                    <div *ngIf="f.correo.errors.required">{{ input_required }}</div>
+                    <div *ngIf="f.correo.errors.email">"El correo electrónico no es válido</div>
+                </div>
+            </div>
+    	</div>
+	</div>
+
+	<div class="row">
+		<div class="col-6">
+            <div class="form-group">
+                <label class="text-secondary">Teléfono</label>
+                <input type="text" 
+                    formControlName="telefono" 
+                    class="form-control" 
+                    placeholder="Ingresa el número telefónico"
+                    [ngClass]="{ 'is-invalid': f.telefono.errors && submitted }">
+                
+                <div class="invalid-feedback" *ngIf="f.telefono.errors && submitted">
+                    <div *ngIf="f.telefono.errors.required">{{ input_required }}</div>
+                </div>
+            </div>
+        </div>
+
+    	 <div class="col-6">
+            <div class="form-group">
+                <label class="text-secondary">Dirección de Habitación</label>
+                <input type="text" 
+                    formControlName="direccion" 
+                    class="form-control" 
+                    placeholder="Ingresa la dirección"
+                    [ngClass]="{ 'is-invalid': f.direccion.errors && submitted }">
+                
+                <div class="invalid-feedback" *ngIf="f.direccion.errors && submitted">
+                    <div *ngIf="f.direccion.errors.required">{{ input_required }}</div>
+                </div>
+            </div>
+        </div>
+	</div>
+
+	<div class="col-lg-12">
+		<br>
+		<div class="form-group text-right">
+			<button type="submit" class="btn btn-primary btn-lg" [disabled]="formUsuario.invalid">
+				<i class="fas fa-sync"></i> Actualizar
+			</button>
+		</div>
+	</div>
+</form>

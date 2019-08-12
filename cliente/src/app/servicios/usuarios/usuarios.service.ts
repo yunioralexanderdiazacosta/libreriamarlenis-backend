@@ -24,6 +24,21 @@ constructor(private http: HttpClient) { }
         return this.http.get(`${API_URI}/usuarios/estadistica/${id}`)
     }
 
+    actualizarUsuario(id, usuario)
+    {
+        return this.http.put(`${API_URI}/usuarios/${id}`, usuario)
+    }
+
+    desactivarUsuario(id, estatus)
+    {
+        return this.http.put(`${API_URI}/usuarios/desactivar/${id}`, estatus)
+    }
+
+    reactivarUsuario(id, estatus)
+    {
+        return this.http.put(`${API_URI}/usuarios/activar/${id}`, estatus)
+    }
+
   	guardarUsuario(usuario)
   	{
   		return this.http.post(`${API_URI}/usuarios/register`, usuario)

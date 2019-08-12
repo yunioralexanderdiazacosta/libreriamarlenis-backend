@@ -21,21 +21,28 @@ export class NuevoEmpleadoComponent implements OnInit {
 	*
 	* @property {ViewChild}
 	*/
-	@ViewChild('cerrarModal') cerrarModal;
+	@ViewChild('cerrarModal') cerrarModal
 
 	/**
 	*Almacena los datos del formulario
 	*
 	*@property {FormGroup}
 	**/
-	formUsuario: FormGroup;
+	formUsuario: FormGroup
 
 	/**
 	*Mensaje de error
 	*
 	*@property {string}
 	**/
-	input_required: string = "Este campo es requerido";
+	input_required: string = "Este campo es obligatorio"
+
+	/**
+	* Verifica si el formulario ha sido enviado o no
+	*
+	*@property {boolean}
+	**/
+	submitted: boolean = false
 
 	constructor(
 		private usuariosService: UsuariosService,
@@ -75,6 +82,8 @@ export class NuevoEmpleadoComponent implements OnInit {
 	**/
 	guardarUsuario()
 	{
+		this.submitted = true
+		if(this.formUsuario.invalid){ return }
 		let datosEnviar = {
 			cedula: this.formUsuario.value.nacionalidad+'-'+this.formUsuario.value.nCedula,
 			nombres: this.formUsuario.value.nombres,
@@ -104,6 +113,7 @@ export class NuevoEmpleadoComponent implements OnInit {
 	* @return {void}
 	*/
 	resetearCampos(){
+		this.submitted = false
 		this.formUsuario.setValue({
 			nacionalidad: '',
 			nCedula: '',

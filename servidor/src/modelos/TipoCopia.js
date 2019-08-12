@@ -14,7 +14,8 @@ module.exports = db.sequelize.define(
 		created_at: {
 			type: Sequelize.DATE,
 			defaultValue: Sequelize.NOW
-		}
+		},
+		estatus: Sequelize.INTEGER
 	},
 	{
 		timestamps: false

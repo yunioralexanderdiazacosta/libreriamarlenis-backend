@@ -17,6 +17,28 @@ Venta.belongsTo(Usuario, { foreignKey: 'usuario_id'})
 
 ventas.use(cors())
 
+ventas.get('/hoy/:hoy', (req, res) => {
+	const fecha = req.params.hoy
+
+	Venta.findOne({
+		attributes: [
+			[Sequelize.literal(`SUM(total)`), 'totalVenta']
+		],
+		where: [
+			{  estatus: 1 },
+			Sequelize.where(Sequelize.fn('DATE', Sequelize.col('created_at')), '=', fecha)
+		]
+
+	})
+	.then(obtenerSuma => {
+		res.json(obtenerSuma)
+	})
+	.catch(err => {
+		res.send(err)
+	})
+})
+
+
 /**
 **** OBTENER VENTAS REALIZADAS A UN CLIENTE DETERMINADO
 **/

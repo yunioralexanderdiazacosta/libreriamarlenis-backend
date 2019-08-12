@@ -13,4 +13,29 @@ export class CatProductosService {
 	{
 		return this.http.get(`${API_URI}/categoriasproductos`)
 	}	
+
+	obtenerCategoriaProducto(id)
+	{
+		return this.http.get(`${API_URI}/categoriasproductos/${id}`)
+	}
+
+	guardarCartegoriaProducto(producto)
+	{
+		return this.http.post(`${API_URI}/categoriasproductos`, producto)
+	}
+
+	actualizarCategoriaProducto(id, producto)
+	{
+		return this.http.put(`${API_URI}/categoriasproductos/${id}`, producto)
+	}
+
+	desactivarCategoria(id, estatus)
+	{
+		return this.http.put(`${API_URI}/categoriasproductos/desactivar/${id}`, estatus)
+	}
+
+	reactivarCategoria(id, estatus)
+	{
+		return this.http.put(`${API_URI}/categoriasproductos/reactivar/${id}`, estatus)
+	}
 }

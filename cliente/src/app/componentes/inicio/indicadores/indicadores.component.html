@@ -11,8 +11,8 @@
                 	</span>
                 </div>
             </div>
-        	<a class="card-footer text-secondary clearfix small z-1" routerLink="#!">
-            	<span class="float-left h6">Nuevo</span>
+        	<a class="card-footer text-secondary clearfix small z-1" routerLink="/clientes">
+            	<span class="float-left h6">Ver</span>
             	<span class="float-right h6">
               		<i class="fas fa-angle-right"></i>
             	</span>
@@ -32,8 +32,8 @@
                 	</span>
                 </div>
             </div>
-            <a class="card-footer text-secondary clearfix small z-1" routerLink="#!">
-            	<span class="float-left h6">Nuevo</span>
+            <a class="card-footer text-secondary clearfix small z-1" routerLink="/inventario">
+            	<span class="float-left h6">Ver</span>
                 <span class="float-right h6">
                 	<i class="fas fa-angle-right"></i>
                 </span>
@@ -53,8 +53,8 @@
             		</span>
             	</div>
             </div>
-          	<a class="card-footer text-secondary clearfix small z-1" routerLink="#!">
-           		<span class="float-left h6">Nuevo</span>
+          	<a class="card-footer text-secondary clearfix small z-1" routerLink="/proveedores">
+           		<span class="float-left h6">Ver</span>
             	<span class="float-right h6">
               		<i class="fas fa-angle-right"></i>
             	</span>
@@ -70,10 +70,10 @@
                 </div>
                 <div class="mr-4">
                 	<span class="h5 text-success">Ventas</span><br>
-                	<span class="h4 text-danger">Bs. 255.000</span>
+                	<span class="h4 text-danger">Bs. {{ totalVenta | separador }} </span>
                 </div>
             </div>
-            <a class="card-footer text-secondary clearfix small z-1" routerLink="#!">
+            <a class="card-footer text-secondary clearfix small z-1" routerLink="/ventas/nueva">
                 <span class="float-left h6">Nueva</span>
                 <span class="float-right h6">
                 	<i class="fas fa-angle-right"></i>

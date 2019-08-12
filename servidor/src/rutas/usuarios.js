@@ -50,6 +50,7 @@ usuarios.post('/register', (req, res) => {
 		apellidos: req.body.apellidos,
 		correo: req.body.correo,
 		telefono: req.body.telefono,
+		direccion: req.body.direccion,
 		usuario: req.body.usuario,
 		clave: req.body.clave,
 		estatus: req.body.estatus,
@@ -120,6 +121,28 @@ usuarios.post('/login', (req, res) => {
 })
 
 /*
+****** ACTUALIZAR USUARIO ******
+*/
+usuarios.put('/:id', (req, res) => {
+	const id = req.params.id
+	Usuario.findOne({
+		where: { id: id } 
+	})
+	.then(obtenerUsuario => {
+		obtenerUsuario.update(req.body)
+		.then(
+			res.json({ message: 'Datos actualizados correctamente' })
+		)
+		.catch(err => {
+			res.send(err)
+		})
+	})
+	.catch(err => {
+		res.send(err)
+	})
+})
+
+/*
 ****** ACTUALIZAR CONTRASEÑA ******
 */
 usuarios.put('/cambiar-clave', (req, res) => {
@@ -146,6 +169,52 @@ usuarios.put('/cambiar-clave', (req, res) => {
 		{
 			res.status(403).send('Contraseña incorrecta')
 		}
+	})
+	.catch(err => {
+		res.send(err)
+	})
+})
+
+/**
+****** DESACTIVAR USUARIO
+**/
+usuarios.put('/desactivar/:id', (req, res) => {
+	const id = req.params.id
+	Usuario.findOne({
+		where: { id: id }
+	})
+	.then(usuario => {
+		const dato = { estatus: req.body.estatus }
+		usuario.update(dato)
+		.then(
+			res.json({ message: 'Empleado desactivado satisfactoriamente' })
+		)
+		.catch(err => {
+			res.send(err)
+		})
+	})
+	.catch(err => {
+		res.send(err)
+	})
+})
+
+/**
+****** REACTIVAR USUARIO
+**/
+usuarios.put('/activar/:id', (req, res) => {
+	const id = req.params.id
+	Usuario.findOne({
+		where: { id: id }
+	})
+	.then(usuario => {
+		const dato = { estatus: req.body.estatus }
+		usuario.update(dato)
+		.then(
+			res.json({ message: 'Usuario reactivado correctamente' })
+		)
+		.catch(err => {
+			res.send(err)
+		})
 	})
 	.catch(err => {
 		res.send(err)

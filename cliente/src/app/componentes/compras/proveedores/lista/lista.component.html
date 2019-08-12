@@ -4,7 +4,7 @@
 			<span class="text-secondary h4"><i class="fas fa-store"></i> Gestión de Proveedores</span>
 			<ol class="breadcrumb" style="float: right;">
 		  		<li class="breadcrumb-item">
-		    		<a href="#">
+		    		<a routerLink="/inicio">
 		    			<i class="fas fa-home"></i>
 		    		</a>
 		  		</li>
@@ -57,7 +57,7 @@
 					  	</td>
 					  	<td class="align-middle">
 					  		<div class="btn btn-group">
-					  		    <a routerLink="#!" class="btn btn-secondary">
+					  		    <a [routerLink]="['/proveedores/detalles', proveedor.id]" class="btn btn-secondary">
 					  				<i class="fas fa-eye"></i>
 					  			</a>
 

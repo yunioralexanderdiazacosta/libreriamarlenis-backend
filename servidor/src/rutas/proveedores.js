@@ -28,6 +28,9 @@ proveedores.get('/', (req, res) => {
 	})
 })
 
+/**
+****** OBTENER PROVEEDOR
+**/
 proveedores.get('/:id', (req, res) => {
 	const id = req.params.id
 	Proveedor.findOne({
@@ -41,6 +44,9 @@ proveedores.get('/:id', (req, res) => {
 	})
 })
 
+/**
+****** ACTUALIZAR PROVEEDOR
+**/
 proveedores.put('/:id', (req, res) => {
 	const id = req.params.id
 	Proveedor.findOne({
@@ -60,6 +66,9 @@ proveedores.put('/:id', (req, res) => {
 	})
 })
 
+/**
+****** GUARDAR PROVEEDOR
+**/
 proveedores.post('/', (req, res) => {
 	const proveedor = {
 		razon_social: req.body.razon_social,

@@ -19,7 +19,31 @@ PedidoCompra.belongsTo(Producto, {foreignKey: 'producto_id' })
 compras.use(cors())
 
 /**
-****** OBTENER  DETALLES DE UNA COMPRA ASOCIADA A UNA VENTA
+****** OBTENER INGRESOS DE UN PRODUCTO DETERMINADO 
+**/
+compras.get('/ingresos/producto/:id', (req, res) => {
+	const id = req.params.id
+
+	PedidoCompra.findAll({
+		include:
+		[{
+			model: Compra,
+			attributes: ['id'],
+			where: { estatus: 1 }
+		}],
+		where: { producto_id: id },
+		order: Sequelize.literal('created_at DESC')
+	})
+	.then(obtenerIngresos => {
+		res.json(obtenerIngresos)
+	})
+	.catch(err => {
+		res.send(err)
+	})
+})
+
+/**
+****** OBTENER DETALLES DE UNA COMPRA
 **/
 compras.get('/detalles/compra/:id', (req, res) => {
 	const id = req.params.id

@@ -15,13 +15,13 @@
                             <label class="text-secondary">Nacionalidad</label>
                             <select class="form-control" 
                                 formControlName="nacionalidad"
-                                [ngClass]="{ 'is-invalid': f.nacionalidad.errors && (f.nacionalidad.dirty || f.nacionalidad.touched) }">
+                                [ngClass]="{ 'is-invalid': f.nacionalidad.errors && submitted }">
                                 <option value="" disabled>Seleccione...</option>
                                 <option value="V" selected>Venezolano</option>
                                 <option value="E">Extranero</option>
                             </select>
 
-                            <div class="invalid-feedback" *ngIf="f.nacionalidad.errors && (f.nacionalidad.dirty || f.nacionalidad.touched)">
+                            <div class="invalid-feedback" *ngIf="f.nacionalidad.errors && submitted">
                                 <div *ngIf="f.nacionalidad.errors.required">Debes seleccionar una opción</div>
                             </div>
                         </div>
@@ -34,9 +34,9 @@
                                 formControlName="nCedula" 
                                 class="form-control" 
                                 placeholder="Ingresa el número de cédula"
-                                [ngClass]="{ 'is-invalid': f.nCedula.errors && (f.nCedula.dirty || f.nCedula.touched) }">
+                                [ngClass]="{ 'is-invalid': f.nCedula.errors && submitted }">
                             
-                            <div class="invalid-feedback" *ngIf="f.nCedula.errors && (f.nCedula.dirty || f.nCedula.touched)">
+                            <div class="invalid-feedback" *ngIf="f.nCedula.errors && submitted">
                                 <div *ngIf="f.nCedula.errors.required">Este campo es requerido y solo acepta números</div>
                             </div>
                         </div>
@@ -51,9 +51,9 @@
                                 formControlName="nombres" 
                                 class="form-control" 
                                 placeholder="Ingresa el nombre"
-                                [ngClass]="{ 'is-invalid': f.nombres.errors && (f.nombres.dirty || f.nombres.touched) }">
+                                [ngClass]="{ 'is-invalid': f.nombres.errors && submitted }">
                             
-                            <div class="invalid-feedback" *ngIf="f.nombres.errors && (f.nombres.dirty || f.nombres.touched)">
+                            <div class="invalid-feedback" *ngIf="f.nombres.errors && submitted">
                                 <div *ngIf="f.nombres.errors.required">{{ input_required }}</div>
                             </div>
                         </div>
@@ -66,7 +66,7 @@
                                 formControlName="apellidos" 
                                 class="form-control" 
                                 placeholder="Ingresa el apellido"
-                                [ngClass]="{ 'is-invalid': f.apellidos.errors && (f.apellidos.dirty || f.apellidos.touched) }">
+                                [ngClass]="{ 'is-invalid': f.apellidos.errors && submitted }">
                             
                             <div class="invalid-feedback" *ngIf="f.apellidos.errors && (f.apellidos.dirty || f.apellidos.touched)">
                                 <div *ngIf="f.apellidos.errors.required">{{ input_required }}</div>
@@ -83,9 +83,9 @@
                                 formControlName="direccion" 
                                 class="form-control" 
                                 placeholder="Ingresa la dirección"
-                                [ngClass]="{ 'is-invalid': f.direccion.errors && (f.direccion.dirty || f.direccion.touched) }">
+                                [ngClass]="{ 'is-invalid': f.direccion.errors && submitted }">
                             
-                            <div class="invalid-feedback" *ngIf="f.direccion.errors && (f.direccion.dirty || f.direccion.touched)">
+                            <div class="invalid-feedback" *ngIf="f.direccion.errors && submitted">
                                 <div *ngIf="f.direccion.errors.required">{{ input_required }}</div>
                             </div>
                         </div>
@@ -98,9 +98,9 @@
                                 formControlName="telefono" 
                                 class="form-control" 
                                 placeholder="Ingresa el número telefónico"
-                                [ngClass]="{ 'is-invalid': f.telefono.errors && (f.telefono.dirty || f.telefono.touched) }">
+                                [ngClass]="{ 'is-invalid': f.telefono.errors && submitted }">
                             
-                            <div class="invalid-feedback" *ngIf="f.telefono.errors && (f.telefono.dirty || f.telefono.touched)">
+                            <div class="invalid-feedback" *ngIf="f.telefono.errors && submitted">
                                 <div *ngIf="f.telefono.errors.required">{{ input_required }}</div>
                             </div>
                         </div>
@@ -115,9 +115,9 @@
                                 formControlName="correo" 
                                 class="form-control" 
                                 placeholder="Ingresa el correo electrónico"
-                                [ngClass]="{ 'is-invalid': f.correo.errors && (f.correo.dirty || f.correo.touched) }">
+                                [ngClass]="{ 'is-invalid': f.correo.errors && submitted }">
                 		
-                            <div class="invalid-feedback" *ngIf="f.correo.errors && (f.correo.dirty || f.correo.touched)">
+                            <div class="invalid-feedback" *ngIf="f.correo.errors && submitted">
                                 <div *ngIf="f.correo.errors.required">{{ input_required }}</div>
                                 <div *ngIf="f.correo.errors.email">"El correo electrónico no es válido</div>
                             </div>
@@ -131,9 +131,9 @@
                                 formControlName="usuario" 
                                 class="form-control" 
                                 placeholder="Ingresa el nombre de usuario"
-                                [ngClass]="{ 'is-invalid': f.usuario.errors && (f.usuario.dirty || f.usuario.touched) }">
+                                [ngClass]="{ 'is-invalid': f.usuario.errors && submitted }">
                 		    
-                            <div class="invalid-feedback" *ngIf="f.usuario.errors && (f.usuario.dirty || f.usuario.touched)">
+                            <div class="invalid-feedback" *ngIf="f.usuario.errors && submitted">
                                 <div *ngIf="f.usuario.errors.required">{{ input_required }}</div>
                                 <div *ngIf="f.usuario.errors.minlength">El usuario debe de contener por lo menos 6 caracteres</div>
                             </div>
@@ -149,9 +149,9 @@
                                 formControlName="clave" 
                                 class="form-control" 
                                 placeholder="Ingresa la contraseña"
-                                [ngClass]="{ 'is-invalid': f.clave.errors && (f.clave.dirty || f.clave.touched) }">
+                                [ngClass]="{ 'is-invalid': f.clave.errors && submitted }">
                 		  
-                            <div class="invalid-feedback" *ngIf="f.clave.errors && (f.clave.dirty || f.clave.touched)">
+                            <div class="invalid-feedback" *ngIf="f.clave.errors && submitted">
                                 <div *ngIf="f.clave.errors.required">{{ input_required }}</div>
                                 <div *ngIf="f.clave.errors.minlength"> La contraseña debe contener por lo menos 4 caracteres</div>
                             </div>
@@ -165,9 +165,9 @@
                                 formControlName="conf_clave" 
                                 class="form-control" 
                                 placeholder="Confirma la contraseña ingresada"
-                                [ngClass]="{ 'is-invalid': f.conf_clave.errors && (f.conf_clave.dirty || f.conf_clave.touched) }">
+                                [ngClass]="{ 'is-invalid': f.conf_clave.errors && submitted }">
                 		    
-                            <div class="invalid-feedback" *ngIf="f.conf_clave.errors && (f.conf_clave.dirty || f.conf_clave.touched)">
+                            <div class="invalid-feedback" *ngIf="f.conf_clave.errors && submitted">
                                 <div *ngIf="f.conf_clave.errors.required">{{ input_required }}</div>
                                 <div *ngIf="f.conf_clave.errors.coincidencia"> Las contraseñas ingresadas no coinciden</div>
                             </div>

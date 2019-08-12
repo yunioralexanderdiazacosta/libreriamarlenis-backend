@@ -63,7 +63,11 @@ import { ProveedorEdicionComponent } from './componentes/proveedores/edicion/edi
 import { ListaInventarioComponent } from './componentes/inventario/lista/lista.component';
 import { ListaEntradasComponent } from './componentes/inventario/entradas/lista/lista.component';
 import { NuevaEntradaComponent } from './componentes/inventario/entradas/nueva/nueva.component';
+
 import { CategoriasProductosComponent } from './componentes/inventario/categorias/categorias.component';
+import { CategoriaProductoEditarComponent } from './componentes/inventario/categorias/editar/editar.component';
+import { CategoriaProductoNuevaComponent } from './componentes/inventario/categorias/nueva/nueva.component';
+
 import { ProductosEdicionComponent } from './componentes/productos/edicion/edicion.component';
 /**********************************************************************************************************/
 
@@ -114,12 +118,20 @@ import { EstadisticaCompFotocopiasComponent } from './componentes/estadisticas/f
 //empleados
 import { ListaEmpleadosComponent } from './componentes/ajustes/empleados/lista/lista.component';
 import { NuevoEmpleadoComponent } from './componentes/ajustes/empleados/nuevo/nuevo.component';
+import { DetallesEmpleadoComponent } from './componentes/ajustes/empleados/detalles/detalles.component';
+import { EditarEmpleadoComponent } from './componentes/ajustes/empleados/editar/editar.component';
 import { NavbarComponent } from './componentes/layouts/navbar/navbar.component';
 /**********************************************************************************************************/
 import { RespaldosBdComponent } from './componentes/respaldos-bd/respaldos-bd.component';
 import { VentasTranscripcionesComponent } from './componentes/ventas/nueva/transcripciones/transcripciones.component';
 import { FiltroPipe } from './_utilidades/filtro/filtro.pipe';
 import { CambiarContrasenaComponent } from './componentes/ajustes/cambiar-contrasena/cambiar-contrasena.component';
+import { ListaTiposCopiasComponent } from './componentes/ajustes/tiposcopias/lista/lista.component';
+import { EditarTipoCopiaComponent } from './componentes/ajustes/tiposcopias/editar/editar.component';
+import { NuevoTipoCopiaComponent } from './componentes/ajustes/tiposcopias/nuevo/nuevo.component';
+import { TipoTareasListaComponent } from './componentes/transcripciones/categorias/lista/lista.component';
+import { TipoTareasEditarComponent } from './componentes/transcripciones/categorias/editar/editar.component';
+import { TipoTareasNuevaComponent } from './componentes/transcripciones/categorias/nueva/nueva.component';
 
 @NgModule({
     declarations: [
@@ -175,7 +187,11 @@ import { CambiarContrasenaComponent } from './componentes/ajustes/cambiar-contra
         ListaInventarioComponent,
         ListaEntradasComponent,
         NuevaEntradaComponent,
+        //categorias
         CategoriasProductosComponent,
+        CategoriaProductoEditarComponent,
+        CategoriaProductoNuevaComponent,
+        //productos
         ProductosEdicionComponent,
         /***************************/
 
@@ -186,6 +202,10 @@ import { CambiarContrasenaComponent } from './componentes/ajustes/cambiar-contra
         EdicionTranscripcionComponent,
         AlmacenamientoComponent,
         CartaComponent,
+        //tipo
+        TipoTareasListaComponent,
+        TipoTareasEditarComponent,
+        TipoTareasNuevaComponent,
         /***************************/
 
         /****** FOTOCOPIAS *********/
@@ -193,16 +213,16 @@ import { CambiarContrasenaComponent } from './componentes/ajustes/cambiar-contra
         ContenidoComponent,
         /***************************/
 
-        /****** REPORTES ***********/
+        /******* REPORTES ***********/
         ReportesSeleccionComponent,
         ReporteVentasComponent,
         ReporteComprasComponent,
         ReporteTransPendientesComponent,
         ReporteInventarioComponent,
         ReporteFotocopiasComponent,
-        /***************************/
+        /****************************/
 
-        /******* ESTADISTICAS ******/
+        /******* ESTADISTICAS *******/
         EstadisticasSeleccionComponent,
         //ventas
         EstadisticasVentasComponent,
@@ -212,7 +232,6 @@ import { CambiarContrasenaComponent } from './componentes/ajustes/cambiar-contra
         ProductosMasVendidosComponent,
         ClientesMesVentasComponent,
         ClientesAtendidosMesComponent,
-
         //empleados
         EstadisticasEmpleadosComponent,
         TranscripcionesMedicionComponent,
@@ -221,19 +240,25 @@ import { CambiarContrasenaComponent } from './componentes/ajustes/cambiar-contra
         EstadisticasFotocopiasComponent,
         EstadisticaFotocopiasTipoComponent,
         EstadisticaCompFotocopiasComponent,
-        /***************************/
+        /*****************************/
 
         /******** AJUSTES ************/
         //empleado
         ListaEmpleadosComponent,
         NuevoEmpleadoComponent,
         ProductosCategoriasMesComponent,
+        DetallesEmpleadoComponent,
+        EditarEmpleadoComponent,
         //respaldos
         RespaldosBdComponent,
+        CambiarContrasenaComponent,
+        //tipos de copias
+        ListaTiposCopiasComponent,
+        EditarTipoCopiaComponent,
+        NuevoTipoCopiaComponent,
         /*****************************/
         SeparadorPipe,
-        FiltroPipe,
-        CambiarContrasenaComponent,
+        FiltroPipe
         ],
     imports: [
         BrowserModule,

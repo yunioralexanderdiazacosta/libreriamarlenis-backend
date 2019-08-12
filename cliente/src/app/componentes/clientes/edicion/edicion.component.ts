@@ -38,6 +38,11 @@ export class ClientesEdicionComponent implements OnInit {
 	**/
   	cliente
 
+    /**
+    *Almacena el identificador del cliente
+    *
+    *@property {any}
+    **/
   	id_cliente
 
 	constructor(

@@ -3,7 +3,7 @@
 		<span class="text-secondary h4"><i class="fas fa-box"></i> Gestión de Inventario</span>
 		<ol class="breadcrumb" style="float:right;">
 	  		<li class="breadcrumb-item">
-	    		<a href="#">
+	    		<a routerLink="/inicio">
 	    			<i class="fas fa-home"></i>
 	    		</a>
 	  		</li>
@@ -60,9 +60,9 @@
 					</td>
 					<td>
 						<div class="btn-group">
-							<button class="btn btn-secondary" routerLink="/inventario/entradas">
+							<a class="btn btn-secondary" [routerLink]="['/inventario/entradas', producto.id]">
 								<i class="fas fa-eye"></i>
-							</button>
+							</a>
 
 							<a class="btn btn-secondary" [routerLink]="['/inventario/editar', producto.id]">
 								<i class="fas fa-edit"></i>
