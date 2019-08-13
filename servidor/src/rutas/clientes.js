@@ -74,6 +74,54 @@ clientes.put('/:id', (req, res) => {
 })
 
 /**
+****** DESACTIVAR CLIENTE
+**/
+clientes.put('/desactivar/:id', (req, res) => {
+	const id = req.params.id
+
+	Cliente.findOne({
+		where: { id: id }
+	})
+	.then(cliente => {
+		const dato = { estatus: req.body.estatus }
+		cliente.update(dato)
+		.then(
+			res.json({ message: 'Cliente desactivado satisfactoriamente' })
+		)
+		.catch(err => {
+			res.send(err)
+		})
+	})
+	.catch(err => {
+		res.send(err)
+	})
+})
+
+/**
+****** REACTIVAR ClIENTE
+**/
+clientes.put('/reactivar/:id', (req, res) => {
+	const id = req.params.id
+
+	Cliente.findOne({
+		where: { id: id }
+	})
+	.then(cliente => {
+		const dato = { estatus: req.body.estatus }
+		cliente.update(dato)
+		.then(
+			res.json({ message: 'Cliente reactivado correctamente' })
+		)
+		.catch(err => {
+			res.send(err)
+		})
+	})
+	.catch(err => {
+		res.send(err)
+	})
+})
+
+/**
 ****** GUARDAR CLIENTE
 **/
 clientes.post('/', (req, res) => {
@@ -84,6 +132,7 @@ clientes.post('/', (req, res) => {
 		apellidos: req.body.apellidos,
 		telefono: req.body.telefono,
 		direccion: req.body.direccion,
+		estatus: 1,
 		created_at: dia
 	}
 

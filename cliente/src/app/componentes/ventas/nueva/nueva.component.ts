@@ -27,7 +27,7 @@ export class NuevaVentaComponent implements OnInit {
     *
     *@property {FormGroup}
     **/
-    formCliente: FormGroup;
+    formCliente: FormGroup
 
     /**
     *Guarda los clientes obtenidos de la API
@@ -126,28 +126,28 @@ export class NuevaVentaComponent implements OnInit {
     *
     *@property {Array}
     **/
-    productosApi;
+    productosApi
 
     /** 
     * Obtiene los productos del arreglo
     *
     *@property {Array}
     **/
-    productosArreglo;
+    productosArreglo
 
     /** 
     * Guardar los tipos de copias de la API
     *
     *@property {Array}
     **/
-    tipoCopiasApi;
+    tipoCopiasApi
 
     /** 
     * Obtiene los tipos de copias del arreglo
     *
     *@property {Array}
     **/
-    tipoCopiasArreglo;
+    tipoCopiasArreglo
 
     /** 
     * Obtiene las transcripciones almacenadas en el arreglo
@@ -314,7 +314,8 @@ export class NuevaVentaComponent implements OnInit {
     {
         this.clientesService.obtenerClientes().subscribe(
         (res: any) => {
-            this.clientes = res
+            const datos = res
+            this.clientes = datos.filter(dato => dato.estatus == 1)
         },
         err => {
             console.log(err)
@@ -395,21 +396,23 @@ export class NuevaVentaComponent implements OnInit {
     {
         this.productosService.obtenerProductos().subscribe(
         (res: any) => {
-            this.productosApi = res;
+            this.productosApi = res
             this.productosArreglo = this.productosService.obtenerProductosArreglo();
-            this.productosArreglo.length = 0;
+            this.productosArreglo.length = 0
             this.productosApi.map(dato => {   
                 let productoArreglo = {
                     id: 0,
                     nombre: '',
                     precio_venta: 0,
                     stock: 0,
-                    estado: 0
-                }; 
-                productoArreglo.id = dato.id;
-                productoArreglo.nombre = dato.nombre;
-                productoArreglo.precio_venta = dato.precio_venta;
+                    estado: 0,
+                    estatus: 0
+                } 
+                productoArreglo.id = dato.id
+                productoArreglo.nombre = dato.nombre
+                productoArreglo.precio_venta = dato.precio_venta
                 productoArreglo.stock = dato.stock
+                productoArreglo.estatus = dato.estado
                 this.productosService.guardarProductoArreglo(productoArreglo)
             })  
         },
@@ -428,7 +431,7 @@ export class NuevaVentaComponent implements OnInit {
 
         this.tipoCopiasService.obtenerTipoCopias().subscribe(
         res => {
-            this.tipoCopiasApi = res;
+            this.tipoCopiasApi = res
             this.tipoCopiasArreglo = this.tipoCopiasService.obtenerTipoCopiasArreglo()
             this.tipoCopiasArreglo.length = 0;
             this.tipoCopiasApi.map(dato => {
@@ -436,11 +439,13 @@ export class NuevaVentaComponent implements OnInit {
                     id: 0,
                     descripcion: '',
                     precio: 0,
-                    estado: 0 
+                    estado: 0,
+                    estatus: 1 
                 };
                 tipoCopiaArreglo.id = dato.id,
                 tipoCopiaArreglo.descripcion = dato.descripcion,
                 tipoCopiaArreglo.precio = dato.precio,
+                tipoCopiaArreglo.estatus = dato.estatus
                 this.tipoCopiasService.guardarTipoCopiaArreglo(tipoCopiaArreglo)
             })
         },

@@ -14,7 +14,7 @@
 			<td>{{ tarea.fecha_entrega | date: 'dd-MM-yyyy hh:mm a' }}</td>
 			<td>{{ tarea.titulo }}</td>
 			<td>{{ tarea.usuario.usuario }}</td>
-			<td>{{ tarea.monto }}</td>
+			<td>Bs. {{ tarea.monto | separador }}</td>
 		</tr>
 	</tbody>
 </table>

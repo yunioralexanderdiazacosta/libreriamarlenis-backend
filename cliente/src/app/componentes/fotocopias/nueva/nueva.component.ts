@@ -21,15 +21,39 @@ export class NuevaFotocopiaComponent implements OnInit {
 	*
 	* @property {ViewChild}
 	*/
-	@ViewChild('cerrarModal') cerrarModal;
+	@ViewChild('cerrarModal') cerrarModal
 
-  	formCopia: FormGroup;
-  	tipoCopias;
-  	tipoCopia;
-  	submitted;
+    /**
+    * Formulario que almacena el pedido de copias
+    *
+    * @property {FormGroup}
+    */
+  	formCopia: FormGroup
+
+    /**
+    * Almacena los tipos de copias del arreglo
+    *
+    * @property {any}
+    */
+  	tipoCopias
+
+    /**
+    * Almacena el tipo de copia seleccionado
+    *
+    * @property {any}
+    */
+  	tipoCopia
+
+    /**
+    * Verifica si el formulario ha sido enviado  o no
+    *
+    * @property {any}
+    */
+  	submitted: boolean = false
+
 	constructor(
 		public fb: FormBuilder,
-    public copiasService: CopiasService,
+        public copiasService: CopiasService,
 		public tipoCopiasService: TipoCopiasService) { }
 
   	ngOnInit() {
@@ -47,7 +71,7 @@ export class NuevaFotocopiaComponent implements OnInit {
 
   	listarTipoCopias()
   	{
-  		this.tipoCopias = this.tipoCopiasService.obtenerTipoCopiasArreglo();
+  		this.tipoCopias = this.tipoCopiasService.obtenerTipoCopiasArreglo()
   	}
 
   	obtenerDatos(id)
@@ -65,15 +89,15 @@ export class NuevaFotocopiaComponent implements OnInit {
 
   	almacenarCopiaVenta()
   	{
-  		this.submitted = true;
+  		this.submitted = true
   		this.formCopia.patchValue({ subtotal: this.f.cantidad.value * this.f.precio.value })
   		if(this.formCopia.invalid){
   			return
   		}
-  		this.copiasService.guardarCopiaArreglo(this.formCopia.value);
+  		this.copiasService.guardarCopiaArreglo(this.formCopia.value)
         this.tipoCopias.find(dato => { 
             if(dato.id == this.formCopia.value.tipo_id){
-                return dato.estado= 1;
+                return dato.estado= 1
             }  
         })
   		this.actualizarMontoCopias.emit(true);
@@ -83,7 +107,7 @@ export class NuevaFotocopiaComponent implements OnInit {
 
   	resetearCampos()
   	{
-  		this.submitted = false;
+  		this.submitted = false
   		this.formCopia.setValue({
   			tipo_id: '',
   			tipo_descripcion: '',

@@ -17,7 +17,7 @@
                                 formControlName="nacionalidad"
                                 [ngClass]="{ 'is-invalid': f.nacionalidad.errors && submitted }">
                                 <option value="" disabled>Seleccione...</option>
-                                <option value="V" selected>Venezolano</option>
+                                <option value="V">Venezolano</option>
                                 <option value="E">Extranero</option>
                             </select>
 
@@ -34,7 +34,7 @@
                                 formControlName="nCedula" 
                                 class="form-control" 
                                 placeholder="Ingresa el número de cédula"
-                                [ngClass]="{ 'is-invalid': f.nCedula.errors && submitted }">
+                                [ngClass]="{ 'is-invalid': f.nCedula.errors && submitted }" autofocus>
                             
                             <div class="invalid-feedback" *ngIf="f.nCedula.errors && submitted">
                                 <div *ngIf="f.nCedula.errors.required">Este campo es requerido y solo acepta números</div>
@@ -173,6 +173,40 @@
                             </div>
                         </div>
                 	</div>
+                </div>
+
+                <div class="row">
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label class="text-secondary">Pregunta secreta</label>
+                            <input type="text" 
+                                formControlName="pregunta_secreta" 
+                                class="form-control" 
+                                placeholder="Ingresa la pregunta secreta"
+                                [ngClass]="{ 'is-invalid': f.pregunta_secreta.errors && submitted }">
+                            
+                            <div class="invalid-feedback" *ngIf="f.pregunta_secreta.errors && submitted">
+                                <div *ngIf="f.pregunta_secreta.errors.required">{{ input_required }}</div>
+                                <div *ngIf="f.pregunta_secreta.errors.maxLength">Superaste el máximo permitido</div>
+                            </div>
+                        </div>
+                    </div>
+
+                     <div class="col-6">
+                        <div class="form-group">
+                            <label class="text-secondary">Respuesta secreta</label>
+                            <input type="text" 
+                                formControlName="respuesta_secreta" 
+                                class="form-control" 
+                                placeholder="Ingresa la respuesta secreta"
+                                [ngClass]="{ 'is-invalid': f.respuesta_secreta.errors && submitted }">
+                            
+                            <div class="invalid-feedback" *ngIf="f.respuesta_secreta.errors && submitted">
+                                <div *ngIf="f.respuesta_secreta.errors.required">{{ input_required }}</div>
+                                <div *ngIf="f.respuesta_secreta.errors.required">Superaste el máximo permitido</div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 

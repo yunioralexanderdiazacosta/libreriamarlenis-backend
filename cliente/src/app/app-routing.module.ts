@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { IniciarsesionComponent } from './componentes/iniciarsesion/iniciarsesion.component';
+import { RecuperarContrasenaComponent } from './componentes/contrasena/recuperar/recuperar.component';
 import { InicioComponent } from './componentes/inicio/inicio.component';
 
 /****************************************** CLIENTE *********************************************************/
@@ -85,6 +86,11 @@ const routes: Routes = [
 	{
 		path: 'iniciarsesion',
 		component: IniciarsesionComponent
+	},
+
+	{
+		path: 'recuperar-clave',
+		component: RecuperarContrasenaComponent
 	},
 
 	{

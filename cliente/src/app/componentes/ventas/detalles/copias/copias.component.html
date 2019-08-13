@@ -13,8 +13,8 @@
 			<td> {{ i+1 }}</td>
 			<td> {{ copia.tipos_copia.descripcion }}</td>
 			<td>{{ copia.cantidad }}</td>
-			<td>{{ copia.precioUnitario }}</td>
-			<td>{{ copia.subtotal }}</td>
+			<td>Bs. {{ copia.precioUnitario | separador }}</td>
+			<td>Bs. {{ copia.subtotal | separador }}</td>
 		</tr>
 	</tbody>
 </table>

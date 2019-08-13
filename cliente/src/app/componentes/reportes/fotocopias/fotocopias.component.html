@@ -18,20 +18,24 @@
 		</div>
 
 
-		<div class="row my-5" *ngIf="copias.length > 0">
+		<div class="row mt-3" *ngIf="copias.length > 0">
 			<div class="col-lg-12">
-				<div class="row justify-content-end">
-					<div class="col-4">
-						<ul class="list-group">
-							<li class="list-group-item">
-								<span class="h6"><b>T. Copias:</b>  {{ totalCopias }}</span>
-							</li>
-							<li class="list-group-item">
-								<span class="h6"><b>Total:</b>  Bs. {{ totalMonto | separador }}</span>
-							</li>
-						</ul>
-					</div>
-				</div>
+				<table class="table">
+					<tr class="text-center">
+						<td>
+							<span class="h5"><b>T. Copias</b><br>  {{ totalCopias }}</span>
+						</td>
+						<td>
+							<span class="h5"><b>T. Copias exitosas</b><br> {{totalCopiasExitosas}}</span>
+						</td>
+						<td>
+							<span class="h5"><b>T. Copias dañadas</b><br> {{totalCopiasDanadas}}</span>
+						</td>
+						<td>
+							<span class="h5"><b>Total:</b><br>  Bs. {{ totalMonto | separador }}</span>
+						</td>
+					</tr>
+				</table>
 			</div>
 		</div>
 

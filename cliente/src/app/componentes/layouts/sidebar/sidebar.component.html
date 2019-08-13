@@ -48,7 +48,7 @@
 		<div class="dropdown-menu" id="bg-none" aria-labelledby="menu3">
 			<a class="dropdown-item" routerLink="/transcripciones">Lista</a>
 			<a class="dropdown-item" routerLink="/transcripciones/almacenamiento">Almacenamiento</a>
-			<a class="dropdown-item" routerLink="/tipostareas">Categorias</a>
+			<a class="dropdown-item" routerLink="/tipostareas" *ngIf="usuario.rol_id == 1">Categorias</a>
 		</div>
 	</li>
 
@@ -70,7 +70,7 @@
 		</a>
 
 		<div class="dropdown-menu" id="bg-none" aria-labelledby="menu4">
-			<a class="dropdown-item" routerLink="/empleados">Empleados</a>
+			<a class="dropdown-item" routerLink="/empleados" *ngIf="usuario.rol_id == 1">Empleados</a>
 			<a class="dropdown-item" routerLink="/cambiar-contrasena">Cambiar contraseña</a>
 			<a class="dropdown-item" routerLink="/respaldos" *ngIf="usuario.rol_id == 1">Respaldos</a>
 			<a class="dropdown-item" routerLink="/tiposdecopias" *ngIf="usuario.rol_id == 1">Tipos de copias</a>

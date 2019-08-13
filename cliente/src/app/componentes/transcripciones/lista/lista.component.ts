@@ -39,11 +39,28 @@ export class ListaTranscripcionesComponent implements OnInit {
 
 	constructor(
         public transcripcionesService: TranscripcionesService,
-        public usuariosService: UsuariosService) { 
+        public usuariosService: UsuariosService) {
+        this.obtenerUsuario() 
         this.listarTranscripciones()
     }
 
   	ngOnInit() {}
+
+    /**
+    *Obtiene los datos del usuario conectado
+    *
+    *@return {void}
+    **/
+    obtenerUsuario()
+    {
+        this.usuariosService.obtenerUsuario().subscribe(
+        res => {
+            this.usuario = res
+        },     
+        err => {
+            console.log(err)
+        })
+    }
 
   	listarTranscripciones()
   	{

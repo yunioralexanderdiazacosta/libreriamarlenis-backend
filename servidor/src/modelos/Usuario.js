@@ -18,6 +18,8 @@ module.exports = db.sequelize.define(
 		direccion: Sequelize.STRING,
 		usuario: Sequelize.STRING,
 		clave: Sequelize.STRING,
+		pregunta_secreta: Sequelize.STRING,
+		respuesta_secreta: Sequelize.STRING,
 		estatus: Sequelize.INTEGER,
 		rol_id: Sequelize.INTEGER,
 		created_at: 

@@ -26,13 +26,13 @@ export class ListaProveedoresComponent implements OnInit {
   		public proveedoresService: ProveedoresService,
         public toastr: ToastrService
   		) { 
-      this.listarproveedores()
+      this.listarProveedores()
     }
 
   	ngOnInit() {
   	}
 
-  	listarproveedores()
+  	listarProveedores()
   	{
   		this.proveedoresService.obtenerProveedores().subscribe(
   		res => {
@@ -55,7 +55,7 @@ export class ListaProveedoresComponent implements OnInit {
            const dato = { estatus: 0 }
            this.proveedoresService.desactivarProveedor(id, dato).subscribe(
            res => {
-                this.listarproveedores()
+                this.listarProveedores()
                 this.toastr.success('Proveedor desactivado correctamente.', 'Exito')
            }, 
            err => {
@@ -70,7 +70,7 @@ export class ListaProveedoresComponent implements OnInit {
         this.proveedoresService.activarProveedor(id, dato).subscribe(
         res => {
             this.toastr.success('Proveedor activado correctamente.', 'Exito')
-            this.listarproveedores()
+            this.listarProveedores()
         }, 
         err => {
             console.log(err)

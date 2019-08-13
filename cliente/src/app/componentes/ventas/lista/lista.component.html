@@ -26,7 +26,11 @@
 			</div>
 
 			<div class="col-lg-8 text-right">
-				<a routerLink="/ventas/nueva" class="btn btn-primary" data-toggle="tooltip" title="Agregar Producto">
+				<a id="pointer" title="Actualizar lista" class="btn btn-link mr-1 text-secondary" (click)="listarVentas()">
+					<i class="fas fa-sync"></i>
+				</a>
+
+				<a routerLink="/ventas/nueva" class="btn btn-primary" data-toggle="tooltip" title="Nueva Venta">
 					<i class="fas fa-plus"></i>
 				</a>
 			</div>

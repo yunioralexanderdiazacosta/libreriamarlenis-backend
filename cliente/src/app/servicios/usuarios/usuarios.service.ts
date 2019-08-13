@@ -19,6 +19,11 @@ constructor(private http: HttpClient) { }
   		return this.http.get(`${API_URI}/usuarios/profile`)
   	}
 
+    obtenerUsuarioRecuperacion(usuario)
+    {
+      return this.http.get(`${API_URI}/usuarios/obtener/${usuario}`)
+    }
+
     obtenerUsuarioEstadistica(id)
     {
         return this.http.get(`${API_URI}/usuarios/estadistica/${id}`)

@@ -171,7 +171,9 @@ export class EdicionTranscripcionComponent implements OnInit {
   		this.transcripcionesService.actualizarTranscripcionPendiente(this.id, this.datosEnviar).subscribe(
   		res => {
   			this.toastr.success('Datos actualizados correctamente.', 'Exito')
-            this.router.navigateByUrl('inicio')
+            this.router.navigateByUrl('transcripciones')
+            event.preventDefault()
+  			event.stopPropagation()
   		},
   		err => {
   			console.log(err)

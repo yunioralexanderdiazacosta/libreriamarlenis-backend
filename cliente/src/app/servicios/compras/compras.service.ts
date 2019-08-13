@@ -25,6 +25,11 @@ export class ComprasService {
 		return compras.splice(indice, 1);
 	}
 
+	resetearCamposArreglo()
+	{
+		return compras.length = 0
+	}
+
 	obtenerComprasApi()
 	{
 		return this.http.get(`${API_URI}/compras`)

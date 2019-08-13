@@ -67,8 +67,8 @@ export class ListaInventarioComponent implements OnInit {
             const dato = { estado: 0 }
             this.productosService.actualizarProducto(id, dato).subscribe(
             res => {
-                this.toastr.success('Producto deshabilitado satisfactoriamente.', 'Exito')
                 this.listarProductos()
+                this.toastr.success('Producto deshabilitado satisfactoriamente.', 'Exito')
             },
             err => {
                 console.log(err)
@@ -81,8 +81,8 @@ export class ListaInventarioComponent implements OnInit {
         const dato =  { estado: 1 }
         this.productosService.actualizarProducto(id, dato).subscribe(
         res => {
-            this.toastr.success('Producto reactivado correctamente.', 'Exito')
             this.listarProductos()
+            this.toastr.success('Producto reactivado correctamente.', 'Exito')
         },
         err => {
             console.log(err)

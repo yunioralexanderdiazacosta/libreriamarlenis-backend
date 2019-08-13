@@ -69,6 +69,8 @@ export class EditarEmpleadoComponent implements OnInit {
 				direccion: [this.usuario.direccion, Validators.required],
 				telefono: [this.usuario.telefono, Validators.required],
 				usuario: [this.usuario.usuario, [ Validators.required, Validators.minLength(8) ]],
+				pregunta_secreta: [this.usuario.pregunta_secreta, [Validators.required, Validators.maxLength(100)]],
+				respuesta_secreta: [this.usuario.respuesta_secreta, [Validators.required, Validators.maxLength(50)]]
 			})
   		},
   		err => {
@@ -104,7 +106,9 @@ export class EditarEmpleadoComponent implements OnInit {
 			correo: this.formUsuario.value.correo,
 			direccion: this.formUsuario.value.direccion,
 			telefono: this.formUsuario.value.telefono,
-			usuario: this.formUsuario.value.usuario
+			usuario: this.formUsuario.value.usuario,
+			pregunta_secreta: this.formUsuario.value.pregunta_secreta,
+			respuesta_secreta: this.formUsuario.value.respuesta_secreta
 		}
 
 		this.usuariosService.actualizarUsuario(this.id, datosEnviar).subscribe(

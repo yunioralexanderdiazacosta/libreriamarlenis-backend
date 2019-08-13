@@ -23,4 +23,9 @@ export class ReportesService {
 	{
 		return this.http.get(`${API_URI}/pedidocopias/${desde}/${hasta}`)
 	}
+
+	obtenerCopiasDanadas(desde, hasta)
+	{
+		return this.http.get(`${API_URI}/copiasdanadas/${desde}/${hasta}`)
+	}
 }

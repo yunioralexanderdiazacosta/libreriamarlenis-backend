@@ -148,7 +148,13 @@ pedidoCopias.get('/:desde/:hasta', (req, res ) => {
 			[Sequelize.literal('SUM(cantidad)'), 'cantidadCopias'],
 			[Sequelize.literal('SUM(subtotal)'), 'montoCopias']
 		],
-		include: [{
+		include: [
+		{
+			model: Venta,
+			where: { estatus: 1 },
+			attributes: ['id']
+		},
+		{
 			model: TipoCopia, 
 			attributes: ['descripcion', 'precio']
 		}],

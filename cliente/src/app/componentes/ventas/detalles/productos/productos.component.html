@@ -13,8 +13,8 @@
 			<td>{{ i+1 }}</td>
 			<td>{{ producto.producto.nombre }}</td>
 			<td>{{ producto.cantidad }}</td>
-			<td>{{ producto.precioUnitario }}</td>
-			<td>{{ producto.subtotal }}</td>
+			<td>Bs. {{ producto.precioUnitario | separador }}</td>
+			<td>Bs. {{ producto.subtotal | separador }}</td>
 		</tr>
 	</tbody>
 </table>

@@ -24,38 +24,48 @@
 	<div class="col-lg-8 offset-lg-2">
 		<table class="table table-hover" *ngIf="usuario">
 			<tr>
-				<th width="50%">Cedula de identidad:</th>
+				<th width="50%">Cédula de identidad</th>
 				<td>{{usuario.cedula}}</td>
 			</tr>
 
 			<tr>
-				<th width="50%">Nombres:</th>
+				<th width="50%">Nombres</th>
 				<td>{{usuario.nombres}}</td>
 			</tr>
 
 			<tr>
-				<th width="50%">Apellidos:</th>
+				<th width="50%">Apellidos</th>
 				<td>{{usuario.apellidos}}</td>
 			</tr>
 
 			<tr>
-				<th width="50%">Nombre de usuario:</th>
+				<th width="50%">Nombre de usuario</th>
 				<td>{{usuario.usuario}}</td>
 			</tr>
 
 			<tr>
-				<th width="50%">Correo electrónico:</th>
+				<th width="50%">Correo electrónico</th>
 				<td>{{usuario.correo}}</td>
 			</tr>
 
 			<tr>
-				<th width="50%">Teléfono:</th>
+				<th width="50%">Teléfono</th>
 				<td>{{usuario.telefono}}</td>
 			</tr>
 
 			<tr>
 				<th width="50%">Dirección de habitación</th>
 				<td>{{usuario.direccion}}</td>
+			</tr>
+
+			<tr>
+				<th width="50%">Pregunta Secreta</th>
+				<td>{{usuario.pregunta_secreta}}</td>
+			</tr>
+
+			<tr>
+				<th width="50%">Respuesta Secreta</th>
+				<td>{{usuario.respuesta_secreta}}</td>
 			</tr>
 		</table>
 	</div>

@@ -29,6 +29,16 @@ export class ClientesService {
 		return this.http.put(`${API_URI}/clientes/${id}`, cliente)
 	}
 
+	desactivarCliente(id, estatus)
+	{
+		return this.http.put(`${API_URI}/clientes/desactivar/${id}`, estatus)
+	}
+
+	reactivarCliente(id, estatus)
+	{
+		return this.http.put(`${API_URI}/clientes/reactivar/${id}`, estatus)
+	}
+
 	guardarCliente(cliente)
 	{
 		return this.http.post(`${API_URI}/clientes`, cliente)

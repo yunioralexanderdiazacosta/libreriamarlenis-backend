@@ -50,7 +50,7 @@ export class NuevoEmpleadoComponent implements OnInit {
 
 		ngOnInit() {
 			this.formUsuario = this.fb.group({
-				nacionalidad: ['', Validators.required],
+				nacionalidad: ['V', Validators.required],
 				nCedula: ['', [ Validators.required, Validators.pattern('[0-9]+')]],
 				nombres: ['', Validators.required],
 				apellidos: ['', Validators.required],
@@ -60,6 +60,8 @@ export class NuevoEmpleadoComponent implements OnInit {
 				usuario: ['', [ Validators.required, Validators.minLength(8) ]],
 				clave: ['', [ Validators.required, Validators.minLength(4) ]],
 				conf_clave: ['', Validators.required],
+				pregunta_secreta: ['', [Validators.required, Validators.maxLength(100)]],
+				respuesta_secreta: ['', [Validators.required, Validators.maxLength(50)]],
 				estatus: [1],
 				rol_id: [2]
 			},
@@ -93,6 +95,8 @@ export class NuevoEmpleadoComponent implements OnInit {
 			telefono: this.formUsuario.value.telefono,
 			usuario: this.formUsuario.value.usuario,
 			clave: this.formUsuario.value.clave,
+			pregunta_secreta: this.formUsuario.value.pregunta_secreta,
+			respuesta_secreta: this.formUsuario.value.respuesta_secreta,
 			estatus: this.formUsuario.value.estatus,
 			rol_id: this.formUsuario.value.rol_id
 		}
@@ -125,6 +129,8 @@ export class NuevoEmpleadoComponent implements OnInit {
 			usuario: '',
 			clave: '',
 			conf_clave: '',
+			pregunta_secreta: '',
+			respuesta_secreta: '',
 			estatus: [1],
 			rol_id: [2]
 		})

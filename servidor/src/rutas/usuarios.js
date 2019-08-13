@@ -39,6 +39,22 @@ usuarios.get('/estadistica/:id', (req, res) => {
 		res.send(err)
 	})
 })
+
+usuarios.get('/obtener/:usuario', (req, res) => {
+	const usuario = req.params.usuario
+
+	Usuario.findOne({
+		where: { usuario: usuario },
+		attributes: ['id', 'pregunta_secreta', 'respuesta_secreta']
+	})
+	.then(obtenerUsuario => {
+		res.json(obtenerUsuario)
+	})
+	.catch(err => {
+		res.send(err)
+	})
+})
+
 /*
 ****** REGISTRO DE USUARIOS
 */
@@ -53,6 +69,8 @@ usuarios.post('/register', (req, res) => {
 		direccion: req.body.direccion,
 		usuario: req.body.usuario,
 		clave: req.body.clave,
+		pregunta_secreta: req.body.pregunta_secreta,
+		respuesta_secreta: req.body.respuesta_secreta,
 		estatus: req.body.estatus,
 		rol_id: req.body.rol_id,
 		created_at: dia

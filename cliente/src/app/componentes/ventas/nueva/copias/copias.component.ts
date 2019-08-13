@@ -26,7 +26,7 @@ export class VentasCopiasComponent implements OnInit {
         public tipoCopiasService: TipoCopiasService) { }
 
   	ngOnInit() {
-  		this.listarCopias();
+  		this.listarCopias()
       this.enviarCopiasDanadas.emit(this.copias_danadas)
   	}
 

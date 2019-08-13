@@ -18,6 +18,7 @@ export class ListaTiposCopiasComponent implements OnInit {
 	constructor(
         public tipoCopiasService: TipoCopiasService,
         public toastr: ToastrService) {
+
 		this.obtenerTipoDeCopias()
 	}
 
@@ -51,8 +52,8 @@ export class ListaTiposCopiasComponent implements OnInit {
             const dato =  { estatus: 0 }
             this.tipoCopiasService.desactivarTipoCopia(id, dato).subscribe(
             res => {
-                 this.toastr.success('Dato desactivado satisfactoriamente.', 'Exito')
                  this.obtenerTipoDeCopias()
+                 this.toastr.success('Dato desactivado satisfactoriamente.', 'Exito')
             },
             err => {
                 console.log(err)
@@ -70,8 +71,8 @@ export class ListaTiposCopiasComponent implements OnInit {
         const dato = { estatus: 1 }
         this.tipoCopiasService.reactivarTipoCopia(id, dato).subscribe(
         res => {
-            this.toastr.success('Dato reactivado correctamente.', 'Exito')
             this.obtenerTipoDeCopias()
+            this.toastr.success('Dato reactivado correctamente.', 'Exito')
         },
         err => {
             console.log(err)

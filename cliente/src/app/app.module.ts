@@ -132,6 +132,7 @@ import { NuevoTipoCopiaComponent } from './componentes/ajustes/tiposcopias/nuevo
 import { TipoTareasListaComponent } from './componentes/transcripciones/categorias/lista/lista.component';
 import { TipoTareasEditarComponent } from './componentes/transcripciones/categorias/editar/editar.component';
 import { TipoTareasNuevaComponent } from './componentes/transcripciones/categorias/nueva/nueva.component';
+import { RecuperarContrasenaComponent } from './componentes/contrasena/recuperar/recuperar.component';
 
 @NgModule({
     declarations: [
@@ -139,6 +140,7 @@ import { TipoTareasNuevaComponent } from './componentes/transcripciones/categori
         SidebarComponent,
         NavbarComponent,
         IniciarsesionComponent,
+        RecuperarContrasenaComponent,
         /******** INICIO ***********/
         InicioComponent,
         VentasSemanaComponent,
@@ -258,7 +260,7 @@ import { TipoTareasNuevaComponent } from './componentes/transcripciones/categori
         NuevoTipoCopiaComponent,
         /*****************************/
         SeparadorPipe,
-        FiltroPipe
+        FiltroPipe,
         ],
     imports: [
         BrowserModule,

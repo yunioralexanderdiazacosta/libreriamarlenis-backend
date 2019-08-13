@@ -119,7 +119,10 @@ export class NuevaCompraComponent implements OnInit {
         public proveedoresService: ProveedoresService,
         public productosService: ProductosService,
         public comprasService: ComprasService,
-        public router: Router) { }
+        public router: Router) { 
+        
+        this.comprasService.resetearCamposArreglo()
+    }
 
     ngOnInit() {
         this.listarProveedores()
@@ -136,8 +139,9 @@ export class NuevaCompraComponent implements OnInit {
 
     listarProveedores(){
         this.proveedoresService.obtenerProveedores().subscribe(
-        res => {
-            this.proveedores = res
+        (res:any) => {
+            const datos = res
+            this.proveedores = datos.filter(dato => dato.estatus == 1)
         },
         err => {
            console.log(err)
@@ -192,12 +196,14 @@ export class NuevaCompraComponent implements OnInit {
                     nombre: '',
                     precio_venta: 0,
                     stock: 0,
-                    estado: 0
+                    estado: 0,
+                    estatus: 1
                 }; 
-                productoArreglo.id = dato.id;
-                productoArreglo.nombre = dato.nombre;
-                productoArreglo.precio_venta = dato.precio_venta;
+                productoArreglo.id = dato.id
+                productoArreglo.nombre = dato.nombre
+                productoArreglo.precio_venta = dato.precio_venta
                 productoArreglo.stock = dato.stock
+                productoArreglo.estatus = dato.estado
                 this.productosService.guardarProductoArreglo(productoArreglo)
             })  
         },

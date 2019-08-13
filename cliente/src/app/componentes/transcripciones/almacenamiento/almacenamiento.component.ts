@@ -37,7 +37,6 @@ export class AlmacenamientoComponent implements OnInit {
   		).subscribe(
   		res => {
   			this.transcripciones = res
-        console.log(this.transcripciones)
   		},
   		err => {
   			console.log(err)

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TipoTranscripcionesService } from '../../../../servicios/tipo-transcripciones/tipo-transcripciones.service';
+import { UsuariosService } from '../../../../servicios/usuarios/usuarios.service';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
@@ -15,10 +16,18 @@ export class TipoTareasListaComponent implements OnInit {
 	**/
 	tipos
 
+   /**
+    *Almacena los datos del usuario conectado
+    *
+    *@property {any}
+    **/
+    usuario
+
 	constructor(
 		public tipotareasService: TipoTranscripcionesService,
+    public usuariosService: UsuariosService,
 		public toastr: ToastrService) { 
-
+    
 		this.listarTiposTareas()
 	}
 

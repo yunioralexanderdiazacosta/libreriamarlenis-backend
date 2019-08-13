@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import * as moment from 'moment'; 
 import { ComprasService } from '../../../servicios/compras/compras.service';
 import { ToastrService } from 'ngx-toastr';
@@ -6,7 +6,8 @@ import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-lista-compras',
   templateUrl: './lista.component.html',
-  styleUrls: ['./lista.component.css']
+  styleUrls: ['./lista.component.css'],
+  changeDetection: ChangeDetectionStrategy.Default
 })
 export class ListaComprasComponent implements OnInit {
     /**
@@ -32,11 +33,11 @@ export class ListaComprasComponent implements OnInit {
 
 	constructor(
         public comprasService: ComprasService,
-        public toastr: ToastrService) { }
+        public toastr: ToastrService) { 
+      this.listarCompras()
+  }
 
-  	ngOnInit() {
-  		this.listarCompras()
-  	}
+  	ngOnInit() {}
 
   	listarCompras()
   	{

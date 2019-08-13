@@ -97,7 +97,10 @@ compras.get('/mes', (req, res) => {
 			[Sequelize.literal(`ELT(MONTH(created_at), "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre")`), 'mes'],
 			[Sequelize.literal(`SUM(total)`), 'totalCompra']
 		],
-		where: Sequelize.where(Sequelize.fn('YEAR', Sequelize.col('created_at')), '=', ano),
+		where: [
+			{ estatus: 1},
+			Sequelize.where(Sequelize.fn('YEAR', Sequelize.col('created_at')), '=', ano)
+		],
 		group: ['mes']
 	})
 	.then(comprasMes => {
@@ -128,6 +131,7 @@ compras.get('/:desde/:hasta', (req, res) => {
      		attributes: ['id']
      	}],
 		where: {
+			estatus: 1,
 			created_at: {
 				[op.gte]: fecha_desde,
 				[op.lte]: fecha_hasta

@@ -19,7 +19,7 @@
                                     [ngClass]="{ 'is-invalid' : f.tipo_id.errors && submitted }">
                                     <option value="" disabled>Seleccione...</option>
                                     <ng-container *ngFor="let dato of tipoCopias">
-                                        <option [value]="dato.id" *ngIf="dato.estado == 0">{{ dato.descripcion }}</option>
+                                        <option [value]="dato.id" *ngIf="dato.estado == 0 && dato.estatus == 1">{{ dato.descripcion }}</option>
                                     </ng-container>
                                 </select>
 

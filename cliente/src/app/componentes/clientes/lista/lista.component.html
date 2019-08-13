@@ -26,6 +26,10 @@
 			</div>
 
 			<div class="col-lg-8 text-right">
+				<a id="pointer" title="Actualizar lista" class="btn btn-link mr-1 text-secondary" (click)="obtenerClientes()">
+					<i class="fas fa-sync"></i>
+				</a>
+
 				<button class="btn btn-primary" data-toggle="modal" data-target="#nuevoCliente">
 					<i class="fas fa-plus"></i>
 				</button>
@@ -40,16 +44,22 @@
 					<th>Apellido(s)</th>
 					<th>Teléfono</th>
 					<th>Direccion</th>
+					<th>Estatus</th>
 					<th></th>
 				</tr>
 			</thead>
 			<tbody class="text-center">
-				<tr *ngFor="let cliente of clientes | filtro: { cedula: busqueda, nombres: busqueda, apellidos: busqueda } | paginate: { itemsPerPage: 10, currentPage: p }">
+				<tr *ngFor="let cliente of clientes | filtro: { cedula: busqueda, nombres: busqueda, apellidos: busqueda, cliente: estatusTexto } | paginate: { itemsPerPage: 10, currentPage: p }">
 				  	<td class="align-middle">{{ cliente.cedula }} </td>
 				  	<td class="align-middle">{{ cliente.nombres }}</td>
 				  	<td class="align-middle">{{ cliente.apellidos }}</td>
 				  	<td class="align-middle">{{ cliente.telefono }}</td>
-				  	<td class="align-middle">{{ cliente.direccion }}
+				  	<td class="align-middle">{{ cliente.direccion }}</td>
+				  	<td class="align-middle">
+				  		<span [ngClass]="cliente.estatus == 1 ? 'badge badge-pill badge-success' : 'badge badge-pill badge-danger'">
+							{{ cliente.estatusTexto }}
+						</span>
+				  	</td>
 				  	<td class="align-middle">
 				  		<div class="btn btn-group">
 				  		    <a [routerLink]="['/clientes/historico', cliente.id]" class="btn btn-secondary">
@@ -60,9 +70,9 @@
 				  				<i class="fas fa-edit"></i>
 				  			</a>
 
-				  			<button class="btn btn-secondary" *ngIf="usuario?.rol_id == 1">
-				  				<i class="fas fa-trash"></i>
-				  			</button>
+				  			<button class="btn btn-secondary" (click)="cliente.estatus == 1 ? desactivar(cliente.id) : activar(cliente.id)" *ngIf="usuario?.rol_id == 1">
+					  				<i [ngClass]="cliente.estatus == 1 ? 'fas fa-trash' : 'fas fa-check'"></i>
+					  		</button>
 				  		</div>
 				  	</td>
 				</tr>
@@ -71,4 +81,4 @@
 		<pagination-controls class="text-right" (pageChange)="p = $event"></pagination-controls>
 	</div>
 </div>
-<app-nuevo-cliente></app-nuevo-cliente>
+<app-nuevo-cliente (actualizarClientes)="obtenerClientes()"></app-nuevo-cliente>

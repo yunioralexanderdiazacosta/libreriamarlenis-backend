@@ -142,7 +142,7 @@ export class NuevaTranscripcionComponent implements OnInit {
 	listarUsuarios()
 	{
 		this.usuariosService.obtenerUsuarios().subscribe(
-		res => {
+		(res:any) => {
 			this.usuarios = res
 		},
 		err => {
@@ -153,7 +153,7 @@ export class NuevaTranscripcionComponent implements OnInit {
 	listarTipoTranscripciones()
 	{
 		this.tipoTranscripcionesService.obtenerTipoTranscripciones().subscribe(
-		res => {
+		(res:any) => {
 			this.tipoTranscripciones = res
 		},
 		err => {

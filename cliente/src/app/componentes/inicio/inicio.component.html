@@ -69,7 +69,7 @@
 							</tr>
 						</tbody>
 					</table>
-					<pagination-controls class="text-right" (pageChange)="p = $event" *ngIf="tpendientes.length > 0"></pagination-controls>
+					<pagination-controls class="text-right" (pageChange)="p = $event" *ngIf="cont_pend > 0 && tpendientes.length > 0"></pagination-controls>
 					<div class="alert alert-secondary text-center" *ngIf="tpendientes.length == 0 || cont_pend == 0">
 						<span class="h5"><i class="fas fa-info-circle"></i> No se ha encontrado resultados</span>
 					</div>

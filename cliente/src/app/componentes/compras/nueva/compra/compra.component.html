@@ -19,7 +19,7 @@
 							    [dropdownPosition]="'bottom'"
 							    (change)="obtenerProducto(f.producto_id.value)">
 							    	<ng-container *ngFor="let producto of productos">
-										<ng-option *ngIf="producto.estado == 0" [value]="producto.id">{{ producto.nombre }}</ng-option>
+										<ng-option *ngIf="producto.estado == 0 && producto.estatus == 1" [value]="producto.id">{{ producto.nombre }}</ng-option>
 									</ng-container>
 							</ng-select>
 

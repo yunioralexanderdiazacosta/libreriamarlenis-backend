@@ -8,7 +8,7 @@ import { ToastrService } from 'ngx-toastr';
   templateUrl: './lista.component.html',
   styleUrls: ['./lista.component.css']
 })
-export class ListaEmpleadosComponent implements OnInit {
+export class ListaEmpleadosComponent implements OnInit  {
 	/**
 	* Almacena los usuarios encontrados en la API
 	*
@@ -27,17 +27,18 @@ export class ListaEmpleadosComponent implements OnInit {
         public usuariosService: UsuariosService,
         public toastr: ToastrService) 
     {
-        this.obtenerUsuarios()
+        this.obteniendoUsuarios()
     }
 
-	ngOnInit() {}
-
-  	/**
+	ngOnInit() { 
+    }
+  
+  /**
 	* Obtiene y guardar los usuarios obtenidos de la API
 	*
 	*@return {Array}
 	**/
-  	obtenerUsuarios()
+  	obteniendoUsuarios()
   	{
   		this.usuariosService.obtenerUsuarios().subscribe(
   		(res: any) =>  {
@@ -55,7 +56,7 @@ export class ListaEmpleadosComponent implements OnInit {
            const dato = { estatus: 0 }
            this.usuariosService.desactivarUsuario(id, dato).subscribe(
            res => {
-                this.obtenerUsuarios()
+                this.obteniendoUsuarios()
                 this.toastr.success('Usuario desactivado correctamente.', 'Exito')
            }, 
            err => {
@@ -70,7 +71,7 @@ export class ListaEmpleadosComponent implements OnInit {
         this.usuariosService.reactivarUsuario(id, dato).subscribe(
         res => {
             this.toastr.success('Usuario activado correctamente.', 'Exito')
-            this.obtenerUsuarios()
+            this.obteniendoUsuarios()
         }, 
         err => {
             console.log(err)

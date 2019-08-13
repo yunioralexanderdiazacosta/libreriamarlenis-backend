@@ -62,7 +62,7 @@ export class CompraComponent implements OnInit {
   			producto_nombre: ['', Validators.required],
   			cantidad: [1, Validators.required],
   			precio_compra: [null, Validators.required],
-  			precio_venta: [null, Validators.required],
+  			precio_venta: [null, [Validators.required, Validators.min(1)]],
   			subtotal: [0]
   		})
   	}
@@ -71,7 +71,7 @@ export class CompraComponent implements OnInit {
 
   	listarProductos()
   	{
-  		this.productos = this.productosService.obtenerProductosArreglo();
+  		this.productos = this.productosService.obtenerProductosArreglo()
   	}
 
   	obtenerProducto(id)
@@ -80,7 +80,8 @@ export class CompraComponent implements OnInit {
   			if(dato.id == id)
   			{
   				this.formulariocompra.patchValue({
-  					producto_nombre: dato.nombre
+  					producto_nombre: dato.nombre,
+            precio_venta: dato.precio_venta
   				})
   			}
   		})

@@ -46,7 +46,10 @@ ventas.get('/cliente/:id', (req, res) => {
 	const id = req.params.id
 	
 	Venta.findAll({
-		where: { clienteId: id },
+		where: { 
+			clienteId: id ,
+			estatus: 1
+		},
 		order: Sequelize.literal('created_at DESC')	
 	})
 	.then(ventasRealizadas => {
@@ -72,7 +75,10 @@ ventas.get('/usuario/:id/mes/:mes', (req, res) => {
 			[Sequelize.literal(`COUNT(id)`), 'totalVentas']
 		],
 		where: [
-			{ usuario_id: id },
+			{ 
+				usuario_id: id,
+				estatus: 1 
+			},
 			Sequelize.where(Sequelize.fn('YEAR', Sequelize.col('created_at')), '=', ano),
 			Sequelize.where(Sequelize.fn('MONTH', Sequelize.col('created_at')), '=', mes)
 		]
@@ -98,7 +104,7 @@ ventas.get('/general/mes/:mes', (req, res) => {
 			[Sequelize.literal(`COUNT(id)`), 'totalVentas']
 		],
 		where: [
-			{},
+			{ estatus: 1},
 			Sequelize.where(Sequelize.fn('YEAR', Sequelize.col('created_at')), '=', ano),
 			Sequelize.where(Sequelize.fn('MONTH', Sequelize.col('created_at')), '=', mes)
 		]
@@ -124,7 +130,10 @@ ventas.get('/mes', (req, res) => {
 			[Sequelize.literal(`ELT(MONTH(created_at), "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre")`), 'mes'],
 			[Sequelize.literal(`SUM(total)`), 'totalVenta']
 		],
-		where: Sequelize.where(Sequelize.fn('YEAR', Sequelize.col('created_at')), '=', ano),
+		where: [ 
+		{ estatus: 1 },
+		Sequelize.where(Sequelize.fn('YEAR', Sequelize.col('created_at')), '=', ano)
+		],
 		group: ['mes']
 	})
 	.then(ventasMes => {
@@ -147,7 +156,10 @@ ventas.get('/clientes-atendidos', (req, res) => {
 			[Sequelize.literal(`ELT(MONTH(created_at), "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre")`), 'mes'],
 			[Sequelize.literal(`COUNT(DISTINCT(clienteId))`), 'totalClientes']
 		],
-		where: Sequelize.where(Sequelize.fn('YEAR', Sequelize.col('created_at')), '=', ano),
+		where: [
+		{estatus: 1},
+		Sequelize.where(Sequelize.fn('YEAR', Sequelize.col('created_at')), '=', ano)
+		],
 		group: ['mes']
 	})
 	.then(clientesMes => {
@@ -174,7 +186,10 @@ ventas.get('/clientes-frecuentes', (req, res) => {
      	attributes: [
      		[Sequelize.literal(`COUNT(clienteId)`), 'totalAtencion']
      	],
-     	where: Sequelize.where(Sequelize.fn('YEAR', Sequelize.col('ventas.created_at')), '=', ano),
+     	where: [
+     		{ estatus: 1},
+     		Sequelize.where(Sequelize.fn('YEAR', Sequelize.col('ventas.created_at')), '=', ano)
+     	],
      	group: ['clienteId'],
      	order: Sequelize.literal('totalAtencion DESC'),
      	limit: 5

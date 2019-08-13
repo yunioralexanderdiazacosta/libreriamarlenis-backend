@@ -1,7 +1,9 @@
 const express = require('express')
 const copiasdanadas = express.Router()
 const cors = require('cors')
+const moment = require('moment')
 const Sequelize = require('sequelize')
+const op = Sequelize.Op
 
 const CopiaDanada = require('../modelos/CopiaDanada')
 const Venta = require('../modelos/Venta')
@@ -37,12 +39,17 @@ copiasdanadas.get('/total/:mes', (req, res) => {
 
 
 /**
-***** OBTIENE LAS COPIAS DAÑADAS DE ACUERDO A LA FECHA DADA
+***** OBTIENE lAS ULTIMAS COPIAS DAÑADAS
 **/
 copiasdanadas.get('/ultimas/:fecha', (req, res) => {
 	const fecha = req.params.fecha
 
 	CopiaDanada.findOne({
+		include: [{
+			model: Venta,
+			where: { estatus: 1 },
+			attributes: ['id']
+		}],
 		attributes: [
 			[Sequelize.literal(`SUM(cantidad)`), 'cantidadCopias']
 		],
@@ -55,6 +62,40 @@ copiasdanadas.get('/ultimas/:fecha', (req, res) => {
 	.catch(err => {
 		res.send(err)
 	})
+})
+
+/**
+***** OBTIENE lAS ULTIMAS COPIAS DAÑADAS DE ACUERDO A UN RANGO DE FECHAS DADO
+**/
+copiasdanadas.get('/:desde/:hasta', (req, res) => {
+	var  desde = req.params.desde 
+	var hasta = req.params.hasta
+	var fecha_desde = moment(desde).format("YYYY-MM-DD 00:00:00")
+	var fecha_hasta = moment(hasta).format("YYYY-MM-DD 23:59:59")
+
+	CopiaDanada.findOne({
+		include: [{
+			model: Venta,
+			where: { estatus: 1 },
+			attributes: ['id']
+		}],
+		attributes: [
+			[Sequelize.literal(`SUM(cantidad)`), 'cantidadCopias']
+		],
+		where: {
+			created_at: {
+				[op.gte]: fecha_desde,
+				[op.lte]: fecha_hasta
+			}
+		}
+	})
+	.then(total => {
+		res.json(total)
+	})
+	.catch(err => {
+		res.send(err)
+	})
+
 })
 
 

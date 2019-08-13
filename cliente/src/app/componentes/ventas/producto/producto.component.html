@@ -20,7 +20,7 @@
                                 (change)="obtenerProducto(f.producto_id.value)"
                                 [ngClass]="{ 'is-invalid': f.producto_id.errors && submitted }">
                                     <ng-container *ngFor="let producto of productos; index as i">
-                                    <ng-option [value]="producto.id" *ngIf="producto.estado == 0">{{ producto.nombre }}</ng-option>
+                                    <ng-option [value]="producto.id" *ngIf="producto.estado == 0 && producto.stock > 0 && producto.estatus == 1">{{ producto.nombre }}</ng-option>
                                     </ng-container>
                             </ng-select>
 

@@ -30,8 +30,8 @@
 			<td>
 				{{ copia.cantidad  }}
 			</td>
-			<td>Bs. {{ copia.precio }}</td>
-			<td>Bs. {{ copia.subtotal }}</td>
+			<td>Bs. {{ copia.precio | separador }}</td>
+			<td>Bs. {{ copia.subtotal | separador }}</td>
 			<td>
 				<button class="btn btn-danger btn-sm" (click)="eliminarCopia(i, copia.tipo_id)">
 					<i class="fas fa-trash"></i>

@@ -22,6 +22,9 @@ Transcripcion.belongsTo(Usuario)
 pedidoTranscripciones.use(cors())
 pedidoTranscripciones.use(fileUpload({ preserveExtension: true }))
 
+/**
+****** OBTENER UNA TRANSCRIPCIÓN
+**/
 pedidoTranscripciones.get('/:id', (req, res) => {
 	const id = req.params.id
 
@@ -175,7 +178,8 @@ pedidoTranscripciones.get('/', (req, res) => {
     		model: Usuario,
     		attributes: ['id', 'usuario']
      	}],
-		attributes: ['id', 'titulo', 'estatus_tarea', 'estatus_entrega', 'created_at']
+		attributes: ['id', 'titulo', 'estatus_tarea', 'estatus_entrega', 'created_at'],
+		order: Sequelize.literal('created_at DESC')
 	})
 	.then(listarTranscripciones => {
 		res.json(listarTranscripciones)

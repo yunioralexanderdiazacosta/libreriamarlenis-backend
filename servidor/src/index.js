@@ -12,7 +12,7 @@ app.use(cors())
 app.use(morgan('dev'))
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: false}))
-app.use(expressJwt({ secret: config.SECRET_KEY }).unless({ path: ['/api/usuarios/login'] }))
+app.use(expressJwt({ secret: config.SECRET_KEY }).unless({ path: ['/api/usuarios/login','/^\/api\/usuarios\/obtener\/.*/usuario']}))
 
 //rutas
 app.use('/api/usuarios', require('./rutas/usuarios'))

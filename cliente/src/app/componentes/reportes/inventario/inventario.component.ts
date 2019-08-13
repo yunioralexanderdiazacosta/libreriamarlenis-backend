@@ -19,8 +19,10 @@ export class ReporteInventarioComponent implements OnInit {
   	listarProductos()
   	{
   		this.productosService.obtenerProductos().subscribe(
-  		res => {
-  			this.productos = res
+  		(res:any) => {
+        const datos = res
+  			this.productos = datos.filter(dato => dato.estado == 1)
+        console.log(datos)
   		},
   		err => {
   			console.log(err)
