@@ -74,6 +74,12 @@ import { CambiarContrasenaComponent } from './componentes/ajustes/cambiar-contra
 import { ListaTiposCopiasComponent } from './componentes/ajustes/tiposcopias/lista/lista.component'
 import { EditarTipoCopiaComponent } from './componentes/ajustes/tiposcopias/editar/editar.component';
 /***********************************************************************************************************/
+
+/****************************************** IVA *******************************************************/
+import { IvaComponent } from './componentes/iva/iva.component';
+/***********************************************************************************************************/
+
+
 import { AuthGuardService } from './servicios/auth-guard/auth-guard.service';
 
 const routes: Routes = [
@@ -367,9 +373,13 @@ const routes: Routes = [
     	path: 'tiposdecopias/editar/:id',
     	component: EditarTipoCopiaComponent,
     	canActivate: [AuthGuardService]
-    }
-
+    },
     /*************************************/
+    {
+    	path: 'iva',
+    	component: IvaComponent,
+    	canActivate: [AuthGuardService]
+    }
 ];
 
 @NgModule({

@@ -7,6 +7,7 @@ import { TipoCopiasService } from '../../../servicios/tipo-copias/tipo-copias.se
 import { TranscripcionesService } from '../../../servicios/transcripciones/transcripciones.service';
 import { VentasService } from '../../../servicios/ventas/ventas.service';
 import { UsuariosService } from '../../../servicios/usuarios/usuarios.service';
+import { IvaService } from '../../../servicios/iva/iva.service';
 import { Cliente } from '../../../modelos/Cliente';
 import { ProductoApi } from '../../../modelos/ProductoApi';
 import { CopiasApi } from '../../../modelos/CopiasApi';
@@ -34,35 +35,35 @@ export class NuevaVentaComponent implements OnInit {
     *
     *@property {Array}
     **/
-    clientes: Array<Cliente>; 
+    clientes: Array<Cliente>
 
      /**
     *Guarda el cliente obtenido de la API
     *
     *@property {Object}
     **/
-    cliente: Cliente;
+    cliente: Cliente
 
     /** 
     * Activa o desactiva el collapse de productos
     *
     *@property {boolean}
     **/
-    formProductos: boolean = false;
+    formProductos: boolean = false
 
     /** 
     * Activa o desactiva el collapse de copias
     *
     *@property {boolean}
     **/
-    formCopias: boolean = false;
+    formCopias: boolean = false
 
     /** 
     * Activa o desactiva el collapse de transcripciones
     *
     *@property {boolean}
     **/
-    formTranscripciones: boolean = false;
+    formTranscripciones: boolean = false
 
     /** 
     * Almacena los productos obtenidos del arreglo
@@ -90,36 +91,42 @@ export class NuevaVentaComponent implements OnInit {
     *
     *@property {number}
     **/
-    montoCopias = 0;
+    montoCopias = 0
 
-     /** 
+    /** 
     * Almacena monto total de cada una de las transcripciones    
     *
     *@property {number}
     **/
-    montoTranscripciones = 0;
+    montoTranscripciones = 0
 
+    /** 
+    * Almacena el valor del IVA   
+    *
+    *@property {number}
+    **/
+    iva: number
 
     /** 
     * Subtotal de la venta
     *
     *@property {number}
     **/
-    subtotalVenta: number = 0;
+    subtotalVenta: number = 0
 
     /** 
     * Total del Iva
     *
     *@property {number}
     **/    
-    subtotalIVA: number = 0;
+    subtotalIVA: number = 0
 
     /** 
     * Monto total de la venta
     *
     *@property {number}
     **/
-    totalVenta: number = 0;
+    totalVenta: number = 0
 
     /** 
     * Obtiene los productos de la API
@@ -221,6 +228,7 @@ export class NuevaVentaComponent implements OnInit {
         public ventasService: VentasService,
         public transcripcionesService: TranscripcionesService,
         public usuariosService: UsuariosService,
+        public ivaService: IvaService,
         public toastr: ToastrService,
         private config: NgSelectConfig,
         public router: Router) 
@@ -365,26 +373,34 @@ export class NuevaVentaComponent implements OnInit {
     **/
     obtenerMontoVenta()
     {
-        this.montoProductos = 0;
-        this.montoCopias = 0;
-        this.montoTranscripciones = 0;
-        this.productos = this.productosService.obtenerProductosVenta();
-        this.copias = this.copiasService.obtenerCopiasArreglo();
-        this.transcripciones = this.transcripcionesService.obtenerTranscripcionesArreglo();
 
-        this.productos.filter(dato => {
-            this.montoProductos = this.montoProductos + dato.subtotal 
+        this.ivaService.obtenerImpuesto().subscribe(
+        (res:any) => {
+            this.iva = parseInt(res.valor)
+            this.montoProductos = 0
+            this.montoCopias = 0
+            this.montoTranscripciones = 0
+            this.productos = this.productosService.obtenerProductosVenta()
+            this.copias = this.copiasService.obtenerCopiasArreglo()
+            this.transcripciones = this.transcripcionesService.obtenerTranscripcionesArreglo()
+
+            this.productos.filter(dato => {
+                this.montoProductos = this.montoProductos + dato.subtotal 
+            })
+            this.copias.filter(dato => {
+                this.montoCopias = this.montoCopias + dato.subtotal
+            })
+            this.transcripciones.filter(dato => {
+                this.montoTranscripciones = this.montoTranscripciones + dato.subtotal
+            })
+            this.subtotalVenta = 0
+            this.subtotalVenta = this.montoProductos + this.montoCopias + this.montoTranscripciones
+            this.subtotalIVA = this.subtotalVenta * (this.iva /100)
+            this.totalVenta = this.subtotalVenta + this.subtotalIVA
+        },
+        err => {
+            console.log(err)
         })
-        this.copias.filter(dato => {
-            this.montoCopias = this.montoCopias + dato.subtotal
-        })
-        this.transcripciones.filter(dato => {
-            this.montoTranscripciones = this.montoTranscripciones + dato.subtotal
-        })
-        this.subtotalVenta = 0
-        this.subtotalVenta = this.montoProductos + this.montoCopias + this.montoTranscripciones;
-        this.subtotalIVA = this.subtotalVenta * (19 /100);
-        this.totalVenta = this.subtotalVenta + this.subtotalIVA;
     }
 
     /** 

@@ -29,6 +29,7 @@ app.use('/api/ventas', require('./rutas/ventas'))
 app.use('/api/copiasdanadas', require('./rutas/copias_danadas'))
 app.use('/api/proveedores', require('./rutas/proveedores'))
 app.use('/api/compras', require('./rutas/compras'))
+app.use('/api/impuesto', require('./rutas/impuesto'))
 
 app.listen(port, () => {
 	console.log('Servidor funcionado en el puerto: ' + port);

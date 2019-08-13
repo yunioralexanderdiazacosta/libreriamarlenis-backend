@@ -8,12 +8,32 @@ import { UsuariosService } from '../../../servicios/usuarios/usuarios.service';
   styleUrls: ['./recuperar.component.css']
 })
 export class RecuperarContrasenaComponent implements OnInit {
+	/**
+	*Formulario con los datos del usuario
+	*
+	*@property {any}
+	**/
 	formulario: FormGroup
 
+    /**
+	*Datos del usuario encontrado
+	*
+	*@property {any}
+	**/
 	usuario
 
+	/**
+	*Verifica si se inserto el usuario o no
+	*
+	*@property {boolean}
+	**/
 	continuar: boolean = false
 
+	/**
+	*Verifica si el formulario esta enviado o no
+	*
+	*@property {boolean}
+	**/
 	submitted: boolean = false
 
 	constructor(

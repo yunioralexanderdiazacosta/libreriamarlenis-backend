@@ -40,6 +40,9 @@ usuarios.get('/estadistica/:id', (req, res) => {
 	})
 })
 
+/*
+****** OBTENER DATOS DE ACUERDO AL USUARIO ******
+*/
 usuarios.get('/obtener/:usuario', (req, res) => {
 	const usuario = req.params.usuario
 

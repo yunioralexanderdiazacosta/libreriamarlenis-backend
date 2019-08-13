@@ -3,10 +3,11 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ProveedoresService } from '../../../servicios/proveedores/proveedores.service';
 import { ComprasService } from '../../../servicios/compras/compras.service';
 import { ProductosService } from '../../../servicios/productos/productos.service';
+import { IvaService } from '../../../servicios/iva/iva.service';
+import { ToastrService } from 'ngx-toastr';
 import { CompraApi } from '../../../modelos/CompraApi';
 import { PedidoCompraApi } from '../../../modelos/PedidoCompraApi';
 import { Compra } from '../../../modelos/Compra';
-import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 
 @Component({
@@ -27,7 +28,7 @@ export class NuevaCompraComponent implements OnInit {
     *
     *@property {Array}
     **/
-    proveedores: any = [];
+    proveedores: any = []
  
     /**
     *Activar o desactivar formulario para agregar nueva solicitud
@@ -55,35 +56,42 @@ export class NuevaCompraComponent implements OnInit {
     *
     *@property {Array}
     **/
-    productosArreglo;
+    productosArreglo
 
     /** 
     * Almacena los productos de la compra obtenidos del arreglo
     *
     *@property {Array}
     **/
-    compras: Array<Compra> = [];
+    compras: Array<Compra> = []
 
     /** 
     * Subtotal de la venta
     *
     *@property {number}
     **/
-    subtotalCompra: number = 0;
+    subtotalCompra: number = 0
 
     /** 
     * Total del Iva
     *
     *@property {number}
     **/    
-    subtotalIVA: number = 0;
+    subtotalIVA: number = 0
 
     /** 
     * Monto total de la venta
     *
     *@property {number}
     **/
-    totalCompra: number = 0;
+    totalCompra: number = 0
+
+    /** 
+    * Almacena el valor del IVA   
+    *
+    *@property {number}
+    **/
+    iva: number
 
     /** 
     * Verifica si el formulario ha sido enviado
@@ -104,7 +112,7 @@ export class NuevaCompraComponent implements OnInit {
     *
     *@property {PedidoCompraApi}
     **/
-    PedidoCompraApi: PedidoCompraApi;
+    PedidoCompraApi: PedidoCompraApi
 
     /** 
     * Almacena el identificador de la compra obtenido de la API
@@ -119,6 +127,7 @@ export class NuevaCompraComponent implements OnInit {
         public proveedoresService: ProveedoresService,
         public productosService: ProductosService,
         public comprasService: ComprasService,
+        public ivaService: IvaService,
         public router: Router) { 
         
         this.comprasService.resetearCamposArreglo()
@@ -174,22 +183,29 @@ export class NuevaCompraComponent implements OnInit {
 
     obtenerMontos()
     {
-        this.subtotalCompra = 0;
-        this.compras = this.comprasService.obtenerCompraArreglo()
-        this.compras.filter(dato => {
-            this.subtotalCompra = this.subtotalCompra + dato.subtotal
+        this.ivaService.obtenerImpuesto().subscribe(
+        (res:any) => {
+            this.iva = parseInt(res.valor)
+              this.subtotalCompra = 0
+            this.compras = this.comprasService.obtenerCompraArreglo()
+            this.compras.filter(dato => {
+                this.subtotalCompra = this.subtotalCompra + dato.subtotal
+            })
+            this.subtotalIVA = this.subtotalCompra * (this.iva /100)
+            this.totalCompra = this.subtotalCompra + this.subtotalIVA
+        },
+        err => {
+            console.log(err)
         })
-        this.subtotalIVA = this.subtotalCompra * (19 /100);
-        this.totalCompra = this.subtotalCompra + this.subtotalIVA;
     }
 
     obteniendoProductos()
     {
         this.productosService.obtenerProductos().subscribe(
         (res: any) => {
-            this.productosApi = res;
-            this.productosArreglo = this.productosService.obtenerProductosArreglo();
-            this.productosArreglo.length = 0;
+            this.productosApi = res
+            this.productosArreglo = this.productosService.obtenerProductosArreglo()
+            this.productosArreglo.length = 0
             this.productosApi.map(dato => {   
                 let productoArreglo = {
                     id: 0,

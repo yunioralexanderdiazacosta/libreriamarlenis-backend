@@ -25,8 +25,12 @@
 				</div>
 			</div>
 
-			<div class="col-lg-8">
-				<button class="btn btn-primary float-right" data-toggle="modal" data-target="#agregarProducto" title="Agregar Producto">
+			<div class="col-lg-8 text-right">
+				<a id="pointer" title="Actualizar lista" class="btn btn-link mr-1 text-secondary" (click)="listarProductos()">
+					<i class="fas fa-sync"></i>
+				</a>
+
+				<button class="btn btn-primary" data-toggle="modal" data-target="#agregarProducto" title="Agregar Producto">
 					<i class="fas fa-plus"></i>
 				</button>
 			</div>

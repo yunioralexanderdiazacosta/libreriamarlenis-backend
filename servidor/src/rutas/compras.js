@@ -155,7 +155,8 @@ compras.get('/', (req, res) => {
     		model: Proveedor,
     		attributes: ['razon_social']
      	}],
-     	attributes: ['id', 'total', 'estatus', 'created_at'] 
+     	attributes: ['id', 'total', 'estatus', 'created_at'],
+     	order: Sequelize.literal('created_at DESC') 
   	})
 	.then(listarCompras => {
 		res.status(200).json(listarCompras)
