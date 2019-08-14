@@ -20,7 +20,8 @@
 	</div>
 </div>
 
-<div class="row">
+<app-precarga *ngIf="loader"></app-precarga>
+<div class="row" *ngIf="!loader">
 	<div class="col-lg-12">
 		<div class="list-group list-group-flush" *ngIf="venta">
 			<div class="list-group-item">

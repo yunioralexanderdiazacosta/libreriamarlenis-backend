@@ -23,6 +23,13 @@ export class TipoTareasListaComponent implements OnInit {
     **/
     usuario
 
+    /**
+    *Activa o desactiva la precarga
+    *
+    *@property {number}
+    **/
+    loader: boolean = true
+
 	constructor(
 		public tipotareasService: TipoTranscripcionesService,
     public usuariosService: UsuariosService,
@@ -44,6 +51,7 @@ export class TipoTareasListaComponent implements OnInit {
   		this.tipotareasService.obtenerTipoTranscripciones().subscribe(
   		res => {
   			this.tipos = res
+            this.loader = false
   		},
   		err => {
   			console.log(err)

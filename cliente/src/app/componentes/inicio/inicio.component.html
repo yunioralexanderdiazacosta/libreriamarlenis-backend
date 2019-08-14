@@ -1,4 +1,7 @@
-<div *ngIf="usuario">
+
+<app-precarga *ngIf="loader"></app-precarga>
+
+<div *ngIf="usuario && !loader">
 	<div class="row">
 		<div class="col-lg-12">
 			<span class="text-secondary h4"><i class="fas fa-home"></i> Inicio</span>

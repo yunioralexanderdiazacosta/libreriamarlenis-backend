@@ -49,8 +49,13 @@ constructor(private http: HttpClient) { }
   		return this.http.post(`${API_URI}/usuarios/register`, usuario)
   	}
 
-    cambiarClaveUsuario(clave)
+    cambiarClaveUsuario(id, clave)
     {
-       return this.http.put(`${API_URI}/usuarios/cambiar-clave`, clave)
+       return this.http.put(`${API_URI}/usuarios/cambiarclave/${id}`, clave)
+    }
+
+    recuperarClave(id, dato)
+    {
+       return this.http.put(`${API_URI}/usuarios/recuperar-clave/${id}`, dato)
     }
 }

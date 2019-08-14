@@ -15,6 +15,13 @@ export class CategoriasProductosComponent implements OnInit {
     **/
     categorias: any = []
 
+    /**
+    *Activa o desactiva la precarga
+    *
+    *@property {number}
+    **/
+    loader: boolean = true
+
 	constructor(
         public catProductosService: CatProductosService,
         public toastr: ToastrService) { 
@@ -34,6 +41,7 @@ export class CategoriasProductosComponent implements OnInit {
   		this.catProductosService.obtenerCategoriasProductos().subscribe(
   		res => {
   			this.categorias = res
+            this.loader = false
   		},
   		err => {
   			console.log(err)

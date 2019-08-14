@@ -37,6 +37,13 @@ export class ListaTranscripcionesComponent implements OnInit {
     **/
     p: number = 1
 
+    /**
+    *Activa o desactiva la precarga
+    *
+    *@property {number}
+    **/
+    loader: boolean = true
+
 	constructor(
         public transcripcionesService: TranscripcionesService,
         public usuariosService: UsuariosService) {
@@ -81,6 +88,7 @@ export class ListaTranscripcionesComponent implements OnInit {
                         return dato.created_at = moment().format(dato.created_at)
                     }
                 })
+                this.loader = false
             },
             err => {
                 console.log(err)

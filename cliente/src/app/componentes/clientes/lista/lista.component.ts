@@ -38,6 +38,13 @@ export class ListaClientesComponent implements OnInit {
     **/
     p: number = 1
 
+    /**
+    *Activa o desactiva la precarga
+    *
+    *@property {number}
+    **/
+    loader: boolean = true
+
 	constructor(
         public clientesService: ClientesService,
         public usuariosService: UsuariosService,
@@ -80,6 +87,7 @@ export class ListaClientesComponent implements OnInit {
                 ?  Object.defineProperty(dato, 'estatusTexto', { value: 'Activo' }) 
                 :  Object.defineProperty(dato, 'estatusTexto', { value: 'Inactivo' }) 
                 })
+                this.loader = false
   			},
   			err => {
   				console.log(err)

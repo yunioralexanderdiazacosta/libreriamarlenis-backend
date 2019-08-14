@@ -23,6 +23,13 @@ export class ListaEmpleadosComponent implements OnInit  {
     **/
     usuario
 
+    /**
+    *Activa o desactiva la precarga
+    *
+    *@property {number}
+    **/
+    loader: boolean = true
+
 	constructor(
         public usuariosService: UsuariosService,
         public toastr: ToastrService) 
@@ -43,6 +50,7 @@ export class ListaEmpleadosComponent implements OnInit  {
   		this.usuariosService.obtenerUsuarios().subscribe(
   		(res: any) =>  {
   			this.usuarios = res
+            this.loader = false
   		},
   		err => {
   			console.log(err)

@@ -18,11 +18,33 @@ export class DetallesVentaComponent implements OnInit {
 	**/
 	venta
 
+    /**
+    *Obtiene el total de productos
+    *
+    *@property {any}
+    **/
     productos
 
+    /**
+    *Obtiene el total de copias
+    *
+    *@property {any}
+    **/
     copias 
 
+    /**
+    *Obtiene el total de tareas
+    *
+    *@property {any}
+    **/
     tareas
+
+    /**
+    *Activa o desactiva la precarga
+    *
+    *@property {number}
+    **/
+    loader: boolean = true
 
 	constructor(
 		public ventasService: VentasService,
@@ -44,6 +66,7 @@ export class DetallesVentaComponent implements OnInit {
   		this.ventasService.obtenerVenta(id).subscribe(
   		res => {
   			this.venta = res
+            this.loader = false
   		},
   		err => {
   			console.log(err)

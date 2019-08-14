@@ -32,6 +32,13 @@ export class ListaEntradasComponent implements OnInit {
     **/
     p: number = 1
 
+    /**
+    *Activa o desactiva la precarga
+    *
+    *@property {number}
+    **/
+    loader: boolean = true
+
 
 	constructor(
 		public comprasService: ComprasService,
@@ -65,6 +72,7 @@ export class ListaEntradasComponent implements OnInit {
 			this.ingresos.filter(dato => {
 				dato.created_at = moment(dato.created_at).format("DD-MM-YYYY hh:mm a")
 			})
+			this.loader = false
 		},
 		err => {
 			console.log(err)

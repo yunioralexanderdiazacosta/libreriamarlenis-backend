@@ -143,7 +143,7 @@ export class EdicionTranscripcionComponent implements OnInit {
     	this.formTranscripcion.patchValue({ archivo_tarea: 'Si' })
   	}
 
-  	guardarCambiosTranscripcion()
+  	guardarCambiosTranscripcion(evento)
   	{
   		if(this.formTranscripcion.invalid){ return }
 
@@ -171,9 +171,9 @@ export class EdicionTranscripcionComponent implements OnInit {
   		this.transcripcionesService.actualizarTranscripcionPendiente(this.id, this.datosEnviar).subscribe(
   		res => {
   			this.toastr.success('Datos actualizados correctamente.', 'Exito')
-            this.router.navigateByUrl('transcripciones')
-            event.preventDefault()
-  			event.stopPropagation()
+            this.router.navigate(['/transcripciones'])
+            evento.preventDefault()
+  			evento.stopPropagation()
   		},
   		err => {
   			console.log(err)

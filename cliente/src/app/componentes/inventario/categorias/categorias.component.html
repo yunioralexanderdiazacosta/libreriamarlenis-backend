@@ -13,8 +13,8 @@
 		<hr id="linea">
 	</div>
 </div>
-
-<div class="row mt-3">
+<app-precarga *ngIf="loader"></app-precarga>
+<div class="row mt-3" *ngIf="!loader">
 	<div class="col-lg-8 offset-lg-2">
 
 		<div class="row">

@@ -15,6 +15,13 @@ export class ListaTiposCopiasComponent implements OnInit {
 	**/
 	tipos
 
+    /**
+    *Activa o desactiva la precarga
+    *
+    *@property {number}
+    **/
+    loader: boolean = true
+
 	constructor(
         public tipoCopiasService: TipoCopiasService,
         public toastr: ToastrService) {
@@ -33,7 +40,8 @@ export class ListaTiposCopiasComponent implements OnInit {
   	{
   		this.tipoCopiasService.obtenerTipoCopias().subscribe(
   		res => {
-  			this.tipos = res  
+  			this.tipos = res
+            this.loader = false  
   		},
   		err => {
   			console.log(err)

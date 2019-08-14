@@ -29,6 +29,13 @@ export class ListaInventarioComponent implements OnInit {
     **/
     p: number = 1
 
+    /**
+    *Activa o desactiva la precarga
+    *
+    *@property {number}
+    **/
+    loader: boolean = true
+
 	constructor(
         public productosService: ProductosService,
         public toastr: ToastrService) { 
@@ -54,6 +61,7 @@ export class ListaInventarioComponent implements OnInit {
                     Object.defineProperty(dato, 'estadoTexto', { value: 'Inactivo' })
                 }
             })
+            this.loader = false
   		},
   		err => {
   			console.log(err)

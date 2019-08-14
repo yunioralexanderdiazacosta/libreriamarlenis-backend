@@ -31,12 +31,27 @@ export class CambiarContrasenaComponent implements OnInit {
 	**/
 	input_required: string = 'Este campo es obligatorio'
 
+  /**
+  *Mensaje de error
+  *
+  *@property {string}
+  **/
 	error: string = ''
+
+  /**
+  *Almacena los datos del usuario conectado
+  *
+  *@property {any}
+  **/
+  usuario
 
 	constructor(
 		public fb: FormBuilder,
 		public usuariosService: UsuariosService,
-		public toastr: ToastrService) {
+		public toastr: ToastrService) 
+  {
+    this.obteniendoUsuario()
+
 		this.formUsuario = this.fb.group({
 			contrasena_actual: ['', Validators.required],
 			nueva_contrasena: ['', [Validators.required, Validators.minLength(4)]],
@@ -52,6 +67,28 @@ export class CambiarContrasenaComponent implements OnInit {
 
   	get f(){ return this.formUsuario.controls }
 
+
+    /**
+    *Obtiene los datos del usuario conectado
+    *
+    *@return {void}
+    **/
+    obteniendoUsuario()
+    {
+        this.usuariosService.obtenerUsuario().subscribe(
+        res => {
+            this.usuario = res
+        },     
+        err => {
+            console.log(err)
+        })
+    }
+
+    /**
+    *Evia la petición de actualizar la contraseña
+    *
+    *@return {void}
+    **/
   	actualizarContrasena()
   	{
   		this.submitted = true
@@ -59,7 +96,7 @@ export class CambiarContrasenaComponent implements OnInit {
   			claveActual: this.formUsuario.value.contrasena_actual,
   			clave: this.formUsuario.value.nueva_contrasena 
   		}
-  		this.usuariosService.cambiarClaveUsuario(dato).subscribe(
+  		this.usuariosService.cambiarClaveUsuario(this.usuario.id, dato).subscribe(
   		res => {
   			this.toastr.success('Contraseña actualizada correctamente.', 'Exito')
   			this.resetearCampos()

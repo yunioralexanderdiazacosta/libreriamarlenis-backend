@@ -21,6 +21,13 @@ export class ListaProveedoresComponent implements OnInit {
     *@property {string}
     **/
     busqueda: string = ''
+
+    /**
+    *Activa o desactiva la precarga
+    *
+    *@property {number}
+    **/
+    loader: boolean = true
   	
   	constructor(
   		public proveedoresService: ProveedoresService,
@@ -42,6 +49,7 @@ export class ListaProveedoresComponent implements OnInit {
                 ?  Object.defineProperty(dato, 'estatusTexto', { value: 'Activo' }) 
                 :  Object.defineProperty(dato, 'estatusTexto', { value: 'Inactivo' }) 
             })
+            this.loader = false
   		},
   		err => {
   			console.log(err)

@@ -6,12 +6,14 @@
 				<span class="h5"><i class="fas fa-chevron-left"></i> Volver</span>
 			</a>
 		</div>
+
 		<div class="card">
 			<div class="card-header">
-				<h4 class="text-center">Recuperar Contraseña</h4>
+				<h4 class="text-center">{{ noGenerada ? 'Recuperar Contraseña' : 'Contraseña Generada'}}</h4>
 			</div>
 		</div>
 		<div class="card-body">
+			<ng-container *ngIf="noGenerada">
 			<div class="form-group">
 				<label class="text-secondary">Usuario</label>
 				<input type="text"
@@ -25,6 +27,7 @@
 		            <div *ngIf="f.usuario.errors.required">{{ input_required }}</div>
 		            <div *ngIf="f.usuario.errors.minlength">El usuario debe de contener por lo menos 6 caracteres</div>
 			    </div>
+			    <small *ngIf="errorUsuario" class="text-danger">{{ errorUsuario }}</small>
 			</div>
 
 			<div class="form-group text-right">
@@ -54,12 +57,19 @@
 	                <div *ngIf="f.respuesta_secreta.errors.required">{{ input_required }}</div>
 	                <div *ngIf="f.respuesta_secreta.errors.maxLength">Superaste el máximo</div>
 	            </div>
+	            <small class="text-danger" *ngIf="errorRespuesta">La respuesta es incorrecta</small>
 			</div>
 
 			<div class="form-group text-right" *ngIf="continuar">
-				<button class="btn btn-lg btn-primary" *ngIf="continuar">
+				<button (click)="procesarPeticion()" class="btn btn-lg btn-primary" *ngIf="continuar">
 					Recuperar
 				</button>
+			</div>
+			</ng-container>
+
+
+			<div class="alert alert-success" *ngIf="!noGenerada">
+				<span class="h4">Tu nueva contraseña es: <b>{{ nuevaClave }}</b></span>
 			</div>
 		</div>
 	</div>

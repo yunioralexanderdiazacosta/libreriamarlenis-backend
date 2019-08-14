@@ -38,7 +38,6 @@ export class DetallesTareasVentaComponent implements OnInit {
   		this.transcripcionesService.obtenerTranscripcionesVenta(id).subscribe(
   		res => {
   			this.tareas = res
-  			console.log(res)
   		},
   		err => {
   			console.log(err)

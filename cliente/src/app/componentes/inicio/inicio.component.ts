@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import * as moment from 'moment'; 
 import { TranscripcionesService } from '../../servicios/transcripciones/transcripciones.service';
 import { UsuariosService } from '../../servicios/usuarios/usuarios.service';
+import { ContadorService } from '../../servicios/contador/contador.service';
 import { TokenPayload } from '../../modelos/tokenPayload';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-inicio',
@@ -45,11 +47,45 @@ export class InicioComponent implements OnInit {
     **/
     p: number = 1
 
+    /**
+    *Obtener contador del arreglo
+    *
+    *@property {number}
+    **/
+    contador
+
+
+    /**
+    *Obtener contador del arreglo
+    *
+    *@property {number}
+    **/
+    porRealizar:number = 0
+
+
+    /**
+    *Obtener contador del arreglo
+    *
+    *@property {number}
+    **/
+    porEntregar:number = 0
+
+    /**
+    *Activa o desactiva la precarga
+    *
+    *@property {number}
+    **/
+    loader: boolean = true
+
+
 	constructor(
-		public usuariosService: UsuariosService,
-		public transcripcionesService: TranscripcionesService) 
+		public transcripcionesService: TranscripcionesService,
+        public usuariosService: UsuariosService,
+        public contadorService: ContadorService,
+        public toastr: ToastrService) 
 	{
-		this.listarTranscripcionesPendientes() 
+        this.obteniendoContador()
+        this.listarTranscripcionesPendientes() 
 	}
 
   	ngOnInit() {}
@@ -57,6 +93,14 @@ export class InicioComponent implements OnInit {
   	daydiff(first, second) {
     	return Math.round((second - first) / (1000 * 60 * 60 * 24));
   	}
+
+    obteniendoContador()
+    {
+        this.contador = 0
+        this.contador = this.contadorService.obtenerContador()
+        const dato = { e: 1 }
+        this.contador.push(dato)
+    }
 
   	listarTranscripcionesPendientes()
   	{
@@ -70,6 +114,8 @@ export class InicioComponent implements OnInit {
   				    if(dato.estatus_entrega == 0 || dato.estatus_tarea == 0)
   				    {
   				    	this.cont_pend++
+                        if(dato.estatus_entrega == 0) { this.porEntregar++ }
+                        if(dato.estatus_tarea == 0){ this.porRealizar++ }
   				    }
   					var fecha_entrega = dato.fecha_entrega  
   					var fecha_hoy = new Date()				
@@ -81,6 +127,8 @@ export class InicioComponent implements OnInit {
                     Object.defineProperty(dato, 'clienteAtendido', { value: dato.venta.cliente.cedula+' - '+dato.venta.cliente.nombres+" "+dato.venta.cliente.apellidos })
 	  			    Object.defineProperty(dato, 'tipoTranscripcion', { value: dato.tipos_transcripcione.descripcion })
                   })
+                  this.obteniendoDatos()
+                  this.loader = false
 	  		},
 	  		err => {
 	  			console.log(err)
@@ -90,4 +138,28 @@ export class InicioComponent implements OnInit {
   			console.log(err)
   		})
   	}
+
+
+    obteniendoDatos()
+    {
+        if(this.contador.length == 1 && this.porRealizar == 0)
+        {
+            this.toastr.success(`No tiene tarea(s) por realizar.`, 'Notificación', { timeOut: 10000 })
+        }
+
+        if(this.contador.length == 1 && this.porEntregar == 0)
+        {
+            this.toastr.success('No tiene tarea(s) por entregar.', 'Notificación', { timeOut: 10000 })
+        }
+
+        if(this.contador.length == 1 && this.porEntregar > 0)
+        {
+            this.toastr.error(`Tiene ${this.porEntregar} tarea(s) por entregar.`, 'Notificacion', { timeOut: 10000 })
+        }
+
+        if(this.contador.length == 1 && this.porRealizar > 0)
+        {
+            this.toastr.error(`Tiene ${this.porRealizar} tarea(s) por realizar.`, 'Notificación', { timeOut: 10000 })
+        }
+    }
 }

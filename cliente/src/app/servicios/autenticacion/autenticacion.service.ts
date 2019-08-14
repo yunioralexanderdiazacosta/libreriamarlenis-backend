@@ -7,6 +7,7 @@ import { API_URI } from '../API_URI';
 
 import { usersDetails } from '../../modelos/usersDetails';
 import { TokenPayload } from '../../modelos/tokenPayload';
+import { contador } from '../../_datos/contador';
 
 interface TokenResponse{
     token: string;
@@ -77,7 +78,8 @@ export class AutenticacionService {
 
     public logout(): void {
     	this.token = '';
-    	window.localStorage.removeItem('userToken');
-    	this.router.navigateByUrl('/iniciarsesion');
+    	window.localStorage.removeItem('userToken')
+        contador.length = 0
+    	this.router.navigateByUrl('/iniciarsesion')
     }
 }

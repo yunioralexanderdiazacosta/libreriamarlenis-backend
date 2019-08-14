@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { UsuariosService } from '../../../servicios/usuarios/usuarios.service';
+import * as moment from 'moment'; 
 
 @Component({
   selector: 'app-recuperar',
@@ -36,6 +37,35 @@ export class RecuperarContrasenaComponent implements OnInit {
 	**/
 	submitted: boolean = false
 
+    /**
+    *Verifica si la contraseña ha sido generada o no
+    *
+    *@property {boolean}
+    **/
+    noGenerada: boolean = true
+
+    /**
+    *Almacena la nueva clave generada
+    *
+    *@property {boolean}
+    **/
+    nuevaClave: any
+
+    /**
+    *Almacena el mensaje de error (en caso de presentarse)
+    *
+    *@property {boolean}
+    **/
+    errorUsuario = ''
+
+    /**
+    *Verifica si la respuesta enviada es correcta o no
+    *
+    *@property {boolean}
+    **/
+    errorRespuesta: boolean = false
+
+
 	constructor(
 		public fb: FormBuilder,
 		public usuariosService: UsuariosService) { }
@@ -56,11 +86,19 @@ export class RecuperarContrasenaComponent implements OnInit {
   			this.formulario.patchValue({ pregunta_secreta: this.usuario.pregunta_secreta })
   			if(this.usuario.id)
   			{
-  				this.continuar = true
+  				      this.continuar = true
+                this.errorUsuario = ''
   			}
   		},
   		err => {
-  			console.log(err)
+  			if(err.status == 403)
+            {
+                this.errorUsuario = err.error
+            }
+            else
+            {
+                console.log(err)
+            }
   		})
   	}
 
@@ -68,6 +106,23 @@ export class RecuperarContrasenaComponent implements OnInit {
 
   	procesarPeticion()
   	{
+       if(this.usuario.respuesta_secreta == this.f.respuesta_secreta.value)
+       {
+           
+           var fecha = new Date()
+           this.nuevaClave = moment(fecha).format("ssmmddHH")
 
+           const dato = { clave: this.nuevaClave }
+           this.usuariosService.recuperarClave(this.usuario.id, dato).subscribe(res => {
+               this.noGenerada = false
+           }, 
+           err => {
+               console.log(err)
+           })
+       }
+       else
+       {
+           this.errorRespuesta = true
+       }
   	}
 }

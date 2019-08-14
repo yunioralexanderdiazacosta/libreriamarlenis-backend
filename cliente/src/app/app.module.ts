@@ -134,6 +134,7 @@ import { TipoTareasEditarComponent } from './componentes/transcripciones/categor
 import { TipoTareasNuevaComponent } from './componentes/transcripciones/categorias/nueva/nueva.component';
 import { RecuperarContrasenaComponent } from './componentes/contrasena/recuperar/recuperar.component';
 import { IvaComponent } from './componentes/iva/iva.component';
+import { PrecargaComponent } from './componentes/precarga/precarga.component';
 
 @NgModule({
     declarations: [
@@ -263,6 +264,7 @@ import { IvaComponent } from './componentes/iva/iva.component';
         SeparadorPipe,
         FiltroPipe,
         IvaComponent,
+        PrecargaComponent,
         ],
     imports: [
         BrowserModule,

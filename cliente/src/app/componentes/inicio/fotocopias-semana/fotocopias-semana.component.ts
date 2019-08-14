@@ -49,7 +49,7 @@ export class FotocopiasSemanaComponent implements OnInit {
     *@property {number} 
     */
     contadorDanadas: number = 0
-  	
+ 	
   	constructor(public copiasService: CopiasService) { 
           this.obtenerFotocopiasSemana()
     }

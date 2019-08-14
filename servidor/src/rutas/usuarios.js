@@ -41,6 +41,40 @@ usuarios.get('/estadistica/:id', (req, res) => {
 })
 
 /*
+****** ACTUALIZAR CONTRASEÑA ******
+*/
+usuarios.put('/cambiarclave/:id', (req, res) => {
+	const id = req.params.id
+	Usuario.findOne({
+		where: { id: id }
+	})
+	.then(usuarioE => {
+		if(bcrypt.compareSync(req.body.claveActual, usuarioE.clave))
+		{
+			const hash = bcrypt.hashSync(req.body.clave, 10)
+			req.body.clave = hash
+			console.log(req.user.id)
+
+			const dato = { clave: req.body.clave  }
+			usuarioE.update(dato)
+			.then(
+				res.json({ message: 'Datos actualizados correctamente' })
+			)
+			.catch(err => {
+				res.send(err)
+			})
+		}
+		else
+		{
+			res.status(403).send('Contraseña incorrecta')
+		}
+	})
+	.catch(err => {
+		res.send(err)
+	})
+})
+
+/*
 ****** OBTENER DATOS DE ACUERDO AL USUARIO ******
 */
 usuarios.get('/obtener/:usuario', (req, res) => {
@@ -51,7 +85,15 @@ usuarios.get('/obtener/:usuario', (req, res) => {
 		attributes: ['id', 'pregunta_secreta', 'respuesta_secreta']
 	})
 	.then(obtenerUsuario => {
-		res.json(obtenerUsuario)
+
+		if(obtenerUsuario)
+		{
+			res.json(obtenerUsuario)
+		}
+		else
+	    {
+	    	res.status(403).send('No se encontró el usuario ingresado')
+	    }
 	})
 	.catch(err => {
 		res.send(err)
@@ -163,36 +205,31 @@ usuarios.put('/:id', (req, res) => {
 	})
 })
 
-/*
-****** ACTUALIZAR CONTRASEÑA ******
-*/
-usuarios.put('/cambiar-clave', (req, res) => {
-	Usuario.findOne({
-		where: { id: req.user.id }
-	})
-	.then(usuarioE => {
-		console.log(req.user.id)
-		if(bcrypt.compareSync(req.body.claveActual, usuarioE.clave))
-		{
-			const hash = bcrypt.hashSync(req.body.clave, 10)
-			req.body.clave = hash
 
-			const dato = { clave: req.body.clave  }
-			usuarioE.update(dato)
-			.then(
-				res.json({ message: 'Datos actualizados correctamente' })
-			)
-			.catch(err => {
-				res.send(err)
-			})
-		}
-		else
-		{
-			res.status(403).send('Contraseña incorrecta')
-		}
+/*
+****** RECUPERAR CONTRASEÑA ******
+*/
+usuarios.put('/recuperar-clave/:id', (req, res) => {
+	const id = req.params.id
+
+	Usuario.findOne({
+		where: { id: id }
+	})
+	.then(usuarioC => {
+		const hash = bcrypt.hashSync(req.body.clave, 10)
+		req.body.clave = hash
+
+		const dato = { clave: req.body.clave  }
+		usuarioC.update(dato)
+		.then(
+			res.json({ message: 'Datos actualizados correctamente' })
+		)
+		.catch(err => {
+			res.send(err)
+		})
 	})
 	.catch(err => {
-		res.send(err)
+		console.log(err)
 	})
 })
 

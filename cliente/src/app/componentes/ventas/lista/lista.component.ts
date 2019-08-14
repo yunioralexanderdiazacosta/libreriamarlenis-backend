@@ -38,6 +38,13 @@ export class ListaVentasComponent implements OnInit {
     **/
     busqueda: string = ''
 
+    /**
+    *Activa o desactiva la precarga
+    *
+    *@property {number}
+    **/
+    loader: boolean = true
+
 	constructor(
         public ventasService: VentasService,
         public usuariosService: UsuariosService,
@@ -66,6 +73,7 @@ export class ListaVentasComponent implements OnInit {
                 ?  Object.defineProperty(dato, 'estatusTexto', { value: 'Procesada' }) 
                 :  Object.defineProperty(dato, 'estatusTexto', { value: 'Anulada' }) 
             })
+            this.loader = false 
   		},
   		err => {
   				console.log(err)
