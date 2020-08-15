@@ -5,7 +5,7 @@ const bodyParser = require('body-parser')
 const app = express()
 const expressJwt = require('express-jwt')
 const config = require('./config')
-const port = process.env.port || 3000
+const port = process.env.port || 8080
 
 //configuración
 app.use(cors())
@@ -31,6 +31,6 @@ app.use('/api/proveedores', require('./rutas/proveedores'))
 app.use('/api/compras', require('./rutas/compras'))
 app.use('/api/impuesto', require('./rutas/impuesto'))
 
-app.listen(port, () => {
+app.listen(port, '0.0.0.0' () => {
 	console.log('Servidor funcionado en el puerto: ' + port);
 })
